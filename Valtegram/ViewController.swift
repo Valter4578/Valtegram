@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+
 
 class ViewController: UIViewController {
 
@@ -22,6 +24,9 @@ class ViewController: UIViewController {
         textField.placeholder = "Email"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
+        
+        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        
         return textField
     }()
 
@@ -31,6 +36,10 @@ class ViewController: UIViewController {
         textField.placeholder = "Username"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
+        
+        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+
+        
         return textField
     }()
     
@@ -40,6 +49,10 @@ class ViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
+        
+        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+
+        
         return textField
     }()
 
@@ -49,15 +62,17 @@ class ViewController: UIViewController {
         button.setTitle("Sign up", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
-        button.backgroundColor = .green
+        button.backgroundColor = UIColor.setAsRgb(red: 27, green: 67, blue: 51)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
+        button.isEnabled = false
         
-        
+        button.addTarget(self, action: #selector(signUpTouched), for: .touchUpInside)
         
         return button
     }()
 
+    // MARK:- Lifecycle yteiuytfghg
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -95,6 +110,38 @@ class ViewController: UIViewController {
         
     }
 
+    
+    // MARK:- Selectors
+    @objc func signUpTouched() {
+
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let username = usernameTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let err = error {
+                let alertController = UIAlertController(title: "Error", message: err.localizedDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel)
+                alertController.addAction(alertAction)
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
+            print("User created ", result?.user.uid)
+        }
+    }
+    
+    @objc func handleTextInputChange() {
+        let isFormValid = emailTextField.text?.count ?? 0 > 0 && usernameTextField.text?.count ?? 0 > 0 && passwordTextField.text?.count ?? 0 > 0
+        
+        if isFormValid {
+            signUpButton.backgroundColor = UIColor.setAsRgb(red: 27, green: 67, blue: 51)
+            signUpButton.isEnabled = true
+        } else {
+            signUpButton.backgroundColor = UIColor.setAsRgb(red: 78, green: 132, blue: 110)
+            signUpButton.isEnabled = false 
+        }
+    }
 
 }
 
