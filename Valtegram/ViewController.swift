@@ -52,6 +52,9 @@ class ViewController: UIViewController {
         button.backgroundColor = .green
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
+        
+        
+        
         return button
     }()
 
@@ -84,8 +87,8 @@ class ViewController: UIViewController {
     private func setupAddPhotoButton() {
         view.addSubview(photoPlusButton)
 
-        photoPlusButton.heightAnchor.constraint(equalToConstant: 140).isActive = true
-            photoPlusButton.widthAnchor.constraint(equalToConstant: 140).isActive = true
+        photoPlusButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            photoPlusButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
             photoPlusButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             photoPlusButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         

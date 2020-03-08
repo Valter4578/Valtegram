@@ -1,0 +1,650 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A0363E81E66296192F7CFC0 /* Pods_Valtegram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B344654F6C7A09945FC0DA34 /* Pods_Valtegram.framework */; };
+		3F00297320092D7E393BC4D0 /* Pods_ValtegramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D4163CA158A46B5B1C68FB /* Pods_ValtegramTests.framework */; };
+		8800EA632414DC280088452E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA622414DC280088452E /* AppDelegate.swift */; };
+		8800EA652414DC280088452E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA642414DC280088452E /* SceneDelegate.swift */; };
+		8800EA672414DC280088452E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA662414DC280088452E /* ViewController.swift */; };
+		8800EA6A2414DC280088452E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA682414DC280088452E /* Main.storyboard */; };
+		8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA6B2414DC280088452E /* Valtegram.xcdatamodeld */; };
+		8800EA6F2414DC2F0088452E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA6E2414DC2F0088452E /* Assets.xcassets */; };
+		8800EA722414DC2F0088452E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA702414DC2F0088452E /* LaunchScreen.storyboard */; };
+		8800EA7D2414DC300088452E /* ValtegramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA7C2414DC300088452E /* ValtegramTests.swift */; };
+		8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883C6332414F0A000712B0D /* UIColor+Extension.swift */; };
+		8883C6382414F58300712B0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8883C6372414F58300712B0D /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8800EA792414DC300088452E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8800EA572414DC280088452E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8800EA5E2414DC280088452E;
+			remoteInfo = Valtegram;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5E3EBE41C0313B9E97ED2043 /* Pods-Valtegram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Valtegram.debug.xcconfig"; path = "Target Support Files/Pods-Valtegram/Pods-Valtegram.debug.xcconfig"; sourceTree = "<group>"; };
+		78F137A446572EE705BBF44F /* Pods-Valtegram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Valtegram.release.xcconfig"; path = "Target Support Files/Pods-Valtegram/Pods-Valtegram.release.xcconfig"; sourceTree = "<group>"; };
+		8725F5C33620819934B8D92C /* Pods-ValtegramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ValtegramTests.debug.xcconfig"; path = "Target Support Files/Pods-ValtegramTests/Pods-ValtegramTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8800EA5F2414DC280088452E /* Valtegram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Valtegram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8800EA622414DC280088452E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8800EA642414DC280088452E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8800EA662414DC280088452E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8800EA692414DC280088452E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8800EA6C2414DC280088452E /* Valtegram.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Valtegram.xcdatamodel; sourceTree = "<group>"; };
+		8800EA6E2414DC2F0088452E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8800EA712414DC2F0088452E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8800EA732414DC2F0088452E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8800EA782414DC300088452E /* ValtegramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValtegramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8800EA7C2414DC300088452E /* ValtegramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValtegramTests.swift; sourceTree = "<group>"; };
+		8800EA7E2414DC300088452E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8883C6332414F0A000712B0D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		8883C6372414F58300712B0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		88B11C702414FEC5003CC711 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C712414FEC5003CC711 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C722414FEC5003CC711 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C732414FEC5003CC711 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C742414FEC5003CC711 /* FirebaseStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C802414FEF8003CC711 /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C812414FEF8003CC711 /* GoogleDataTransportCCTSupport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransportCCTSupport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C822414FEF8003CC711 /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C832414FEF8003CC711 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C842414FEF8003CC711 /* leveldb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = leveldb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88B11C852414FEF8003CC711 /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E03173517AC7ADC6F66365C /* Pods-ValtegramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ValtegramTests.release.xcconfig"; path = "Target Support Files/Pods-ValtegramTests/Pods-ValtegramTests.release.xcconfig"; sourceTree = "<group>"; };
+		B344654F6C7A09945FC0DA34 /* Pods_Valtegram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Valtegram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5D4163CA158A46B5B1C68FB /* Pods_ValtegramTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ValtegramTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8800EA5C2414DC280088452E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A0363E81E66296192F7CFC0 /* Pods_Valtegram.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8800EA752414DC300088452E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F00297320092D7E393BC4D0 /* Pods_ValtegramTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		801306A9C5581F0805E2E84C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				88B11C802414FEF8003CC711 /* GoogleDataTransport.framework */,
+				88B11C812414FEF8003CC711 /* GoogleDataTransportCCTSupport.framework */,
+				88B11C822414FEF8003CC711 /* GoogleUtilities.framework */,
+				88B11C832414FEF8003CC711 /* GTMSessionFetcher.framework */,
+				88B11C842414FEF8003CC711 /* leveldb.framework */,
+				88B11C852414FEF8003CC711 /* nanopb.framework */,
+				88B11C702414FEC5003CC711 /* FirebaseAuth.framework */,
+				88B11C712414FEC5003CC711 /* FirebaseCore.framework */,
+				88B11C722414FEC5003CC711 /* FirebaseCoreDiagnostics.framework */,
+				88B11C732414FEC5003CC711 /* FirebaseDatabase.framework */,
+				88B11C742414FEC5003CC711 /* FirebaseStorage.framework */,
+				B344654F6C7A09945FC0DA34 /* Pods_Valtegram.framework */,
+				C5D4163CA158A46B5B1C68FB /* Pods_ValtegramTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8800EA562414DC280088452E = {
+			isa = PBXGroup;
+			children = (
+				8800EA612414DC280088452E /* Valtegram */,
+				8800EA7B2414DC300088452E /* ValtegramTests */,
+				8800EA602414DC280088452E /* Products */,
+				C9336217D47693137AC58E90 /* Pods */,
+				801306A9C5581F0805E2E84C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8800EA602414DC280088452E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8800EA5F2414DC280088452E /* Valtegram.app */,
+				8800EA782414DC300088452E /* ValtegramTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8800EA612414DC280088452E /* Valtegram */ = {
+			isa = PBXGroup;
+			children = (
+				8883C6322414F08200712B0D /* Extensions */,
+				8800EA622414DC280088452E /* AppDelegate.swift */,
+				8800EA642414DC280088452E /* SceneDelegate.swift */,
+				8800EA662414DC280088452E /* ViewController.swift */,
+				8800EA682414DC280088452E /* Main.storyboard */,
+				8800EA6E2414DC2F0088452E /* Assets.xcassets */,
+				8800EA702414DC2F0088452E /* LaunchScreen.storyboard */,
+				8800EA732414DC2F0088452E /* Info.plist */,
+				8883C6372414F58300712B0D /* GoogleService-Info.plist */,
+				8800EA6B2414DC280088452E /* Valtegram.xcdatamodeld */,
+			);
+			path = Valtegram;
+			sourceTree = "<group>";
+		};
+		8800EA7B2414DC300088452E /* ValtegramTests */ = {
+			isa = PBXGroup;
+			children = (
+				8800EA7C2414DC300088452E /* ValtegramTests.swift */,
+				8800EA7E2414DC300088452E /* Info.plist */,
+			);
+			path = ValtegramTests;
+			sourceTree = "<group>";
+		};
+		8883C6322414F08200712B0D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8883C6332414F0A000712B0D /* UIColor+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C9336217D47693137AC58E90 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5E3EBE41C0313B9E97ED2043 /* Pods-Valtegram.debug.xcconfig */,
+				78F137A446572EE705BBF44F /* Pods-Valtegram.release.xcconfig */,
+				8725F5C33620819934B8D92C /* Pods-ValtegramTests.debug.xcconfig */,
+				9E03173517AC7ADC6F66365C /* Pods-ValtegramTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8800EA5E2414DC280088452E /* Valtegram */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8800EA812414DC300088452E /* Build configuration list for PBXNativeTarget "Valtegram" */;
+			buildPhases = (
+				7BC3C71CF331EF2D7FF2C912 /* [CP] Check Pods Manifest.lock */,
+				8800EA5B2414DC280088452E /* Sources */,
+				8800EA5C2414DC280088452E /* Frameworks */,
+				8800EA5D2414DC280088452E /* Resources */,
+				00F45EAF5A03AF9DB2D326C6 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Valtegram;
+			productName = Valtegram;
+			productReference = 8800EA5F2414DC280088452E /* Valtegram.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8800EA772414DC300088452E /* ValtegramTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8800EA842414DC300088452E /* Build configuration list for PBXNativeTarget "ValtegramTests" */;
+			buildPhases = (
+				83FD7B352B5B42B43AB12854 /* [CP] Check Pods Manifest.lock */,
+				8800EA742414DC300088452E /* Sources */,
+				8800EA752414DC300088452E /* Frameworks */,
+				8800EA762414DC300088452E /* Resources */,
+				9260CAC21FBBD59BCC2C4C9F /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8800EA7A2414DC300088452E /* PBXTargetDependency */,
+			);
+			name = ValtegramTests;
+			productName = ValtegramTests;
+			productReference = 8800EA782414DC300088452E /* ValtegramTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8800EA572414DC280088452E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Максим Алексеев";
+				TargetAttributes = {
+					8800EA5E2414DC280088452E = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					8800EA772414DC300088452E = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 8800EA5E2414DC280088452E;
+					};
+				};
+			};
+			buildConfigurationList = 8800EA5A2414DC280088452E /* Build configuration list for PBXProject "Valtegram" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8800EA562414DC280088452E;
+			productRefGroup = 8800EA602414DC280088452E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8800EA5E2414DC280088452E /* Valtegram */,
+				8800EA772414DC300088452E /* ValtegramTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8800EA5D2414DC280088452E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8800EA722414DC2F0088452E /* LaunchScreen.storyboard in Resources */,
+				8883C6382414F58300712B0D /* GoogleService-Info.plist in Resources */,
+				8800EA6F2414DC2F0088452E /* Assets.xcassets in Resources */,
+				8800EA6A2414DC280088452E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8800EA762414DC300088452E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00F45EAF5A03AF9DB2D326C6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Valtegram/Pods-Valtegram-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Valtegram/Pods-Valtegram-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Valtegram/Pods-Valtegram-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BC3C71CF331EF2D7FF2C912 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Valtegram-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83FD7B352B5B42B43AB12854 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ValtegramTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9260CAC21FBBD59BCC2C4C9F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ValtegramTests/Pods-ValtegramTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ValtegramTests/Pods-ValtegramTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ValtegramTests/Pods-ValtegramTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8800EA5B2414DC280088452E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8800EA672414DC280088452E /* ViewController.swift in Sources */,
+				8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */,
+				8800EA632414DC280088452E /* AppDelegate.swift in Sources */,
+				8800EA652414DC280088452E /* SceneDelegate.swift in Sources */,
+				8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8800EA742414DC300088452E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8800EA7D2414DC300088452E /* ValtegramTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8800EA7A2414DC300088452E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8800EA5E2414DC280088452E /* Valtegram */;
+			targetProxy = 8800EA792414DC300088452E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8800EA682414DC280088452E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8800EA692414DC280088452E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8800EA702414DC2F0088452E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8800EA712414DC2F0088452E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8800EA7F2414DC300088452E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8800EA802414DC300088452E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8800EA822414DC300088452E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E3EBE41C0313B9E97ED2043 /* Pods-Valtegram.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
+				INFOPLIST_FILE = Valtegram/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Pineapple.Valtegram;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8800EA832414DC300088452E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78F137A446572EE705BBF44F /* Pods-Valtegram.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
+				INFOPLIST_FILE = Valtegram/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Pineapple.Valtegram;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8800EA852414DC300088452E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8725F5C33620819934B8D92C /* Pods-ValtegramTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
+				INFOPLIST_FILE = ValtegramTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Pineapple.ValtegramTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Valtegram.app/Valtegram";
+			};
+			name = Debug;
+		};
+		8800EA862414DC300088452E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E03173517AC7ADC6F66365C /* Pods-ValtegramTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 44ZWCLCJ2W;
+				INFOPLIST_FILE = ValtegramTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Pineapple.ValtegramTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Valtegram.app/Valtegram";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8800EA5A2414DC280088452E /* Build configuration list for PBXProject "Valtegram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8800EA7F2414DC300088452E /* Debug */,
+				8800EA802414DC300088452E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8800EA812414DC300088452E /* Build configuration list for PBXNativeTarget "Valtegram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8800EA822414DC300088452E /* Debug */,
+				8800EA832414DC300088452E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8800EA842414DC300088452E /* Build configuration list for PBXNativeTarget "ValtegramTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8800EA852414DC300088452E /* Debug */,
+				8800EA862414DC300088452E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8800EA6B2414DC280088452E /* Valtegram.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8800EA6C2414DC280088452E /* Valtegram.xcdatamodel */,
+			);
+			currentVersion = 8800EA6C2414DC280088452E /* Valtegram.xcdatamodel */;
+			path = Valtegram.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 8800EA572414DC280088452E /* Project object */;
+}
