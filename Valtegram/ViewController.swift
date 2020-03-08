@@ -16,6 +16,9 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(named: "add"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(photoPlusButtonTapped), for: .touchUpInside)
+        
         return button
     }()
     
@@ -72,7 +75,7 @@ class ViewController: UIViewController {
         return button
     }()
 
-    // MARK:- Lifecycle yteiuytfghg
+    // MARK:- Lifecycle 
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -82,6 +85,7 @@ class ViewController: UIViewController {
         
     }
     
+    // MARK:- Private methods
     private func setupTextFields() {
         
         let stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, signUpButton ])
@@ -111,6 +115,13 @@ class ViewController: UIViewController {
     }
 
     
+    private func showErrorAlert(with errorText: String) {
+        let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .cancel)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     // MARK:- Selectors
     @objc func signUpTouched() {
 
@@ -120,14 +131,34 @@ class ViewController: UIViewController {
         
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let err = error {
+                // Create alert with error
                 let alertController = UIAlertController(title: "Error", message: err.localizedDescription, preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "OK", style: .cancel)
                 alertController.addAction(alertAction)
                 self.present(alertController, animated: true, completion: nil)
+                
+                print(err.localizedDescription)
                 return
             }
             
             print("User created ", result?.user.uid)
+            
+        
+            guard let uid = result?.user.uid else { return }
+            
+            let usernameValues = ["username":username]
+            let values = [uid:usernameValues]
+            
+            Database.database().reference().child("users").updateChildValues(values) { (error, reference) in
+                if let err = error {
+                    self.showErrorAlert(with: err.localizedDescription)
+                    print("Failed to add user into database: ", err.localizedDescription)
+                    return
+                }
+                
+                print("User saved")
+            }
+
         }
     }
     
@@ -139,9 +170,32 @@ class ViewController: UIViewController {
             signUpButton.isEnabled = true
         } else {
             signUpButton.backgroundColor = UIColor.setAsRgb(red: 78, green: 132, blue: 110)
-            signUpButton.isEnabled = false 
+            signUpButton.isEnabled = false
         }
     }
 
+    
+    @objc func photoPlusButtonTapped() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
 }
 
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage]as? UIImage {
+            photoPlusButton.setImage(editedImage, for: .normal)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            photoPlusButton.setImage(originalImage, for: .normal)
+        }
+                
+        photoPlusButton.layer.cornerRadius = photoPlusButton.frame.width/2
+        photoPlusButton.layer.masksToBounds = true
+        
+        dismiss(animated: true, completion: nil)
+    }
+}
