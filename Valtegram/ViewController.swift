@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         return button
     }()
 
-    // MARK:- Lifecycle 
+    // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -142,21 +142,49 @@ class ViewController: UIViewController {
             }
             
             print("User created ", result?.user.uid)
+  
+            guard let image = self.photoPlusButton.imageView?.image else { return }
+            guard let data = image.jpegData(compressionQuality: 0.2) else { return }
             
-        
-            guard let uid = result?.user.uid else { return }
             
-            let usernameValues = ["username":username]
-            let values = [uid:usernameValues]
+            let filename = NSUUID().uuidString
             
-            Database.database().reference().child("users").updateChildValues(values) { (error, reference) in
+            let profileRef = Storage.storage().reference().child("profileImages").child(filename)
+            
+            let uploadTask = profileRef.putData(data, metadata: nil) { (metadata, error) in
+                
+                let profileRef = StorageReference().child("profileImage")
                 if let err = error {
                     self.showErrorAlert(with: err.localizedDescription)
-                    print("Failed to add user into database: ", err.localizedDescription)
+                    print("Failed to uploud image: ", err.localizedDescription)
                     return
                 }
                 
-                print("User saved")
+                let profileImageUrl = profileRef.downloadURL { (url, error) in
+                    if let err = error {
+                        self.showErrorAlert(with: err.localizedDescription)
+                        print("Failed to get image url: ", err.localizedDescription)
+                        return
+                    }
+                    
+                    print("Successfully upload profile image: ", url)
+
+                }
+                
+                guard let uid = result?.user.uid else { return }
+
+                let usernameValues = ["username": username, "profileImageUrl": profileImageUrl] as [String : Any]
+                let values = [uid:usernameValues]
+
+                Database.database().reference().child("users").updateChildValues(values) { (error, reference) in
+                    if let err = error {
+                        self.showErrorAlert(with: err.localizedDescription)
+                        print("Failed to add user into database: ", err.localizedDescription)
+                        return
+                    }
+
+                    print("User saved")
+                }
             }
 
         }
