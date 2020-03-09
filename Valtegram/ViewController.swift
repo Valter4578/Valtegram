@@ -11,6 +11,8 @@ import Firebase
 
 
 class ViewController: UIViewController {
+    
+    private var isImageUplouded = false
 
     let photoPlusButton: UIButton = {
         let button = UIButton()
@@ -120,6 +122,75 @@ class ViewController: UIViewController {
         let alertAction = UIAlertAction(title: "OK", style: .cancel)
         alertController.addAction(alertAction)
         self.present(alertController, animated: true, completion: nil)
+        
+        print(errorText)
+    }
+    
+    // Create and save user in database
+    private func createUser(email: String, password: String, imageToUpload: UIImage, data: Data, username: String) {
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let err = error {
+                self.showErrorAlert(with: err.localizedDescription)
+            }
+            print("User created ", result?.user.uid)
+
+            
+            let imgURL = self.uploadImage(image: imageToUpload, data: data)
+            guard let uid = result?.user.uid else { return }
+            if self.isImageUplouded {
+                self.saveUserIntoDatabase(username: username, uid: uid, imageUrl: imgURL)
+            }
+        }
+        print(#function)
+    }
+    
+    private func uploadImage(image: UIImage, data: Data) -> URL? {
+        var url: URL?
+        
+        let filename = NSUUID().uuidString
+        
+        let profileRef = Storage.storage().reference().child("profileImages").child(filename)
+        
+        let uploadTask = profileRef.putData(data, metadata: nil) { (metadata, error) in
+            
+            let profileRef = StorageReference().child("profileImage")
+            if let err = error {
+                self.showErrorAlert(with: err.localizedDescription)
+                print("Failed to uploud image: ", err.localizedDescription)
+                return
+            }
+                
+            print(Thread.current)
+            var profileImageUrl: URL?
+            let profileImageUrlTask = profileRef.downloadURL { (imgUrl, error) in
+                if let err = error {
+                    self.showErrorAlert(with: err.localizedDescription)
+                    print("Failed to get image url: ", err.localizedDescription)
+                    return
+                }
+                
+                print("Successfully upload profile image: ", imgUrl)
+                
+                url = imgUrl
+                self.isImageUplouded = true
+            }
+        }
+        
+        print(#function)
+        return url
+    }
+    
+    private func saveUserIntoDatabase(username: String, uid: String, imageUrl: URL?) {
+        Database.database().reference().child("users").updateChildValues([uid:["username":username, "profileImageUrl":imageUrl]]) { (error, reference) in
+            if let err = error {
+                self.showErrorAlert(with: err.localizedDescription)
+                print("Failed to add user into database: ", err.localizedDescription)
+                return
+            }
+
+            print("User " + username + " saved with image: \(imageUrl?.absoluteString)")
+        }
+        print(#function)
     }
     
     // MARK:- Selectors
@@ -129,66 +200,13 @@ class ViewController: UIViewController {
         guard let password = passwordTextField.text else { return }
         guard let username = usernameTextField.text else { return }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            if let err = error {
-                // Create alert with error
-                let alertController = UIAlertController(title: "Error", message: err.localizedDescription, preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "OK", style: .cancel)
-                alertController.addAction(alertAction)
-                self.present(alertController, animated: true, completion: nil)
-                
-                print(err.localizedDescription)
-                return
-            }
-            
-            print("User created ", result?.user.uid)
-  
-            guard let image = self.photoPlusButton.imageView?.image else { return }
-            guard let data = image.jpegData(compressionQuality: 0.2) else { return }
-            
-            
-            let filename = NSUUID().uuidString
-            
-            let profileRef = Storage.storage().reference().child("profileImages").child(filename)
-            
-            let uploadTask = profileRef.putData(data, metadata: nil) { (metadata, error) in
-                
-                let profileRef = StorageReference().child("profileImage")
-                if let err = error {
-                    self.showErrorAlert(with: err.localizedDescription)
-                    print("Failed to uploud image: ", err.localizedDescription)
-                    return
-                }
-                
-                let profileImageUrl = profileRef.downloadURL { (url, error) in
-                    if let err = error {
-                        self.showErrorAlert(with: err.localizedDescription)
-                        print("Failed to get image url: ", err.localizedDescription)
-                        return
-                    }
-                    
-                    print("Successfully upload profile image: ", url)
-
-                }
-                
-                guard let uid = result?.user.uid else { return }
-
-                let usernameValues = ["username": username, "profileImageUrl": profileImageUrl] as [String : Any]
-                let values = [uid:usernameValues]
-
-                Database.database().reference().child("users").updateChildValues(values) { (error, reference) in
-                    if let err = error {
-                        self.showErrorAlert(with: err.localizedDescription)
-                        print("Failed to add user into database: ", err.localizedDescription)
-                        return
-                    }
-
-                    print("User saved")
-                }
-            }
-
-        }
+        guard let image = self.photoPlusButton.imageView?.image else { return }
+        guard let data = image.jpegData(compressionQuality: 0.2) else { return }
+        
+        createUser(email: email, password: password, imageToUpload: image, data: data, username: username)
     }
+
+
     
     @objc func handleTextInputChange() {
         let isFormValid = emailTextField.text?.count ?? 0 > 0 && usernameTextField.text?.count ?? 0 > 0 && passwordTextField.text?.count ?? 0 > 0
