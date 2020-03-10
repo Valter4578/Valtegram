@@ -12,8 +12,10 @@ import Firebase
 
 class ViewController: UIViewController {
     
-    private var isImageUplouded = false
-
+    private var username: String?
+    private var email: String?
+    private var password: String?
+    
     let photoPlusButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "add"), for: .normal)
@@ -133,25 +135,26 @@ class ViewController: UIViewController {
                 self.showErrorAlert(with: err.localizedDescription)
             }
             print("User created ", result?.user.uid)
-
             
-            let imgURL = self.uploadImage(image: imageToUpload, data: data)
             guard let uid = result?.user.uid else { return }
-            if self.isImageUplouded {
-                self.saveUserIntoDatabase(username: username, uid: uid, imageUrl: imgURL)
-            }
+
+            let imgURL = self.uploadImage(image: imageToUpload, data: data, uid: uid)
+            
         }
         print(#function)
     }
     
-    private func uploadImage(image: UIImage, data: Data) -> URL? {
+    
+    
+    
+    private func uploadImage(image: UIImage, data: Data, uid: String) -> URL? {
         var url: URL?
         
         let filename = NSUUID().uuidString
         
         let profileRef = Storage.storage().reference().child("profileImages").child(filename)
         
-        let uploadTask = profileRef.putData(data, metadata: nil) { (metadata, error) in
+        profileRef.putData(data, metadata: nil) { (metadata, error) in
             
             let profileRef = StorageReference().child("profileImage")
             if let err = error {
@@ -159,8 +162,7 @@ class ViewController: UIViewController {
                 print("Failed to uploud image: ", err.localizedDescription)
                 return
             }
-                
-            print(Thread.current)
+            
             var profileImageUrl: URL?
             let profileImageUrlTask = profileRef.downloadURL { (imgUrl, error) in
                 if let err = error {
@@ -170,9 +172,10 @@ class ViewController: UIViewController {
                 }
                 
                 print("Successfully upload profile image: ", imgUrl)
+                    
                 
-                url = imgUrl
-                self.isImageUplouded = true
+                guard let usrName = self.username else { return }
+                self.saveUserIntoDatabase(username: usrName, uid: uid, imageUrl: imgUrl)
             }
         }
         
@@ -181,13 +184,13 @@ class ViewController: UIViewController {
     }
     
     private func saveUserIntoDatabase(username: String, uid: String, imageUrl: URL?) {
-        Database.database().reference().child("users").updateChildValues([uid:["username":username, "profileImageUrl":imageUrl]]) { (error, reference) in
+        
+        Database.database().reference().child("users").updateChildValues([uid:["username":username, "profileImageUrl":imageUrl?.absoluteString]]) { (error, reference) in
             if let err = error {
                 self.showErrorAlert(with: err.localizedDescription)
-                print("Failed to add user into database: ", err.localizedDescription)
+                print("Failed to add user into database: ",err.localizedDescription)
                 return
             }
-
             print("User " + username + " saved with image: \(imageUrl?.absoluteString)")
         }
         print(#function)
@@ -196,14 +199,19 @@ class ViewController: UIViewController {
     // MARK:- Selectors
     @objc func signUpTouched() {
 
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        guard let username = usernameTextField.text else { return }
+        email = emailTextField.text
+        password = passwordTextField.text
+        username = usernameTextField.text
         
         guard let image = self.photoPlusButton.imageView?.image else { return }
         guard let data = image.jpegData(compressionQuality: 0.2) else { return }
         
-        createUser(email: email, password: password, imageToUpload: image, data: data, username: username)
+        
+        guard let mail = email else { return }
+        guard let passwrd = password else { return }
+        guard let usrName = username else { return }
+        
+        createUser(email: mail, password: passwrd, imageToUpload: image, data: data, username: usrName)
     }
 
 
