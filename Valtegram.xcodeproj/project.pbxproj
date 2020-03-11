@@ -10,13 +10,15 @@
 		3A0363E81E66296192F7CFC0 /* Pods_Valtegram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B344654F6C7A09945FC0DA34 /* Pods_Valtegram.framework */; };
 		3F00297320092D7E393BC4D0 /* Pods_ValtegramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D4163CA158A46B5B1C68FB /* Pods_ValtegramTests.framework */; };
 		8800EA632414DC280088452E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA622414DC280088452E /* AppDelegate.swift */; };
-		8800EA652414DC280088452E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA642414DC280088452E /* SceneDelegate.swift */; };
-		8800EA672414DC280088452E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA662414DC280088452E /* ViewController.swift */; };
+		8800EA672414DC280088452E /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA662414DC280088452E /* AuthViewController.swift */; };
 		8800EA6A2414DC280088452E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA682414DC280088452E /* Main.storyboard */; };
 		8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA6B2414DC280088452E /* Valtegram.xcdatamodeld */; };
 		8800EA6F2414DC2F0088452E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA6E2414DC2F0088452E /* Assets.xcassets */; };
 		8800EA722414DC2F0088452E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA702414DC2F0088452E /* LaunchScreen.storyboard */; };
 		8800EA7D2414DC300088452E /* ValtegramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA7C2414DC300088452E /* ValtegramTests.swift */; };
+		885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA642414DC280088452E /* SceneDelegate.swift */; };
+		885C446724190C9D00B6E03C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446424190B9500B6E03C /* TabBarController.swift */; };
+		885C446924190E3800B6E03C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446824190E3800B6E03C /* UserProfileViewController.swift */; };
 		8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883C6332414F0A000712B0D /* UIColor+Extension.swift */; };
 		8883C6382414F58300712B0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8883C6372414F58300712B0D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -38,7 +40,7 @@
 		8800EA5F2414DC280088452E /* Valtegram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Valtegram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8800EA622414DC280088452E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8800EA642414DC280088452E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8800EA662414DC280088452E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8800EA662414DC280088452E /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8800EA692414DC280088452E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8800EA6C2414DC280088452E /* Valtegram.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Valtegram.xcdatamodel; sourceTree = "<group>"; };
 		8800EA6E2414DC2F0088452E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,6 +49,8 @@
 		8800EA782414DC300088452E /* ValtegramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValtegramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8800EA7C2414DC300088452E /* ValtegramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValtegramTests.swift; sourceTree = "<group>"; };
 		8800EA7E2414DC300088452E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		885C446424190B9500B6E03C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		885C446824190E3800B6E03C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		8883C6332414F0A000712B0D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8883C6372414F58300712B0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88B11C702414FEC5003CC711 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +135,9 @@
 				8883C6322414F08200712B0D /* Extensions */,
 				8800EA622414DC280088452E /* AppDelegate.swift */,
 				8800EA642414DC280088452E /* SceneDelegate.swift */,
-				8800EA662414DC280088452E /* ViewController.swift */,
+				8800EA662414DC280088452E /* AuthViewController.swift */,
+				885C446424190B9500B6E03C /* TabBarController.swift */,
+				885C446824190E3800B6E03C /* UserProfileViewController.swift */,
 				8800EA682414DC280088452E /* Main.storyboard */,
 				8800EA6E2414DC2F0088452E /* Assets.xcassets */,
 				8800EA702414DC2F0088452E /* LaunchScreen.storyboard */,
@@ -357,11 +363,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8800EA672414DC280088452E /* ViewController.swift in Sources */,
+				8800EA672414DC280088452E /* AuthViewController.swift in Sources */,
 				8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */,
 				8800EA632414DC280088452E /* AppDelegate.swift in Sources */,
-				8800EA652414DC280088452E /* SceneDelegate.swift in Sources */,
+				885C446724190C9D00B6E03C /* TabBarController.swift in Sources */,
+				885C446924190E3800B6E03C /* UserProfileViewController.swift in Sources */,
 				8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */,
+				885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
