@@ -23,8 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13.0, *) { } else {
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let tabBarController = TabBarController()
-            let navigationController = UINavigationController(rootViewController: tabBarController)
-            self.window!.rootViewController = navigationController
+            self.window!.rootViewController = tabBarController
             self.window!.makeKeyAndVisible()
         }
         return true

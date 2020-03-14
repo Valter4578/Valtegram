@@ -19,8 +19,11 @@
 		885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA642414DC280088452E /* SceneDelegate.swift */; };
 		885C446724190C9D00B6E03C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446424190B9500B6E03C /* TabBarController.swift */; };
 		885C446924190E3800B6E03C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446824190E3800B6E03C /* UserProfileViewController.swift */; };
+		885C446B2419357C00B6E03C /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446A2419357C00B6E03C /* UserProfileHeader.swift */; };
+		885C446D2419378E00B6E03C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446C2419378E00B6E03C /* UIView+Extension.swift */; };
 		8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883C6332414F0A000712B0D /* UIColor+Extension.swift */; };
 		8883C6382414F58300712B0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8883C6372414F58300712B0D /* GoogleService-Info.plist */; };
+		88CC0B43241D10DF003E604C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC0B42241D10DF003E604C /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,8 @@
 		8800EA7E2414DC300088452E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		885C446424190B9500B6E03C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		885C446824190E3800B6E03C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		885C446A2419357C00B6E03C /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		885C446C2419378E00B6E03C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		8883C6332414F0A000712B0D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8883C6372414F58300712B0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		88B11C702414FEC5003CC711 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +69,7 @@
 		88B11C832414FEF8003CC711 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B11C842414FEF8003CC711 /* leveldb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = leveldb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B11C852414FEF8003CC711 /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88CC0B42241D10DF003E604C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9E03173517AC7ADC6F66365C /* Pods-ValtegramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ValtegramTests.release.xcconfig"; path = "Target Support Files/Pods-ValtegramTests/Pods-ValtegramTests.release.xcconfig"; sourceTree = "<group>"; };
 		B344654F6C7A09945FC0DA34 /* Pods_Valtegram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Valtegram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5D4163CA158A46B5B1C68FB /* Pods_ValtegramTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ValtegramTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +144,8 @@
 				8800EA662414DC280088452E /* AuthViewController.swift */,
 				885C446424190B9500B6E03C /* TabBarController.swift */,
 				885C446824190E3800B6E03C /* UserProfileViewController.swift */,
+				88CC0B42241D10DF003E604C /* User.swift */,
+				885C446A2419357C00B6E03C /* UserProfileHeader.swift */,
 				8800EA682414DC280088452E /* Main.storyboard */,
 				8800EA6E2414DC2F0088452E /* Assets.xcassets */,
 				8800EA702414DC2F0088452E /* LaunchScreen.storyboard */,
@@ -161,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				8883C6332414F0A000712B0D /* UIColor+Extension.swift */,
+				885C446C2419378E00B6E03C /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -366,9 +375,12 @@
 				8800EA672414DC280088452E /* AuthViewController.swift in Sources */,
 				8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */,
 				8800EA632414DC280088452E /* AppDelegate.swift in Sources */,
+				885C446D2419378E00B6E03C /* UIView+Extension.swift in Sources */,
+				885C446B2419357C00B6E03C /* UserProfileHeader.swift in Sources */,
 				885C446724190C9D00B6E03C /* TabBarController.swift in Sources */,
 				885C446924190E3800B6E03C /* UserProfileViewController.swift in Sources */,
 				8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */,
+				88CC0B43241D10DF003E604C /* User.swift in Sources */,
 				885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
