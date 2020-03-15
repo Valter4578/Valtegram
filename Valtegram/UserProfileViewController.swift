@@ -12,6 +12,7 @@ import Firebase
 class UserProfileViewController: UICollectionViewController {
     // MARK:- Private properties
     private var user: User?
+    private let cellId = "mainCell"
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -23,7 +24,7 @@ class UserProfileViewController: UICollectionViewController {
         
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         
-
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     //MARK: - Private methods
@@ -55,6 +56,30 @@ class UserProfileViewController: UICollectionViewController {
     
 
     // MARK:- Collection view data source
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 8
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath)
+        cell.backgroundColor = .cyan
+        
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Deduct 2 because of two lines beetwen midle cell and left and right cell
+        let width = (view.frame.width-2)/3
+        return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
 }
 
 // MARK:- CollectionView Flow layout delegate
