@@ -19,6 +19,6 @@ class TabBarController: UITabBarController {
         navigationController.tabBarItem.image = UIImage(named: "profile_unselected")?.withRenderingMode(.automatic)
         navigationController.tabBarItem.selectedImage = UIImage(named: "profile_selected")?.withRenderingMode(.automatic)
 
-        viewControllers = [navigationController]
+        viewControllers = [navigationController, UIViewController()]
     }
 }
