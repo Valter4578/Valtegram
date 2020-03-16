@@ -18,6 +18,16 @@ class UserProfileViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Check if user didn't log in
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let logInViewController = LogInViewController()
+                logInViewController.modalPresentationStyle = .fullScreen
+                let navigationController = UINavigationController(rootViewController: logInViewController)
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        }
+        
         collectionView.backgroundColor = .white
         
         fetchUser()

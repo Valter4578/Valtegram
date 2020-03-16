@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SignUpViewController.swift
 //  Valtegram
 //
 //  Created by Максим Алексеев on 08.03.2020.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class ViewController: UIViewController {
+class SignUpViewController: UIViewController {
     
     private var username: String?
     private var email: String?
@@ -82,6 +82,8 @@ class ViewController: UIViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .white
 
         setupAddPhotoButton()
         setupTextFields()
@@ -239,7 +241,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[.editedImage]as? UIImage {
             photoPlusButton.setImage(editedImage, for: .normal)
