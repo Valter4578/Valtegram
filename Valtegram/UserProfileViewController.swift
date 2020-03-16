@@ -25,6 +25,8 @@ class UserProfileViewController: UICollectionViewController {
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
+        setupPreferenceButton()
     }
     
     //MARK: - Private methods
@@ -45,6 +47,26 @@ class UserProfileViewController: UICollectionViewController {
         }
     }
     
+    // MARK:- Setups
+    private func setupPreferenceButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(logOut))
+    }
+    
+    
+    // MARK:- Objc methods
+    @objc func logOut() {
+        let alertController = UIAlertController(title: "Log out", message: "Do you really want to do it ?", preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
+            do {
+                try? Auth.auth().signOut()
+            } catch {
+                print(error)
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true)
+    }
     // MARK:- Collection view delegate
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
