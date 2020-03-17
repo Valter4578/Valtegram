@@ -69,13 +69,24 @@ class SignUpViewController: UIViewController {
         button.setTitle("Sign up", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
-        button.backgroundColor = UIColor.setAsRgb(red: 27, green: 67, blue: 51)
+        button.backgroundColor = UIColor.setAsRgb(red: 14, green: 186, blue: 129)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
         button.isEnabled = false
         
         button.addTarget(self, action: #selector(signUpTouched), for: .touchUpInside)
         
+        return button
+    }()
+    
+    lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attributedString = LogInViewController.makeAttributedButtonTitle(greenText: "Login ", grayText: "if you have account")
+        button.setAttributedTitle(attributedString, for: .normal)
+        
+        button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
         return button
     }()
 
@@ -87,6 +98,7 @@ class SignUpViewController: UIViewController {
 
         setupAddPhotoButton()
         setupTextFields()
+        setupLoginButton()
         
         
     }
@@ -116,8 +128,20 @@ class SignUpViewController: UIViewController {
             photoPlusButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
             photoPlusButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             photoPlusButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+    
         
         
+    }
+    
+    private func setupLoginButton() {
+        view.addSubview(loginButton)
+        
+        NSLayoutConstraint.activate([
+            loginButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            loginButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            loginButton.heightAnchor.constraint(equalToConstant: 45),
+        ])
     }
 
     
@@ -238,6 +262,10 @@ class SignUpViewController: UIViewController {
         
         present(imagePickerController, animated: true, completion: nil)
         
+    }
+    
+    @objc func handleLoginButton() {
+        navigationController?.popViewController(animated: true)
     }
 }
 

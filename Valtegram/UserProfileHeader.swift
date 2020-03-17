@@ -204,7 +204,7 @@ class UserProfileHeader: UICollectionViewCell {
         NSLayoutConstraint.activate([
             usernameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 4),
             usernameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 25),
-            usernameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 15),
+            usernameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
             usernameLabel.bottomAnchor.constraint(equalTo: gridButton.topAnchor, constant: 3),
         ])
         

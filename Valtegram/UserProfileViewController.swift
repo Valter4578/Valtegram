@@ -22,7 +22,6 @@ class UserProfileViewController: UICollectionViewController {
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let logInViewController = LogInViewController()
-                logInViewController.modalPresentationStyle = .fullScreen
                 let navigationController = UINavigationController(rootViewController: logInViewController)
                 self.present(navigationController, animated: true, completion: nil)
             }
