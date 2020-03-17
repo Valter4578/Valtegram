@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LogInViewController: UIViewController {
     // MARK:- Views
@@ -41,17 +42,16 @@ class LogInViewController: UIViewController {
     }()
     
     
-    let emailTextField: UITextField = {
+    lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        
-        
+        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return textField
     }()
     
-    let passwordTextField: UITextField = {
+    lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Password"
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +70,7 @@ class LogInViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
         button.isEnabled = false
-                
+        button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
         return button
     }()
     
@@ -157,10 +157,47 @@ class LogInViewController: UIViewController {
         return attributedTitle
     }
 
+    private func showErrorAlert(with errorText: String) {
+        let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .cancel)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+        print(errorText)
+    }
     
     // MARK:- Objc methods
     @objc func handleSignUpButton() {
         let signUpViewController = SignUpViewController()
         navigationController?.pushViewController(signUpViewController, animated: true)
+    }
+    
+    @objc func handleTextInputChange() {
+        let isFormValid = emailTextField.text?.count ?? 0 > 0 && passwordTextField.text?.count ?? 0 > 0
+        
+        if isFormValid {
+            logInButton.backgroundColor = UIColor.setAsRgb(red: 27, green: 67, blue: 51)
+            logInButton.isEnabled = true
+        } else {
+            logInButton.backgroundColor = UIColor.setAsRgb(red: 78, green: 132, blue: 110)
+            logInButton.isEnabled = false
+        }
+    }
+    
+    @objc func handleLoginButton() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let err = error {
+                self.showErrorAlert(with: err.localizedDescription
+                )
+            }
+            
+            print("Succssesfuly loged in with user: ", result?.user.uid ?? "")
+            // Update ui
+            guard let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? TabBarController else { return }
+            tabBarVC.setupViewControllers()
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

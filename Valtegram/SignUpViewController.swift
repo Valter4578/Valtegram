@@ -103,7 +103,7 @@ class SignUpViewController: UIViewController {
         
     }
     
-    // MARK:- Private methods
+    // MARK:- Setups
     private func setupTextFields() {
         
         let stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, signUpButton ])
@@ -144,7 +144,7 @@ class SignUpViewController: UIViewController {
         ])
     }
 
-    
+    // MARK:- Private methods 
     private func showErrorAlert(with errorText: String) {
         let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .cancel)
@@ -218,6 +218,11 @@ class SignUpViewController: UIViewController {
                 return
             }
             print("User " + username + " saved with image: \(imageUrl?.absoluteString)")
+            
+            // Update ui
+            guard let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? TabBarController else { return }
+            tabBarVC.setupViewControllers()
+            self.dismiss(animated: true, completion: nil)
         }
         print(#function)
     }
@@ -238,6 +243,7 @@ class SignUpViewController: UIViewController {
         guard let usrName = username else { return }
         
         createUser(email: mail, password: passwrd, imageToUpload: image, data: data, username: usrName)
+        
     }
 
 
