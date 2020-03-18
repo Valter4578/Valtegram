@@ -69,13 +69,24 @@ class SignUpViewController: UIViewController {
         button.setTitle("Sign up", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
-        button.backgroundColor = UIColor.setAsRgb(red: 27, green: 67, blue: 51)
+        button.backgroundColor = UIColor.setAsRgb(red: 14, green: 186, blue: 129)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
         button.isEnabled = false
         
         button.addTarget(self, action: #selector(signUpTouched), for: .touchUpInside)
         
+        return button
+    }()
+    
+    lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attributedString = LogInViewController.makeAttributedButtonTitle(greenText: "Login ", grayText: "if you have account")
+        button.setAttributedTitle(attributedString, for: .normal)
+        
+        button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
         return button
     }()
 
@@ -87,11 +98,12 @@ class SignUpViewController: UIViewController {
 
         setupAddPhotoButton()
         setupTextFields()
+        setupLoginButton()
         
         
     }
     
-    // MARK:- Private methods
+    // MARK:- Setups
     private func setupTextFields() {
         
         let stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, signUpButton ])
@@ -116,11 +128,23 @@ class SignUpViewController: UIViewController {
             photoPlusButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
             photoPlusButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             photoPlusButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+    
         
         
     }
-
     
+    private func setupLoginButton() {
+        view.addSubview(loginButton)
+        
+        NSLayoutConstraint.activate([
+            loginButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            loginButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
+            loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            loginButton.heightAnchor.constraint(equalToConstant: 45),
+        ])
+    }
+
+    // MARK:- Private methods 
     private func showErrorAlert(with errorText: String) {
         let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .cancel)
@@ -194,6 +218,11 @@ class SignUpViewController: UIViewController {
                 return
             }
             print("User " + username + " saved with image: \(imageUrl?.absoluteString)")
+            
+            // Update ui
+            guard let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? TabBarController else { return }
+            tabBarVC.setupViewControllers()
+            self.dismiss(animated: true, completion: nil)
         }
         print(#function)
     }
@@ -214,6 +243,7 @@ class SignUpViewController: UIViewController {
         guard let usrName = username else { return }
         
         createUser(email: mail, password: passwrd, imageToUpload: image, data: data, username: usrName)
+        
     }
 
 
@@ -238,6 +268,10 @@ class SignUpViewController: UIViewController {
         
         present(imagePickerController, animated: true, completion: nil)
         
+    }
+    
+    @objc func handleLoginButton() {
+        navigationController?.popViewController(animated: true)
     }
 }
 

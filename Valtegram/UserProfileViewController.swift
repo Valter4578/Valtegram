@@ -22,7 +22,6 @@ class UserProfileViewController: UICollectionViewController {
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let logInViewController = LogInViewController()
-                logInViewController.modalPresentationStyle = .fullScreen
                 let navigationController = UINavigationController(rootViewController: logInViewController)
                 self.present(navigationController, animated: true, completion: nil)
             }
@@ -69,6 +68,10 @@ class UserProfileViewController: UICollectionViewController {
         alertController.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
             do {
                 try? Auth.auth().signOut()
+                
+                let loginVC = LogInViewController()
+                let navigationVC = UINavigationController(rootViewController: loginVC)
+                self.present(navigationVC, animated: true, completion: nil)
             } catch {
                 print(error)
             }
