@@ -1,5 +1,5 @@
 //
-//  UIImageView+Extension.swift
+//  UIImage+Extension.swift
 //  Valtegram
 //
 //  Created by Максим Алексеев on 11.03.2020.
