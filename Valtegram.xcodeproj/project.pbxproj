@@ -24,6 +24,8 @@
 		88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88601AB4241FB51600004DFC /* LogInViewController.swift */; };
 		8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883C6332414F0A000712B0D /* UIColor+Extension.swift */; };
 		8883C6382414F58300712B0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8883C6372414F58300712B0D /* GoogleService-Info.plist */; };
+		8895C4A524223CE400CEF61B /* PhotoSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8895C4A424223CE400CEF61B /* PhotoSelectorViewController.swift */; };
+		88BB62A02422606C0063A914 /* PhotoSelctorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BB629F2422606C0063A914 /* PhotoSelctorCell.swift */; };
 		88CC0B43241D10DF003E604C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC0B42241D10DF003E604C /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,7 @@
 		88601AB4241FB51600004DFC /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		8883C6332414F0A000712B0D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8883C6372414F58300712B0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8895C4A424223CE400CEF61B /* PhotoSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorViewController.swift; sourceTree = "<group>"; };
 		88B11C702414FEC5003CC711 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B11C712414FEC5003CC711 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B11C722414FEC5003CC711 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +74,7 @@
 		88B11C832414FEF8003CC711 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B11C842414FEF8003CC711 /* leveldb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = leveldb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B11C852414FEF8003CC711 /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88BB629F2422606C0063A914 /* PhotoSelctorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelctorCell.swift; sourceTree = "<group>"; };
 		88CC0B42241D10DF003E604C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9E03173517AC7ADC6F66365C /* Pods-ValtegramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ValtegramTests.release.xcconfig"; path = "Target Support Files/Pods-ValtegramTests/Pods-ValtegramTests.release.xcconfig"; sourceTree = "<group>"; };
 		B344654F6C7A09945FC0DA34 /* Pods_Valtegram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Valtegram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +149,8 @@
 				8800EA642414DC280088452E /* SceneDelegate.swift */,
 				8800EA662414DC280088452E /* SignUpViewController.swift */,
 				885C446424190B9500B6E03C /* TabBarController.swift */,
+				8895C4A424223CE400CEF61B /* PhotoSelectorViewController.swift */,
+				88BB629F2422606C0063A914 /* PhotoSelctorCell.swift */,
 				885C446824190E3800B6E03C /* UserProfileViewController.swift */,
 				88601AB4241FB51600004DFC /* LogInViewController.swift */,
 				88CC0B42241D10DF003E604C /* User.swift */,
@@ -378,9 +384,11 @@
 				8800EA672414DC280088452E /* SignUpViewController.swift in Sources */,
 				8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */,
 				88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */,
+				88BB62A02422606C0063A914 /* PhotoSelctorCell.swift in Sources */,
 				8800EA632414DC280088452E /* AppDelegate.swift in Sources */,
 				885C446D2419378E00B6E03C /* UIImage+Extension.swift in Sources */,
 				885C446B2419357C00B6E03C /* UserProfileHeader.swift in Sources */,
+				8895C4A524223CE400CEF61B /* PhotoSelectorViewController.swift in Sources */,
 				885C446724190C9D00B6E03C /* TabBarController.swift in Sources */,
 				885C446924190E3800B6E03C /* UserProfileViewController.swift in Sources */,
 				8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */,

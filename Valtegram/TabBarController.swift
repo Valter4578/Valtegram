@@ -8,9 +8,16 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, UITabBarControllerDelegate  {
+    // MARK:- Properties
+    
+    
+    // Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.delegate = self
+        
         
         setupViewControllers()
         modifyItems()
@@ -35,6 +42,9 @@ class TabBarController: UITabBarController {
         viewControllers = [homeNavigationController,searchNavigationController,plusNavigationController,likedNavigationController, userProfileNavigationController]
     }
     
+    
+    // MARK:- Private methods
+    
     /// builder function that create navigation controllers for tab bart
     /// - Parameters:
     ///   - imageName: name of imag
@@ -56,5 +66,21 @@ class TabBarController: UITabBarController {
         for item in items {
             item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         }
+    }
+    
+    // MARK:- TabBarControllerDelegate
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = viewControllers?.firstIndex(of: viewController)
+        
+        if index == 2 {
+            let layout = UICollectionViewFlowLayout()
+            let photoSelectorController = PhotoSelectorViewController(collectionViewLayout: layout)
+            let navigationController = UINavigationController(rootViewController: photoSelectorController)
+            present(navigationController, animated: true)
+            return false
+        }
+        
+        
+        return true
     }
 }
