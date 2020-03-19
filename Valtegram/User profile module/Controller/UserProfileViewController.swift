@@ -13,6 +13,7 @@ class UserProfileViewController: UICollectionViewController {
     // MARK:- Private properties
     private var user: User?
     private let cellId = "mainCell"
+    private var posts = [Post]()
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -33,12 +34,24 @@ class UserProfileViewController: UICollectionViewController {
         
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         setupPreferenceButton()
+        
+        fetchPosts()
     }
     
     //MARK: - Private methods
+    private func showErrorAlert(with errorText: String) {
+           let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
+           let alertAction = UIAlertAction(title: "OK", style: .cancel)
+           alertController.addAction(alertAction)
+           self.present(alertController, animated: true, completion: nil)
+           
+           print(errorText)
+       }
+       
+    
     func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -53,6 +66,28 @@ class UserProfileViewController: UICollectionViewController {
             self.collectionView.reloadData()
         }) { (error) in
             print(error.localizedDescription)
+        }
+    }
+    
+    private func fetchPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let reference = Database.database().reference().child("posts").child(uid)
+        reference.observe(.value, with: { (snapshot) in
+
+            guard let dictionaries = snapshot.value as? [String:Any] else { return }
+            dictionaries.forEach { (key, value) in
+                print("Key: \(key), value \(value)")
+                
+                guard let dictionary = value as? [String:Any] else { return }
+                let imageUrl = dictionary["imageUrl"] as? String
+                let post = Post(dictionary: dictionary)
+                self.posts.append(post)
+            }
+            
+            self.collectionView.reloadData()
+        }) { (error) in
+            self.showErrorAlert(with: error.localizedDescription)
         }
     }
     
@@ -92,14 +127,13 @@ class UserProfileViewController: UICollectionViewController {
 
     // MARK:- Collection view data source
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath)
-        cell.backgroundColor = .cyan
-        
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as? PostCollectionViewCell
+        cell?.post = posts[indexPath.item]
+        return cell!
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -24,6 +24,8 @@
 		88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88601AB4241FB51600004DFC /* LogInViewController.swift */; };
 		8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883C6332414F0A000712B0D /* UIColor+Extension.swift */; };
 		8883C6382414F58300712B0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8883C6372414F58300712B0D /* GoogleService-Info.plist */; };
+		889482732423CF0700A9A22D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889482722423CF0700A9A22D /* Post.swift */; };
+		889482762423D3A400A9A22D /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889482752423D3A400A9A22D /* PostCollectionViewCell.swift */; };
 		8895C4A524223CE400CEF61B /* PhotoSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8895C4A424223CE400CEF61B /* PhotoSelectorViewController.swift */; };
 		88BB62A02422606C0063A914 /* PhotoSelctorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BB629F2422606C0063A914 /* PhotoSelctorCell.swift */; };
 		88BCEBF324233AB100A22886 /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCEBF224233AB100A22886 /* PhotoSelectorHeader.swift */; };
@@ -64,6 +66,8 @@
 		88601AB4241FB51600004DFC /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		8883C6332414F0A000712B0D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8883C6372414F58300712B0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		889482722423CF0700A9A22D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		889482752423D3A400A9A22D /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
 		8895C4A424223CE400CEF61B /* PhotoSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorViewController.swift; sourceTree = "<group>"; };
 		88B11C702414FEC5003CC711 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B11C712414FEC5003CC711 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +185,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		889482742423CF0F00A9A22D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				889482722423CF0700A9A22D /* Post.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		88BCEBF424234A0E00A22886 /* Login module  */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				885C446A2419357C00B6E03C /* UserProfileHeader.swift */,
+				889482752423D3A400A9A22D /* PostCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -269,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				885C446424190B9500B6E03C /* TabBarController.swift */,
+				889482742423CF0F00A9A22D /* Model */,
 			);
 			path = "Main module";
 			sourceTree = "<group>";
@@ -502,6 +516,8 @@
 				8895C4A524223CE400CEF61B /* PhotoSelectorViewController.swift in Sources */,
 				88BCEBF324233AB100A22886 /* PhotoSelectorHeader.swift in Sources */,
 				885C446724190C9D00B6E03C /* TabBarController.swift in Sources */,
+				889482732423CF0700A9A22D /* Post.swift in Sources */,
+				889482762423D3A400A9A22D /* PostCollectionViewCell.swift in Sources */,
 				885C446924190E3800B6E03C /* UserProfileViewController.swift in Sources */,
 				8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */,
 				88CC0B43241D10DF003E604C /* User.swift in Sources */,
