@@ -19,17 +19,19 @@ class PhotoSelectorViewController: UICollectionViewController {
     let headerId = "photoSelectorHeader"
     
     var images = [UIImage]()
+    var selectedImage: UIImage?
+    var assets = [PHAsset]()
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .green
+        collectionView.backgroundColor = .white
         
         setupNavigationController()
         
         collectionView.register(PhotoSelctorCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        collectionView.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         
         fetchPhotos()
     }
@@ -47,23 +49,36 @@ class PhotoSelectorViewController: UICollectionViewController {
         let options = PHFetchOptions()
         options.fetchLimit = 20
         let allPhotos = PHAsset.fetchAssets(with: .image, options: options)
-        allPhotos.enumerateObjects { (asset, count, stop) in
-            
-            let imageManager = PHImageManager.default()
-            let targetSize = CGSize(width: 350, height: 350)
-            let options = PHImageRequestOptions()
-            options.isSynchronous = true
-            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options) { (image, info) in
+        
+        DispatchQueue.global(qos: .background).async {
+            allPhotos.enumerateObjects { (asset, count, stop) in
+                print(count)
+                let imageManager = PHImageManager.default()
+                let targetSize = CGSize(width: 100, height: 100)
+                let options = PHImageRequestOptions()
+                options.isSynchronous = true
                 
-                guard let img = image else { return }
-                self.images.append(img)
-                
-                if count == allPhotos.count - 1 {
-                    self.collectionView.reloadData()
+                imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options) { (image, info) in
+                    
+                    guard let img = image else { return }
+                    self.images.append(img)
+                    self.assets.append(asset)
+                    if self.selectedImage == nil {
+                        self.selectedImage = img
+                    }
+                    
+                    
+                    if count == allPhotos.count - 1 {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
+                    }
+                    
                 }
             }
         }
     }
+    
     
     // MARK:- Objc methods
     
@@ -82,6 +97,11 @@ class PhotoSelectorViewController: UICollectionViewController {
         
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedImage = images[indexPath.item]
+        collectionView.reloadData()
+    }
     // MARK:- CollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -89,8 +109,24 @@ class PhotoSelectorViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath )
-        header.backgroundColor = .yellow
+        
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath ) as? PhotoSelectorHeader else { fatalError() }
+        header.photoImageView.image = selectedImage
+        
+        if let selectedImage = selectedImage {
+            if let index = self.images.firstIndex(of: selectedImage) {
+                let selectedAsset = self.assets[index]
+                
+                let imageManager = PHImageManager.default()
+                
+                let targetSize = CGSize(width: 500, height: 500)
+                imageManager.requestImage(for: selectedAsset, targetSize: targetSize, contentMode: .default, options: nil) { (image, info) in
+                    print(Thread.current)
+                    header.photoImageView.image = image
+                }
+                
+            }
+        }
         return header
     }
     
