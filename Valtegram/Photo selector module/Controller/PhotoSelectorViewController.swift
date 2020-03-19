@@ -9,8 +9,14 @@
 import UIKit
 import Photos
 
+protocol PhotoSelectorDelegate: class {
+    func setImage(image: UIImage)
+}
+
 class PhotoSelectorViewController: UICollectionViewController {
     // MARK:- Properties
+    weak var delegate: PhotoSelectorDelegate?
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -22,6 +28,7 @@ class PhotoSelectorViewController: UICollectionViewController {
     var selectedImage: UIImage?
     var assets = [PHAsset]()
     
+    
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +39,7 @@ class PhotoSelectorViewController: UICollectionViewController {
         
         collectionView.register(PhotoSelctorCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        
         
         fetchPhotos()
     }
@@ -47,10 +55,10 @@ class PhotoSelectorViewController: UICollectionViewController {
     // MARK:- Private functions
     private func fetchPhotos() {
         let options = PHFetchOptions()
-        options.fetchLimit = 20
+        options.fetchLimit = 10
         let allPhotos = PHAsset.fetchAssets(with: .image, options: options)
         
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             allPhotos.enumerateObjects { (asset, count, stop) in
                 print(count)
                 let imageManager = PHImageManager.default()
@@ -87,7 +95,13 @@ class PhotoSelectorViewController: UICollectionViewController {
     }
     
     @objc func handleNextButton() {
+        let sharePhotoViewController = SharePhotoViewController()
         
+        
+        navigationController?.pushViewController(sharePhotoViewController, animated: true)
+        
+        guard let img = selectedImage else { return }
+        sharePhotoViewController.image = img
     }
     
     // MARK:- CollectionViewDelegate
@@ -101,6 +115,9 @@ class PhotoSelectorViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedImage = images[indexPath.item]
         collectionView.reloadData()
+        
+        let indexPath = IndexPath(row: 0, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
     }
     // MARK:- CollectionViewDataSource
 
