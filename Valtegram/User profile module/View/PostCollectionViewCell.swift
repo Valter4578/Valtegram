@@ -46,6 +46,8 @@ class PostCollectionViewCell: UICollectionViewCell {
                 return
             }
             
+            if url.absoluteString != self.post?.imageUrl { return }
+            
             print(data)
             guard let data = data else { return }
             let image = UIImage(data: data)

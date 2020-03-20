@@ -69,6 +69,25 @@ class UserProfileViewController: UICollectionViewController {
         }
     }
     
+    private func fetchOrderedPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let reference = Database.database().reference().child("posts").child(uid)
+
+        reference.queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
+            print(snapshot.key)
+            print(snapshot.value)
+            
+            guard let dictionary = snapshot.value as? [String:Any] else { return }
+            let post = Post(dictionary: dictionary)
+            self.posts.append(post)
+            
+            self.collectionView?.reloadData()
+            
+        }) { (error) in
+            self.showErrorAlert(with: error.localizedDescription)
+        }
+    }
+    
     private func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
