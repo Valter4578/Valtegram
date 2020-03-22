@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+protocol LoginViewInput: class {
+    func handleLoginButton()
+    
+    func handleTextInputChange()
+    
+    func handleSignUpButton()
+    
+    func cancel(_ animated: Bool)
+}

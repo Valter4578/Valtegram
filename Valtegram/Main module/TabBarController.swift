@@ -24,8 +24,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
     }
     
     func setupViewControllers() {
+        let collectionViewLayout = UICollectionViewFlowLayout()
         // home view controller
-        let homeNavigationController = createNavigationController(imageName: "home")
+        let homeFeedViewController = HomeFeedViewController(collectionViewLayout: collectionViewLayout)
+        let homeNavigationController = createNavigationController(imageName: "home", rootViewController: homeFeedViewController)
         // search view controller
         let searchNavigationController = createNavigationController(imageName: "search")
         // plus view controller
@@ -34,7 +36,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
         let likedNavigationController = createNavigationController(imageName: "heart")
         
         // profile view controller
-        let collectionViewLayout = UICollectionViewFlowLayout()
         let userProfileViewController = UserProfileViewController(collectionViewLayout: collectionViewLayout)
         let userProfileNavigationController = createNavigationController(imageName: "profile", rootViewController: userProfileViewController)
         

@@ -16,12 +16,15 @@
 		8800EA6F2414DC2F0088452E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA6E2414DC2F0088452E /* Assets.xcassets */; };
 		8800EA722414DC2F0088452E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA702414DC2F0088452E /* LaunchScreen.storyboard */; };
 		8800EA7D2414DC300088452E /* ValtegramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA7C2414DC300088452E /* ValtegramTests.swift */; };
+		881299B42424AC3B00495088 /* HomeFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881299B32424AC3B00495088 /* HomeFeedCollectionViewCell.swift */; };
+		884589582424A79F009FE863 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884589572424A79F009FE863 /* HomeFeedViewController.swift */; };
 		885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA642414DC280088452E /* SceneDelegate.swift */; };
 		885C446724190C9D00B6E03C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446424190B9500B6E03C /* TabBarController.swift */; };
 		885C446924190E3800B6E03C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446824190E3800B6E03C /* UserProfileViewController.swift */; };
 		885C446B2419357C00B6E03C /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446A2419357C00B6E03C /* UserProfileHeader.swift */; };
 		885C446D2419378E00B6E03C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446C2419378E00B6E03C /* UIImage+Extension.swift */; };
 		88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88601AB4241FB51600004DFC /* LogInViewController.swift */; };
+		8869B2A3242746AC00B1B2CA /* LoginAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869B2A2242746AB00B1B2CA /* LoginAssembly.swift */; };
 		8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883C6332414F0A000712B0D /* UIColor+Extension.swift */; };
 		8883C6382414F58300712B0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8883C6372414F58300712B0D /* GoogleService-Info.plist */; };
 		889482732423CF0700A9A22D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889482722423CF0700A9A22D /* Post.swift */; };
@@ -31,6 +34,12 @@
 		88BCEBF324233AB100A22886 /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCEBF224233AB100A22886 /* PhotoSelectorHeader.swift */; };
 		88BCEC0324234BED00A22886 /* SharePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCEC0224234BED00A22886 /* SharePhotoViewController.swift */; };
 		88CC0B43241D10DF003E604C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC0B42241D10DF003E604C /* User.swift */; };
+		88DE00182427356E008888C8 /* HomeFeedPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE00172427356E008888C8 /* HomeFeedPresenterInput.swift */; };
+		88DE001A242735CA008888C8 /* HomeFeedPresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE0019242735CA008888C8 /* HomeFeedPresenterOutput.swift */; };
+		88DE001C2427367C008888C8 /* HomeFeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE001B2427367C008888C8 /* HomeFeedPresenter.swift */; };
+		88DE001F242741E8008888C8 /* LoginPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE001E242741E8008888C8 /* LoginPresenterInput.swift */; };
+		88DE002124274202008888C8 /* LoginPresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE002024274202008888C8 /* LoginPresenterOutput.swift */; };
+		88DE00232427420E008888C8 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE00222427420E008888C8 /* LoginPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,11 +68,14 @@
 		8800EA782414DC300088452E /* ValtegramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValtegramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8800EA7C2414DC300088452E /* ValtegramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValtegramTests.swift; sourceTree = "<group>"; };
 		8800EA7E2414DC300088452E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		881299B32424AC3B00495088 /* HomeFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		884589572424A79F009FE863 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
 		885C446424190B9500B6E03C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		885C446824190E3800B6E03C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		885C446A2419357C00B6E03C /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		885C446C2419378E00B6E03C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		88601AB4241FB51600004DFC /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		8869B2A2242746AB00B1B2CA /* LoginAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAssembly.swift; sourceTree = "<group>"; };
 		8883C6332414F0A000712B0D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8883C6372414F58300712B0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		889482722423CF0700A9A22D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -84,6 +96,12 @@
 		88BCEBF224233AB100A22886 /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
 		88BCEC0224234BED00A22886 /* SharePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoViewController.swift; sourceTree = "<group>"; };
 		88CC0B42241D10DF003E604C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		88DE00172427356E008888C8 /* HomeFeedPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedPresenterInput.swift; sourceTree = "<group>"; };
+		88DE0019242735CA008888C8 /* HomeFeedPresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedPresenterOutput.swift; sourceTree = "<group>"; };
+		88DE001B2427367C008888C8 /* HomeFeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedPresenter.swift; sourceTree = "<group>"; };
+		88DE001E242741E8008888C8 /* LoginPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterInput.swift; sourceTree = "<group>"; };
+		88DE002024274202008888C8 /* LoginPresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterOutput.swift; sourceTree = "<group>"; };
+		88DE00222427420E008888C8 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		9E03173517AC7ADC6F66365C /* Pods-ValtegramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ValtegramTests.release.xcconfig"; path = "Target Support Files/Pods-ValtegramTests/Pods-ValtegramTests.release.xcconfig"; sourceTree = "<group>"; };
 		B344654F6C7A09945FC0DA34 /* Pods_Valtegram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Valtegram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5D4163CA158A46B5B1C68FB /* Pods_ValtegramTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ValtegramTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +170,8 @@
 		8800EA612414DC280088452E /* Valtegram */ = {
 			isa = PBXGroup;
 			children = (
+				889482742423CF0F00A9A22D /* Model */,
+				884589562424A77A009FE863 /* Home feed module */,
 				8883C6322414F08200712B0D /* Extensions */,
 				88BCEC0124234B9B00A22886 /* Share photo module */,
 				88BCEBFD24234AED00A22886 /* Sign up module */,
@@ -176,6 +196,24 @@
 			path = ValtegramTests;
 			sourceTree = "<group>";
 		};
+		881299B22424AC2A00495088 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				884589572424A79F009FE863 /* HomeFeedViewController.swift */,
+				881299B32424AC3B00495088 /* HomeFeedCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		884589562424A77A009FE863 /* Home feed module */ = {
+			isa = PBXGroup;
+			children = (
+				88DE001624273551008888C8 /* Presenter */,
+				881299B22424AC2A00495088 /* View */,
+			);
+			path = "Home feed module";
+			sourceTree = "<group>";
+		};
 		8883C6322414F08200712B0D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,17 +234,19 @@
 		88BCEBF424234A0E00A22886 /* Login module  */ = {
 			isa = PBXGroup;
 			children = (
-				88BCEBF524234A7000A22886 /* Controllers */,
+				88DE001D242741D4008888C8 /* Presenter */,
+				88BCEBF524234A7000A22886 /* View */,
+				8869B2A2242746AB00B1B2CA /* LoginAssembly.swift */,
 			);
 			path = "Login module ";
 			sourceTree = "<group>";
 		};
-		88BCEBF524234A7000A22886 /* Controllers */ = {
+		88BCEBF524234A7000A22886 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				88601AB4241FB51600004DFC /* LogInViewController.swift */,
 			);
-			path = Controllers;
+			path = View;
 			sourceTree = "<group>";
 		};
 		88BCEBF624234A8000A22886 /* User profile module */ = {
@@ -282,7 +322,6 @@
 			isa = PBXGroup;
 			children = (
 				885C446424190B9500B6E03C /* TabBarController.swift */,
-				889482742423CF0F00A9A22D /* Model */,
 			);
 			path = "Main module";
 			sourceTree = "<group>";
@@ -305,6 +344,26 @@
 				88BCEC0224234BED00A22886 /* SharePhotoViewController.swift */,
 			);
 			path = "Share photo module";
+			sourceTree = "<group>";
+		};
+		88DE001624273551008888C8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				88DE00172427356E008888C8 /* HomeFeedPresenterInput.swift */,
+				88DE0019242735CA008888C8 /* HomeFeedPresenterOutput.swift */,
+				88DE001B2427367C008888C8 /* HomeFeedPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		88DE001D242741D4008888C8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				88DE001E242741E8008888C8 /* LoginPresenterInput.swift */,
+				88DE002024274202008888C8 /* LoginPresenterOutput.swift */,
+				88DE00222427420E008888C8 /* LoginPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		C9336217D47693137AC58E90 /* Pods */ = {
@@ -509,19 +568,28 @@
 				8800EA672414DC280088452E /* SignUpViewController.swift in Sources */,
 				8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */,
 				88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */,
+				88DE00232427420E008888C8 /* LoginPresenter.swift in Sources */,
+				88DE00182427356E008888C8 /* HomeFeedPresenterInput.swift in Sources */,
 				88BB62A02422606C0063A914 /* PhotoSelctorCell.swift in Sources */,
 				8800EA632414DC280088452E /* AppDelegate.swift in Sources */,
 				885C446D2419378E00B6E03C /* UIImage+Extension.swift in Sources */,
 				885C446B2419357C00B6E03C /* UserProfileHeader.swift in Sources */,
 				8895C4A524223CE400CEF61B /* PhotoSelectorViewController.swift in Sources */,
 				88BCEBF324233AB100A22886 /* PhotoSelectorHeader.swift in Sources */,
+				88DE001A242735CA008888C8 /* HomeFeedPresenterOutput.swift in Sources */,
 				885C446724190C9D00B6E03C /* TabBarController.swift in Sources */,
+				88DE001C2427367C008888C8 /* HomeFeedPresenter.swift in Sources */,
+				884589582424A79F009FE863 /* HomeFeedViewController.swift in Sources */,
+				88DE002124274202008888C8 /* LoginPresenterOutput.swift in Sources */,
 				889482732423CF0700A9A22D /* Post.swift in Sources */,
 				889482762423D3A400A9A22D /* PostCollectionViewCell.swift in Sources */,
+				881299B42424AC3B00495088 /* HomeFeedCollectionViewCell.swift in Sources */,
 				885C446924190E3800B6E03C /* UserProfileViewController.swift in Sources */,
 				8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */,
 				88CC0B43241D10DF003E604C /* User.swift in Sources */,
+				88DE001F242741E8008888C8 /* LoginPresenterInput.swift in Sources */,
 				885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */,
+				8869B2A3242746AC00B1B2CA /* LoginAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

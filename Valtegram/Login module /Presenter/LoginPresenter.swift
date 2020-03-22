@@ -12,24 +12,21 @@ class LoginPresenter: LoginViewOutput {
 
     weak var view: LoginViewInput!
     
-    func didPressLogin(email: String, password: String) -> Error? {
-
-        var err: Error?
+    func didPressLogin(email: String, password: String) {
         
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                err = error
+                print(error.localizedDescription)
                 return
             }
             
-            print("Succssesfuly loged in with user: ", result?.user.uid ?? "")
+            print("Succssesfuly logged in with user: ", result?.user.uid ?? "")
             // Update ui
             guard let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? TabBarController else { return }
             tabBarVC.setupViewControllers()
             
             self.view.cancel(true)
         }
-        return err
     }
     
 }

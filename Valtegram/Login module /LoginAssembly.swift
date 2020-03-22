@@ -9,13 +9,15 @@
 import UIKit
 
 class LoginAssembly {
-//    func configureModule() -> UIViewController {
-//        let view = LoginViewController()
-//        
-//        let presenter = LoginViewPresenter()
-//        
-//        view.presenter = presenter
-//        
-//        presen
-//    }
+    class func configureModule() -> UIViewController {
+
+        let view = LogInViewController()
+    
+        let presenter = LoginPresenter()
+        presenter.view = view
+        
+        view.presenter = presenter
+        
+        return view
+    }
 }

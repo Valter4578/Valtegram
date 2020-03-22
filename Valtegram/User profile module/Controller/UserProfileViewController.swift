@@ -22,7 +22,7 @@ class UserProfileViewController: UICollectionViewController {
         // Check if user didn't log in
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
-                let logInViewController = LogInViewController()
+                let logInViewController = LoginAssembly.configureModule()
                 let navigationController = UINavigationController(rootViewController: logInViewController)
                 self.present(navigationController, animated: true, completion: nil)
             }
@@ -38,7 +38,7 @@ class UserProfileViewController: UICollectionViewController {
         
         setupPreferenceButton()
         
-        fetchPosts()
+        fetchOrderedPosts()
     }
     
     //MARK: - Private methods
@@ -87,28 +87,7 @@ class UserProfileViewController: UICollectionViewController {
             self.showErrorAlert(with: error.localizedDescription)
         }
     }
-    
-    private func fetchPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        let reference = Database.database().reference().child("posts").child(uid)
-        reference.observe(.value, with: { (snapshot) in
 
-            guard let dictionaries = snapshot.value as? [String:Any] else { return }
-            dictionaries.forEach { (key, value) in
-                print("Key: \(key), value \(value)")
-                
-                guard let dictionary = value as? [String:Any] else { return }
-                let imageUrl = dictionary["imageUrl"] as? String
-                let post = Post(dictionary: dictionary)
-                self.posts.append(post)
-            }
-            
-            self.collectionView.reloadData()
-        }) { (error) in
-            self.showErrorAlert(with: error.localizedDescription)
-        }
-    }
     
     // MARK:- Setups
     private func setupPreferenceButton() {
@@ -123,8 +102,8 @@ class UserProfileViewController: UICollectionViewController {
             do {
                 try? Auth.auth().signOut()
                 
-                let loginVC = LogInViewController()
-                let navigationVC = UINavigationController(rootViewController: loginVC)
+                let logInViewController = LoginAssembly.configureModule()
+                let navigationVC = UINavigationController(rootViewController: logInViewController)
                 self.present(navigationVC, animated: true, completion: nil)
             } catch {
                 print(error)

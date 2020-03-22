@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+protocol LoginViewOutput: class {
+        
+    func didPressLogin(email: String, password: String)
+}
+    
