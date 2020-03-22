@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+protocol UserProfileOutput: class {
+    func didLogOut()
+    func fetchOrderedPosts() 
+}

@@ -9,11 +9,14 @@
 import UIKit
 import Firebase
 
-class UserProfileViewController: UICollectionViewController {
+class UserProfileViewController: UICollectionViewController, UserProfileInput {
+    // MARK:- Properties
+    weak var presenter: UserProfileOutput?
+    
     // MARK:- Private properties
     private var user: User?
     private let cellId = "mainCell"
-    private var posts = [Post]()
+    var posts = [Post]()
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -69,42 +72,42 @@ class UserProfileViewController: UICollectionViewController {
         }
     }
     
-    private func fetchOrderedPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let reference = Database.database().reference().child("posts").child(uid)
+//    private func fetchOrderedPosts() {
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        let reference = Database.database().reference().child("posts").child(uid)
+//
+//        reference.queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
+//            print(snapshot.key)
+//            print(snapshot.value)
+//            
+//            guard let dictionary = snapshot.value as? [String:Any] else { return }
+//            let post = Post(dictionary: dictionary)
+//            self.posts.append(post)
+//            
+//            self.collectionView?.reloadData()
+//            
+//        }) { (error) in
+//            self.showErrorAlert(with: error.localizedDescription)
+//        }
+//    }
 
-        reference.queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
-            print(snapshot.key)
-            print(snapshot.value)
-            
-            guard let dictionary = snapshot.value as? [String:Any] else { return }
-            let post = Post(dictionary: dictionary)
-            self.posts.append(post)
-            
-            self.collectionView?.reloadData()
-            
-        }) { (error) in
-            self.showErrorAlert(with: error.localizedDescription)
-        }
+    // MARK:- UserProfileUn
+    func show(_ controller: UIViewController) {
+        present(controller, animated: true, completion: nil)
     }
-
     
     // MARK:- Setups
     private func setupPreferenceButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(logOut))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(handleLogOutButton))
     }
     
     
     // MARK:- Objc methods
-    @objc func logOut() {
+    @objc func handleLogOutButton() {
         let alertController = UIAlertController(title: "Log out", message: "Do you really want to do it ?", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
             do {
-                try? Auth.auth().signOut()
-                
-                let logInViewController = LoginAssembly.configureModule()
-                let navigationVC = UINavigationController(rootViewController: logInViewController)
-                self.present(navigationVC, animated: true, completion: nil)
+                self.presenter?.didLogOut()
             } catch {
                 print(error)
             }
@@ -121,7 +124,7 @@ class UserProfileViewController: UICollectionViewController {
             
         return header
     }
-    
+
 
     // MARK:- Collection view data source
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -6,8 +6,10 @@
 //  Copyright © 2020 Максим Алексеев. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class UserProfilePresenter {
-    
+protocol UserProfileInput: class {
+    func handleLogOutButton()
+    func show(_ controller: UIViewController)
+    var posts: [Post] { get set }
 }

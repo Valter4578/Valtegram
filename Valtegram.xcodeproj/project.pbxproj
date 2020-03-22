@@ -27,8 +27,10 @@
 		8869B2A3242746AC00B1B2CA /* LoginAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869B2A2242746AB00B1B2CA /* LoginAssembly.swift */; };
 		8869B2A62427921D00B1B2CA /* UserProfilePresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869B2A52427921C00B1B2CA /* UserProfilePresenterOutput.swift */; };
 		8869B2AA2427927F00B1B2CA /* UserProfilePresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869B2A92427927F00B1B2CA /* UserProfilePresenterInput.swift */; };
+		8869B2AC2427935100B1B2CA /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869B2AB2427935100B1B2CA /* UserProfilePresenter.swift */; };
 		8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883C6332414F0A000712B0D /* UIColor+Extension.swift */; };
 		8883C6382414F58300712B0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8883C6372414F58300712B0D /* GoogleService-Info.plist */; };
+		8887E1B124279A27001F1CC6 /* UserProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8887E1B024279A27001F1CC6 /* UserProfileAssembly.swift */; };
 		889482732423CF0700A9A22D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889482722423CF0700A9A22D /* Post.swift */; };
 		889482762423D3A400A9A22D /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889482752423D3A400A9A22D /* PostCollectionViewCell.swift */; };
 		8895C4A524223CE400CEF61B /* PhotoSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8895C4A424223CE400CEF61B /* PhotoSelectorViewController.swift */; };
@@ -80,8 +82,10 @@
 		8869B2A2242746AB00B1B2CA /* LoginAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAssembly.swift; sourceTree = "<group>"; };
 		8869B2A52427921C00B1B2CA /* UserProfilePresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenterOutput.swift; sourceTree = "<group>"; };
 		8869B2A92427927F00B1B2CA /* UserProfilePresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenterInput.swift; sourceTree = "<group>"; };
+		8869B2AB2427935100B1B2CA /* UserProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
 		8883C6332414F0A000712B0D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8883C6372414F58300712B0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8887E1B024279A27001F1CC6 /* UserProfileAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAssembly.swift; sourceTree = "<group>"; };
 		889482722423CF0700A9A22D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		889482752423D3A400A9A22D /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
 		8895C4A424223CE400CEF61B /* PhotoSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 			children = (
 				8869B2A52427921C00B1B2CA /* UserProfilePresenterOutput.swift */,
 				8869B2A92427927F00B1B2CA /* UserProfilePresenterInput.swift */,
+				8869B2AB2427935100B1B2CA /* UserProfilePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 			children = (
 				8869B2A4242791D800B1B2CA /* Presenter */,
 				88BCEBF924234AAC00A22886 /* View */,
+				8887E1B024279A27001F1CC6 /* UserProfileAssembly.swift */,
 			);
 			path = "User profile module";
 			sourceTree = "<group>";
@@ -565,12 +571,14 @@
 				8869B2A62427921D00B1B2CA /* UserProfilePresenterOutput.swift in Sources */,
 				88BCEC0324234BED00A22886 /* SharePhotoViewController.swift in Sources */,
 				8869B2AA2427927F00B1B2CA /* UserProfilePresenterInput.swift in Sources */,
+				8869B2AC2427935100B1B2CA /* UserProfilePresenter.swift in Sources */,
 				8800EA672414DC280088452E /* SignUpViewController.swift in Sources */,
 				8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */,
 				88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */,
 				88DE00232427420E008888C8 /* LoginPresenter.swift in Sources */,
 				88DE00182427356E008888C8 /* HomeFeedPresenterInput.swift in Sources */,
 				88BB62A02422606C0063A914 /* PhotoSelctorCell.swift in Sources */,
+				8887E1B124279A27001F1CC6 /* UserProfileAssembly.swift in Sources */,
 				8800EA632414DC280088452E /* AppDelegate.swift in Sources */,
 				885C446D2419378E00B6E03C /* UIImage+Extension.swift in Sources */,
 				885C446B2419357C00B6E03C /* UserProfileHeader.swift in Sources */,
