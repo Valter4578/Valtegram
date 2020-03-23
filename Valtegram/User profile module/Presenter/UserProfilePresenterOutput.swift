@@ -6,9 +6,15 @@
 //  Copyright © 2020 Максим Алексеев. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol UserProfileOutput: class {
+    // UserProfileViewController
     func didLogOut()
-    func fetchOrderedPosts() 
+    func fetchOrderedPosts()
+    func fetchUser(complitionHandler: @escaping ((User) -> Void))
+    // PostCollectionViewHeader
+    func getProfileImage(url: URL) -> UIImage?
+    // PostCollectionViewCell
+    func getPostImage(post: Post?) -> UIImage?
 }

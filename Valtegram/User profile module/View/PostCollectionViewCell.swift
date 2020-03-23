@@ -18,10 +18,12 @@ class PostCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     // MARK:- Properties
+    var presenter: UserProfileOutput?
+    
     var post: Post? {
         didSet {
             print(post?.imageUrl)
-            setPostImage()
+            photoImageView.image = presenter?.getPostImage(post: post)
         }
     }
     
@@ -37,28 +39,27 @@ class PostCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    private func setPostImage() {
-        guard let post = post else { return }
-        guard let url = URL(string: post.imageUrl) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let err = error {
-                print(err.localizedDescription)
-                return
-            }
-            
-            if url.absoluteString != self.post?.imageUrl { return }
-            
-            print(data)
-            guard let data = data else { return }
-            let image = UIImage(data: data)
-            
-            
-            DispatchQueue.main.async {
-                self.photoImageView.image = image
-            }
-        }.resume()
-        
-    }
+//    private func setPostImage() {
+//        guard let post = post else { return }
+//        guard let url = URL(string: post.imageUrl) else { return }
+//        URLSession.shared.dataTask(with: url) { (data, response, error) in
+//            if let err = error {
+//                print(err.localizedDescription)
+//                return
+//            }
+//
+//            if url.absoluteString != self.post?.imageUrl { return }
+//
+//            print(data)
+//            guard let data = data else { return }
+//            let image = UIImage(data: data)
+//
+//
+//            DispatchQueue.main.async {
+//                self.photoImageView.image = image
+//            }
+//        }.resume()
+//    }
     
     // MARK:- Inits
     override init(frame: CGRect) {

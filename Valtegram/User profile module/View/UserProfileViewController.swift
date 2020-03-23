@@ -11,10 +11,14 @@ import Firebase
 
 class UserProfileViewController: UICollectionViewController, UserProfileInput {
     // MARK:- Properties
-    weak var presenter: UserProfileOutput?
+    var presenter: UserProfileOutput! {
+        didSet {
+            print("Presenteer: \(presenter)")
+        }
+    }
     
     // MARK:- Private properties
-    private var user: User?
+    var user: User?
     private let cellId = "mainCell"
     var posts = [Post]()
     
@@ -33,7 +37,7 @@ class UserProfileViewController: UICollectionViewController, UserProfileInput {
         
         collectionView.backgroundColor = .white
         
-        fetchUser()
+        setUser()
         
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         
@@ -41,36 +45,35 @@ class UserProfileViewController: UICollectionViewController, UserProfileInput {
         
         setupPreferenceButton()
         
-        fetchOrderedPosts()
+        presenter?.fetchOrderedPosts()
     }
     
-    //MARK: - Private methods
-    private func showErrorAlert(with errorText: String) {
-           let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
-           let alertAction = UIAlertAction(title: "OK", style: .cancel)
-           alertController.addAction(alertAction)
-           self.present(alertController, animated: true, completion: nil)
-           
-           print(errorText)
-       }
-       
-    
-    func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot.value ?? "")
-            
-            
-            guard let dictionary = snapshot.value as? [String: Any] else { return }
-            self.user = User(dictionary: dictionary)
-            
-            self.title = self.user?.username
-            
+    // MARK:- Iternal methods
+    func setUser() {
+        presenter?.fetchUser(complitionHandler: { (user) in
+            self.title = user.username
             self.collectionView.reloadData()
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+        })
     }
+    
+    //MARK: - Private method
+        
+//    func fetchUser() {
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+//            print(snapshot.value ?? "")
+//
+//
+//            guard let dictionary = snapshot.value as? [String: Any] else { return }
+//            self.user = User(dictionary: dictionary)
+//
+//            self.title = self.user?.username
+//
+//            self.collectionView.reloadData()
+//        }) { (error) in
+//            print(error.localizedDescription)
+//        }
+//    }
     
 //    private func fetchOrderedPosts() {
 //        guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -121,6 +124,7 @@ class UserProfileViewController: UICollectionViewController, UserProfileInput {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
         
         header.user = self.user
+        header.presenter = presenter
             
         return header
     }
@@ -134,6 +138,7 @@ class UserProfileViewController: UICollectionViewController, UserProfileInput {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as? PostCollectionViewCell
         cell?.post = posts[indexPath.item]
+        cell?.presenter = presenter
         return cell!
     }
 

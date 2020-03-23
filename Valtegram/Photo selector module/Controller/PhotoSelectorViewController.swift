@@ -55,7 +55,7 @@ class PhotoSelectorViewController: UICollectionViewController {
     // MARK:- Private functions
     private func fetchPhotos() {
         let options = PHFetchOptions()
-        options.fetchLimit = 10
+        options.fetchLimit = 100
         let allPhotos = PHAsset.fetchAssets(with: .image, options: options)
         
         DispatchQueue.global(qos: .userInitiated).async {

@@ -9,7 +9,11 @@
 import UIKit
 
 protocol UserProfileInput: class {
+    // UserProfileViewController
+    var posts: [Post] { get set }
+    var user: User? { get set }
+
     func handleLogOutButton()
     func show(_ controller: UIViewController)
-    var posts: [Post] { get set }
+    func setUser()
 }

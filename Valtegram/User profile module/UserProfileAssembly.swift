@@ -9,13 +9,15 @@
 import UIKit
 
 class UserProfileAssembly {
-    class func configureModule() -> UIViewController {
-        let view = UserProfileViewController()
+    class func configureModule() -> UserProfileViewController {
+        let layout = UICollectionViewFlowLayout()
+        let viewController = UserProfileViewController(collectionViewLayout: layout)
+        
         let presenter = UserProfilePresenter()
         
-        view.presenter = presenter
-        presenter.view = view
+        viewController.presenter = presenter
+        presenter.view = viewController
         
-        return view
+        return viewController
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 class UserProfileHeader: UICollectionViewCell {
     //MARK:- Properties
@@ -15,23 +14,22 @@ class UserProfileHeader: UICollectionViewCell {
     
     var user: User? {
         didSet {
-            guard let usr = user else { return }
-            guard let url = URL(string: usr.profileImageURL) else { return }
-            presenter?.getImage(url: url)
+            guard let usr = user, let url = URL(string: usr.profileImageURL) else { return }
+            let image = presenter?.getProfileImage(url: url)
+            profileImageView.image = image
             usernameLabel.text = user?.username
         }
     }
+    
     // MARK:- Views
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .red
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let usernameLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.text = "username"
         return label
@@ -39,7 +37,6 @@ class UserProfileHeader: UICollectionViewCell {
     // Stackview's buttons
     private let gridButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "menu"), for: .normal)
         button.setImage(UIImage(named: "menu-s"), for: .selected)
         return button
@@ -47,7 +44,6 @@ class UserProfileHeader: UICollectionViewCell {
     
     private let listButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "list"), for: .normal)
         button.setImage(UIImage(named: "list-s"), for: .selected)
         return button
@@ -55,7 +51,6 @@ class UserProfileHeader: UICollectionViewCell {
     
     private let bookmarkButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "bookmark"), for: .normal)
         button.setImage(UIImage(named: "bookmark-s"), for: .selected)
         
@@ -65,7 +60,6 @@ class UserProfileHeader: UICollectionViewCell {
     // Statistics labels
     private let postsLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
 
         let attributedString = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 15)])
         attributedString.append(NSAttributedString(string: "posts", attributes: [NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
@@ -79,7 +73,6 @@ class UserProfileHeader: UICollectionViewCell {
     
     private let followersLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
 
         let attributedString = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 15)])
         attributedString.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
@@ -92,7 +85,6 @@ class UserProfileHeader: UICollectionViewCell {
     
     private let followingLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         
         let attributedString = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 15)])
         attributedString.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
@@ -106,7 +98,6 @@ class UserProfileHeader: UICollectionViewCell {
     
     private let editProfileButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
          
         button.setTitle("Edit profile", for: .normal)
         button.setTitleColor(UIColor.setAsRgb(red: 27, green: 67, blue: 51), for: .normal)
@@ -117,6 +108,26 @@ class UserProfileHeader: UICollectionViewCell {
         button.layer.cornerRadius = 8
         return button
     }()
+    
+    // MARK:- Initializers
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        let viewsArray = [profileImageView, usernameLabel, gridButton, listButton, gridButton, bookmarkButton, postsLabel, followersLabel, followingLabel, editProfileButton]
+        viewsArray.forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
+    
+        setupImageView()
+        setupToolBar()
+        setupLabel()
+        setupUserStats()
+        setupEditButton()
+        
+        print(#function)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK:- Setups
     private func setupToolBar() {
@@ -210,20 +221,4 @@ class UserProfileHeader: UICollectionViewCell {
         ])
     }
     
-    // MARK:- Initializers
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    
-        setupImageView()
-        setupToolBar()
-        setupLabel()
-        setupUserStats()
-        setupEditButton()
-        
-        print(#function)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
