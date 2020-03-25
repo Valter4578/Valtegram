@@ -9,18 +9,15 @@
 import UIKit
 import Firebase
 
-class UserProfileViewController: UICollectionViewController, UserProfileInput {
+class UserProfileViewController: UICollectionViewController {
     // MARK:- Properties
-    var presenter: UserProfileOutput! {
-        didSet {
-            print("Presenteer: \(presenter)")
-        }
-    }
     
     // MARK:- Private properties
-    var user: User?
+    private var user: User?
     private let cellId = "mainCell"
-    var posts = [Post]()
+    private var posts = [Post]()
+    private var imagesForCell: [UIImage] = [UIImage]()
+    private var imageForProfile: UIImage?
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -37,80 +34,78 @@ class UserProfileViewController: UICollectionViewController, UserProfileInput {
         
         collectionView.backgroundColor = .white
         
-        setUser()
+        fetchUser()
+        presenter.fetchOrderedPost()
         
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
-        
         collectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         setupPreferenceButton()
-        
-        presenter?.fetchOrderedPosts()
-    }
-    
-    // MARK:- Iternal methods
-    func setUser() {
-        presenter?.fetchUser(complitionHandler: { (user) in
-            self.title = user.username
-            self.collectionView.reloadData()
-        })
-    }
-    
-    //MARK: - Private method
-        
-//    func fetchUser() {
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-//            print(snapshot.value ?? "")
-//
-//
-//            guard let dictionary = snapshot.value as? [String: Any] else { return }
-//            self.user = User(dictionary: dictionary)
-//
-//            self.title = self.user?.username
-//
-//            self.collectionView.reloadData()
-//        }) { (error) in
-//            print(error.localizedDescription)
-//        }
-//    }
-    
-//    private func fetchOrderedPosts() {
-//        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        let reference = Database.database().reference().child("posts").child(uid)
-//
-//        reference.queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
-//            print(snapshot.key)
-//            print(snapshot.value)
-//            
-//            guard let dictionary = snapshot.value as? [String:Any] else { return }
-//            let post = Post(dictionary: dictionary)
-//            self.posts.append(post)
-//            
-//            self.collectionView?.reloadData()
-//            
-//        }) { (error) in
-//            self.showErrorAlert(with: error.localizedDescription)
-//        }
-//    }
-
-    // MARK:- UserProfileUn
-    func show(_ controller: UIViewController) {
-        present(controller, animated: true, completion: nil)
+            
     }
     
     // MARK:- Setups
     private func setupPreferenceButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(handleLogOutButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(handleLogOut))
     }
     
+    //MARK: - Private methods
+    private func showErrorAlert(with errorText: String) {
+           let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
+           let alertAction = UIAlertAction(title: "OK", style: .cancel)
+           alertController.addAction(alertAction)
+           self.present(alertController, animated: true, completion: nil)
+           
+           print(errorText)
+    }
+       
     
+    // MARK:- UserProfilePresenterInput
+    func fetchUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot.value ?? "")
+            
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            self.user = User(dictionary: dictionary)
+            
+            self.title = self.user?.username
+            
+            self.collectionView.reloadData()
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func fetchOrderedPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let reference = Database.database().reference().child("posts").child(uid)
+        
+        reference.queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
+            print(snapshot.key)
+            print(snapshot.value)
+            
+            guard let dictionary = snapshot.value as? [String:Any] else { return }
+            let post = Post(dictionary: dictionary)
+            self.posts.append(post)
+            
+            self.collectionView?.reloadData()
+            
+        }) { (error) in
+            self.showErrorAlert(with: error.localizedDescription)
+        }
+    }
+
     // MARK:- Objc methods
-    @objc func handleLogOutButton() {
+    @objc func handleLogOut() {
         let alertController = UIAlertController(title: "Log out", message: "Do you really want to do it ?", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
             do {
-                self.presenter?.didLogOut()
+                self.presenter.didLogout()
+                
+                let logInViewController = LoginAssembly.configureModule()
+                let navigationVC = UINavigationController(rootViewController: logInViewController)
+                self.present(navigationVC, animated: true, completion: nil)
             } catch {
                 print(error)
             }
@@ -119,27 +114,32 @@ class UserProfileViewController: UICollectionViewController, UserProfileInput {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertController, animated: true)
     }
-    // MARK:- Collection view delegate
+
+}
+
+// MARK:- Collection view delegate
+extension UserProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
         
         header.user = self.user
-        header.presenter = presenter
-            
+        header.profileImageView.image = imageForProfile
+        
         return header
     }
+}
 
-
-    // MARK:- Collection view data source
+// MARK:- Collection view data source
+extension UserProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as? PostCollectionViewCell
-        cell?.post = posts[indexPath.item]
-        cell?.presenter = presenter
-        return cell!
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as! PostCollectionViewCell
+        cell.post = posts[indexPath.item]
+        cell.photoImageView.image = imagesForCell[indexPath.item]
+        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -157,6 +157,7 @@ class UserProfileViewController: UICollectionViewController, UserProfileInput {
     }
 }
 
+
 // MARK:- CollectionView Flow layout delegate
 extension UserProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -165,3 +166,4 @@ extension UserProfileViewController: UICollectionViewDelegateFlowLayout {
         
     }
 }
+
