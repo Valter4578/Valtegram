@@ -11,13 +11,12 @@ import Firebase
 
 class UserProfileViewController: UICollectionViewController {
     // MARK:- Properties
-    
+    var presenter: UserProfileOutput!
     // MARK:- Private properties
     private var user: User?
     private let cellId = "mainCell"
     private var posts = [Post]()
-    private var imagesForCell: [UIImage] = [UIImage]()
-    private var imageForProfile: UIImage?
+
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -34,8 +33,14 @@ class UserProfileViewController: UICollectionViewController {
         
         collectionView.backgroundColor = .white
         
-        fetchUser()
-        presenter.fetchOrderedPost()
+        presenter.fetchUser { (user) in
+            self.title = self.user?.username
+            self.collectionView.reloadData()
+        }
+        
+        presenter.fetchOrderedPosts { (posts) in
+            self.collectionView.reloadData()
+        }
         
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         collectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
@@ -60,7 +65,6 @@ class UserProfileViewController: UICollectionViewController {
     }
        
     
-    // MARK:- UserProfilePresenterInput
     func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -99,17 +103,8 @@ class UserProfileViewController: UICollectionViewController {
     // MARK:- Objc methods
     @objc func handleLogOut() {
         let alertController = UIAlertController(title: "Log out", message: "Do you really want to do it ?", preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
-            do {
-                self.presenter.didLogout()
-                
-                let logInViewController = LoginAssembly.configureModule()
-                let navigationVC = UINavigationController(rootViewController: logInViewController)
-                self.present(navigationVC, animated: true, completion: nil)
-            } catch {
-                print(error)
-            }
-        }))
+
+        presenter.didLogOut()
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertController, animated: true)
@@ -123,7 +118,6 @@ extension UserProfileViewController {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
         
         header.user = self.user
-        header.profileImageView.image = imageForProfile
         
         return header
     }
@@ -137,8 +131,7 @@ extension UserProfileViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as! PostCollectionViewCell
-        cell.post = posts[indexPath.item]
-        cell.photoImageView.image = imagesForCell[indexPath.item]
+        cell.post = presenter.posts[indexPath.item]
         return cell
     }
 

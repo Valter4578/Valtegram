@@ -17,6 +17,7 @@
 		8800EA722414DC2F0088452E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA702414DC2F0088452E /* LaunchScreen.storyboard */; };
 		8800EA7D2414DC300088452E /* ValtegramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA7C2414DC300088452E /* ValtegramTests.swift */; };
 		881299B42424AC3B00495088 /* HomeFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881299B32424AC3B00495088 /* HomeFeedCollectionViewCell.swift */; };
+		881BD8DD242B87EF00BCE307 /* UserProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881BD8DC242B87EF00BCE307 /* UserProfileInput.swift */; };
 		884589582424A79F009FE863 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884589572424A79F009FE863 /* HomeFeedViewController.swift */; };
 		885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA642414DC280088452E /* SceneDelegate.swift */; };
 		885C446724190C9D00B6E03C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446424190B9500B6E03C /* TabBarController.swift */; };
@@ -25,12 +26,8 @@
 		885C446D2419378E00B6E03C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446C2419378E00B6E03C /* UIImage+Extension.swift */; };
 		88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88601AB4241FB51600004DFC /* LogInViewController.swift */; };
 		8869B2A3242746AC00B1B2CA /* LoginAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869B2A2242746AB00B1B2CA /* LoginAssembly.swift */; };
-		8869B2A62427921D00B1B2CA /* UserProfilePresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869B2A52427921C00B1B2CA /* UserProfilePresenterOutput.swift */; };
-		8869B2AA2427927F00B1B2CA /* UserProfilePresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869B2A92427927F00B1B2CA /* UserProfilePresenterInput.swift */; };
-		8869B2AC2427935100B1B2CA /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869B2AB2427935100B1B2CA /* UserProfilePresenter.swift */; };
 		8883C6342414F0A000712B0D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883C6332414F0A000712B0D /* UIColor+Extension.swift */; };
 		8883C6382414F58300712B0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8883C6372414F58300712B0D /* GoogleService-Info.plist */; };
-		8887E1B124279A27001F1CC6 /* UserProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8887E1B024279A27001F1CC6 /* UserProfileAssembly.swift */; };
 		8887E1B524279C44001F1CC6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8887E1B424279C44001F1CC6 /* NetworkService.swift */; };
 		889482732423CF0700A9A22D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889482722423CF0700A9A22D /* Post.swift */; };
 		889482762423D3A400A9A22D /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889482752423D3A400A9A22D /* PostCollectionViewCell.swift */; };
@@ -45,6 +42,8 @@
 		88DE001F242741E8008888C8 /* LoginPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE001E242741E8008888C8 /* LoginPresenterInput.swift */; };
 		88DE002124274202008888C8 /* LoginPresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE002024274202008888C8 /* LoginPresenterOutput.swift */; };
 		88DE00232427420E008888C8 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE00222427420E008888C8 /* LoginPresenter.swift */; };
+		88DFDC40242B886D00B5AB8F /* UserProfileOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DFDC3F242B886D00B5AB8F /* UserProfileOutput.swift */; };
+		88DFDC42242B890400B5AB8F /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DFDC41242B890400B5AB8F /* UserProfilePresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +73,7 @@
 		8800EA7C2414DC300088452E /* ValtegramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValtegramTests.swift; sourceTree = "<group>"; };
 		8800EA7E2414DC300088452E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		881299B32424AC3B00495088 /* HomeFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		881BD8DC242B87EF00BCE307 /* UserProfileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInput.swift; sourceTree = "<group>"; };
 		884589572424A79F009FE863 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
 		885C446424190B9500B6E03C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		885C446824190E3800B6E03C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -81,12 +81,8 @@
 		885C446C2419378E00B6E03C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		88601AB4241FB51600004DFC /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		8869B2A2242746AB00B1B2CA /* LoginAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAssembly.swift; sourceTree = "<group>"; };
-		8869B2A52427921C00B1B2CA /* UserProfilePresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenterOutput.swift; sourceTree = "<group>"; };
-		8869B2A92427927F00B1B2CA /* UserProfilePresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenterInput.swift; sourceTree = "<group>"; };
-		8869B2AB2427935100B1B2CA /* UserProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
 		8883C6332414F0A000712B0D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8883C6372414F58300712B0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8887E1B024279A27001F1CC6 /* UserProfileAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAssembly.swift; sourceTree = "<group>"; };
 		8887E1B424279C44001F1CC6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		889482722423CF0700A9A22D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		889482752423D3A400A9A22D /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -112,6 +108,8 @@
 		88DE001E242741E8008888C8 /* LoginPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterInput.swift; sourceTree = "<group>"; };
 		88DE002024274202008888C8 /* LoginPresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterOutput.swift; sourceTree = "<group>"; };
 		88DE00222427420E008888C8 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		88DFDC3F242B886D00B5AB8F /* UserProfileOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileOutput.swift; sourceTree = "<group>"; };
+		88DFDC41242B890400B5AB8F /* UserProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
 		9E03173517AC7ADC6F66365C /* Pods-ValtegramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ValtegramTests.release.xcconfig"; path = "Target Support Files/Pods-ValtegramTests/Pods-ValtegramTests.release.xcconfig"; sourceTree = "<group>"; };
 		B344654F6C7A09945FC0DA34 /* Pods_Valtegram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Valtegram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5D4163CA158A46B5B1C68FB /* Pods_ValtegramTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ValtegramTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -228,9 +226,9 @@
 		8869B2A4242791D800B1B2CA /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				8869B2A52427921C00B1B2CA /* UserProfilePresenterOutput.swift */,
-				8869B2A92427927F00B1B2CA /* UserProfilePresenterInput.swift */,
-				8869B2AB2427935100B1B2CA /* UserProfilePresenter.swift */,
+				881BD8DC242B87EF00BCE307 /* UserProfileInput.swift */,
+				88DFDC3F242B886D00B5AB8F /* UserProfileOutput.swift */,
+				88DFDC41242B890400B5AB8F /* UserProfilePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -284,7 +282,6 @@
 			children = (
 				8869B2A4242791D800B1B2CA /* Presenter */,
 				88BCEBF924234AAC00A22886 /* View */,
-				8887E1B024279A27001F1CC6 /* UserProfileAssembly.swift */,
 			);
 			path = "User profile module";
 			sourceTree = "<group>";
@@ -579,18 +576,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8869B2A62427921D00B1B2CA /* UserProfilePresenterOutput.swift in Sources */,
 				88BCEC0324234BED00A22886 /* SharePhotoViewController.swift in Sources */,
-				8869B2AA2427927F00B1B2CA /* UserProfilePresenterInput.swift in Sources */,
-				8869B2AC2427935100B1B2CA /* UserProfilePresenter.swift in Sources */,
+				88DFDC42242B890400B5AB8F /* UserProfilePresenter.swift in Sources */,
+				881BD8DD242B87EF00BCE307 /* UserProfileInput.swift in Sources */,
 				8800EA672414DC280088452E /* SignUpViewController.swift in Sources */,
 				8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */,
 				88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */,
+				88DFDC40242B886D00B5AB8F /* UserProfileOutput.swift in Sources */,
 				88DE00232427420E008888C8 /* LoginPresenter.swift in Sources */,
 				8887E1B524279C44001F1CC6 /* NetworkService.swift in Sources */,
 				88DE00182427356E008888C8 /* HomeFeedPresenterInput.swift in Sources */,
 				88BB62A02422606C0063A914 /* PhotoSelctorCell.swift in Sources */,
-				8887E1B124279A27001F1CC6 /* UserProfileAssembly.swift in Sources */,
 				8800EA632414DC280088452E /* AppDelegate.swift in Sources */,
 				885C446D2419378E00B6E03C /* UIImage+Extension.swift in Sources */,
 				885C446B2419357C00B6E03C /* UserProfileHeader.swift in Sources */,
