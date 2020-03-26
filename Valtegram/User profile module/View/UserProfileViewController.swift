@@ -16,6 +16,9 @@ class UserProfileViewController: UICollectionViewController {
     private var user: User?
     private let cellId = "mainCell"
     private var posts = [Post]()
+    
+    private var cell: PostCollectionViewCell?
+    private var header: UserProfileHeader?
 
     
     // MARK:- Lifecycle
@@ -34,11 +37,12 @@ class UserProfileViewController: UICollectionViewController {
         collectionView.backgroundColor = .white
         
         presenter.fetchUser { (user) in
-            self.title = self.user?.username
+            self.title = user.username
             self.collectionView.reloadData()
         }
         
         presenter.fetchOrderedPosts { (posts) in
+            
             self.collectionView.reloadData()
         }
         
@@ -64,41 +68,6 @@ class UserProfileViewController: UICollectionViewController {
            print(errorText)
     }
        
-    
-    func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot.value ?? "")
-            
-            guard let dictionary = snapshot.value as? [String: Any] else { return }
-            self.user = User(dictionary: dictionary)
-            
-            self.title = self.user?.username
-            
-            self.collectionView.reloadData()
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    }
-    
-    private func fetchOrderedPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let reference = Database.database().reference().child("posts").child(uid)
-        
-        reference.queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
-            print(snapshot.key)
-            print(snapshot.value)
-            
-            guard let dictionary = snapshot.value as? [String:Any] else { return }
-            let post = Post(dictionary: dictionary)
-            self.posts.append(post)
-            
-            self.collectionView?.reloadData()
-            
-        }) { (error) in
-            self.showErrorAlert(with: error.localizedDescription)
-        }
-    }
 
     // MARK:- Objc methods
     @objc func handleLogOut() {
@@ -112,27 +81,39 @@ class UserProfileViewController: UICollectionViewController {
 
 }
 
+extension UserProfileViewController: UserProfileInput {
+    func show(_ viewController: UIViewController) {
+        present(viewController, animated: true, completion: nil)
+    }
+}
+
 // MARK:- Collection view delegate
 extension UserProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
+        header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as? UserProfileHeader
         
-        header.user = self.user
+        header?.user = self.user
         
-        return header
+        return header ?? UICollectionViewCell()
     }
 }
 
 // MARK:- Collection view data source
 extension UserProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        print(presenter.posts.count)
+        return presenter.posts.count 
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as! PostCollectionViewCell
-        cell.post = presenter.posts[indexPath.item]
-        return cell
+        
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as? PostCollectionViewCell
+        let post = presenter.posts[indexPath.item]
+        cell?.post = presenter.posts[indexPath.item]
+
+        print(#function)
+        
+        return cell ?? UICollectionViewCell()
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
