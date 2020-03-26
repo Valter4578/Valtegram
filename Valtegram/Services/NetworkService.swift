@@ -9,22 +9,19 @@
 import UIKit
 
 class NetworkService {
-    var complitionHandler: ((Data) -> UIImage)!
-    
-    func getImageFrom(_ url: URL, complitionHandler: @escaping ((Data) -> UIImage) ) {
-        self.complitionHandler = complitionHandler
-         
+    class func getImage(from url: URL, complitionHandler: @escaping ((UIImage) -> Void)) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let err = error {
-                print(err.localizedDescription)
+            if let error = error {
+                print(error.localizedDescription)
                 return
             }
             
             guard let data = data else { return }
-            DispatchQueue.main.async {
+            guard let image = UIImage(data: data) else { return }
             
-                complitionHandler(data)
+            DispatchQueue.main.async {
+                complitionHandler(image)
             }
-        }.resume()
+        }
     }
 }
