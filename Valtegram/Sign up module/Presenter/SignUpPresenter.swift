@@ -13,8 +13,19 @@ class SignUpPresenter: SignUpOutput {
     weak var view: SignUpInput?
     
     func saveUserIntoDatabase(username: String, uid: String, imageUrl: URL?) {
-        
-        
+        Database.database().reference().child("users").updateChildValues([uid:["username":username, "profileImageUrl":imageUrl?.absoluteString]]) { (error, reference) in
+            if let err = error {
+                print("Failed to add user into database: ",err.localizedDescription)
+                return
+            }
+            print("User " + username + " saved with image: \(imageUrl?.absoluteString)")
+            
+            // Update ui
+            guard let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? TabBarController else { return }
+            tabBarVC.setupViewControllers()
+            view?.cancel(animated: true)
+        }
+        print(#function)
     }
     
     func createUser(email: String, password: String, imageToUpload: UIImage, data: Data, username: String) {
