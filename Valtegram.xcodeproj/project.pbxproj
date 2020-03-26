@@ -23,7 +23,6 @@
 		8833F5C2242CD2D8007CFC51 /* SignUpInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5C1242CD2D8007CFC51 /* SignUpInput.swift */; };
 		8833F5C8242CDDFE007CFC51 /* SignUpAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5C7242CDDFE007CFC51 /* SignUpAssembly.swift */; };
 		8833F5CB242CE474007CFC51 /* PhotoSelectorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5CA242CE474007CFC51 /* PhotoSelectorPresenter.swift */; };
-		8833F5CD242CE484007CFC51 /* PhotoSelectorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5CC242CE484007CFC51 /* PhotoSelectorInput.swift */; };
 		8833F5CF242CE49A007CFC51 /* PhotoSelectorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5CE242CE49A007CFC51 /* PhotoSelectorOutput.swift */; };
 		8833F5D2242CEBEC007CFC51 /* PhotoSelectorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5D1242CEBEC007CFC51 /* PhotoSelectorAssembly.swift */; };
 		884589582424A79F009FE863 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884589572424A79F009FE863 /* HomeFeedViewController.swift */; };
@@ -89,7 +88,6 @@
 		8833F5C1242CD2D8007CFC51 /* SignUpInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInput.swift; sourceTree = "<group>"; };
 		8833F5C7242CDDFE007CFC51 /* SignUpAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAssembly.swift; sourceTree = "<group>"; };
 		8833F5CA242CE474007CFC51 /* PhotoSelectorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorPresenter.swift; sourceTree = "<group>"; };
-		8833F5CC242CE484007CFC51 /* PhotoSelectorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorInput.swift; sourceTree = "<group>"; };
 		8833F5CE242CE49A007CFC51 /* PhotoSelectorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorOutput.swift; sourceTree = "<group>"; };
 		8833F5D1242CEBEC007CFC51 /* PhotoSelectorAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorAssembly.swift; sourceTree = "<group>"; };
 		884589572424A79F009FE863 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
@@ -272,7 +270,6 @@
 		8833F5D0242CE4A0007CFC51 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				8833F5CC242CE484007CFC51 /* PhotoSelectorInput.swift */,
 				8833F5CE242CE49A007CFC51 /* PhotoSelectorOutput.swift */,
 			);
 			path = Protocols;
@@ -655,7 +652,6 @@
 				8800EA632414DC280088452E /* AppDelegate.swift in Sources */,
 				8833F5CF242CE49A007CFC51 /* PhotoSelectorOutput.swift in Sources */,
 				885C446D2419378E00B6E03C /* UIImage+Extension.swift in Sources */,
-				8833F5CD242CE484007CFC51 /* PhotoSelectorInput.swift in Sources */,
 				885C446B2419357C00B6E03C /* UserProfileHeader.swift in Sources */,
 				8895C4A524223CE400CEF61B /* PhotoSelectorViewController.swift in Sources */,
 				88BCEBF324233AB100A22886 /* PhotoSelectorHeader.swift in Sources */,

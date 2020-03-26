@@ -6,4 +6,15 @@
 //  Copyright © 2020 Максим Алексеев. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class PhotoSelectorAssembly {
+    class func configureModule() -> PhotoSelectorViewController {
+        let layout = UICollectionViewFlowLayout()
+        let view = PhotoSelectorViewController(collectionViewLayout: layout)
+        let presenter = PhotoSelectorPresenter()
+        view.presenter = presenter
+        
+        return view
+    }
+}

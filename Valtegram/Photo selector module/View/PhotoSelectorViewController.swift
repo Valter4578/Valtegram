@@ -15,6 +15,8 @@ protocol PhotoSelectorDelegate: class {
 
 class PhotoSelectorViewController: UICollectionViewController {
     // MARK:- Properties
+    var presenter: PhotoSelectorOutput!
+    
     weak var delegate: PhotoSelectorDelegate?
     
     override var prefersStatusBarHidden: Bool {
@@ -24,9 +26,9 @@ class PhotoSelectorViewController: UICollectionViewController {
     let cellId = "photoSelectorCell"
     let headerId = "photoSelectorHeader"
     
-    var images = [UIImage]()
-    var selectedImage: UIImage?
-    var assets = [PHAsset]()
+//    var images = [UIImage]()
+//    var selectedImage: UIImage?
+//    var assets = [PHAsset]()
     
     
     // MARK:- Lifecycle
@@ -40,8 +42,9 @@ class PhotoSelectorViewController: UICollectionViewController {
         collectionView.register(PhotoSelctorCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         
-        
-        fetchPhotos()
+        presenter.fetchPhotos() {
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK:- Setups
@@ -52,44 +55,10 @@ class PhotoSelectorViewController: UICollectionViewController {
 
     }
     
-    // MARK:- Private functions
-    private func fetchPhotos() {
-        let options = PHFetchOptions()
-        options.fetchLimit = 100
-        let allPhotos = PHAsset.fetchAssets(with: .image, options: options)
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            allPhotos.enumerateObjects { (asset, count, stop) in
-                print(count)
-                let imageManager = PHImageManager.default()
-                let targetSize = CGSize(width: 100, height: 100)
-                let options = PHImageRequestOptions()
-                options.isSynchronous = true
-                
-                imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options) { (image, info) in
-                    
-                    guard let img = image else { return }
-                    self.images.append(img)
-                    self.assets.append(asset)
-                    if self.selectedImage == nil {
-                        self.selectedImage = img
-                    }
-                    
-                    
-                    if count == allPhotos.count - 1 {
-                        DispatchQueue.main.async {
-                            self.collectionView.reloadData()
-                        }
-                    }
-                    
-                }
-            }
-        }
-    }
+
     
     
     // MARK:- Objc methods
-    
     @objc func handleCancelButton() {
         dismiss(animated: true, completion: nil)
     }
@@ -99,39 +68,43 @@ class PhotoSelectorViewController: UICollectionViewController {
         
         navigationController?.pushViewController(sharePhotoViewController, animated: true)
         
-        guard let img = selectedImage else { return }
+        guard let img = presenter.selectedImage else { return }
         sharePhotoViewController.image = img
     }
-    
-    // MARK:- CollectionViewDelegate
+}
+
+// MARK:- CollectionViewDelegate
+extension PhotoSelectorViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PhotoSelctorCell
-        cell.photoImageView.image = images[indexPath.item]
+        cell.photoImageView.image = presenter.images[indexPath.item]
         
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedImage = images[indexPath.item]
+        presenter.selectedImage = presenter.images[indexPath.item]
         collectionView.reloadData()
         
         let indexPath = IndexPath(row: 0, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
     }
-    // MARK:- CollectionViewDataSource
+}
 
+// MARK:- CollectionViewDataSource
+extension PhotoSelectorViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return presenter.images.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath ) as? PhotoSelectorHeader else { fatalError() }
-        header.photoImageView.image = selectedImage
+        header.photoImageView.image = presenter.selectedImage
         
-        if let selectedImage = selectedImage {
-            if let index = self.images.firstIndex(of: selectedImage) {
-                let selectedAsset = self.assets[index]
+        if let selectedImage = presenter.selectedImage {
+            if let index = presenter.images.firstIndex(of: selectedImage) {
+                let selectedAsset = presenter.assets[index]
                 
                 let imageManager = PHImageManager.default()
                 
@@ -154,6 +127,7 @@ class PhotoSelectorViewController: UICollectionViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 1, left: 0, bottom: 0, right: 0)
     }
+
 }
  
 // MARK:- CollectionViewDelegateFlowLayout

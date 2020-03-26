@@ -6,4 +6,13 @@
 //  Copyright © 2020 Максим Алексеев. All rights reserved.
 //
 
-import Foundation
+import Photos
+import UIKit
+
+protocol PhotoSelectorOutput: class {
+    var images: [UIImage] { get set }
+    var selectedImage: UIImage? { get set }
+    var assets: [PHAsset] { get set }
+    
+    func fetchPhotos(complitionHandler: @escaping () -> ())
+}
