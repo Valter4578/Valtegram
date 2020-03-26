@@ -97,7 +97,6 @@ class PhotoSelectorViewController: UICollectionViewController {
     @objc func handleNextButton() {
         let sharePhotoViewController = SharePhotoViewController()
         
-        
         navigationController?.pushViewController(sharePhotoViewController, animated: true)
         
         guard let img = selectedImage else { return }

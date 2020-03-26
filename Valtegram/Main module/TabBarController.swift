@@ -73,13 +73,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
         let index = viewControllers?.firstIndex(of: viewController)
         
         if index == 2 {
-            let layout = UICollectionViewFlowLayout()
-            let photoSelectorController = PhotoSelectorViewController(collectionViewLayout: layout)
+            let photoSelectorController = PhotoSelectorAssembly.configureModule()
             let navigationController = UINavigationController(rootViewController: photoSelectorController)
             present(navigationController, animated: true)
             return false
         }
-        
         
         return true
     }
