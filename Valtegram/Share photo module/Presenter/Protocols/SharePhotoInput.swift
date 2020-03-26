@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SharePhotoInput: class {
-    var navigationItem: UINavigationItem { get set }
+    var isNavigationButtonEnable: Bool { get set }
     
     func handleShareButton()
     func cancel(animated: Bool)

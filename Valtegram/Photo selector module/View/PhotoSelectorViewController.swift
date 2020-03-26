@@ -55,16 +55,13 @@ class PhotoSelectorViewController: UICollectionViewController {
 
     }
     
-
-    
-    
     // MARK:- Objc methods
     @objc func handleCancelButton() {
         dismiss(animated: true, completion: nil)
     }
     
     @objc func handleNextButton() {
-        let sharePhotoViewController = SharePhotoViewController()
+        let sharePhotoViewController = SharePhotoAssembly.configureModule()
         
         navigationController?.pushViewController(sharePhotoViewController, animated: true)
         

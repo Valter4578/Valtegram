@@ -14,13 +14,13 @@ class SharePhotoPresenter: SharePhotoOutput {
     
     func didPressShare(text: String, image: UIImage) {
         if text.count == 0 {
-            view?.navigationItem.rightBarButtonItem?.isEnabled = false
+            view?.isNavigationButtonEnable = true
         }
         let image = image
         guard let uploadData = image.jpegData(compressionQuality: 0.7) else { return }
         let filename = NSUUID().uuidString
         let reference = Storage.storage().reference().child("posts").child(filename)
-        view?.navigationItem.rightBarButtonItem?.isEnabled = false
+        view?.isNavigationButtonEnable = false
         reference.putData(uploadData, metadata: nil) { (meta, error) in
             if let err = error {
                 print(err.localizedDescription)
@@ -34,7 +34,7 @@ class SharePhotoPresenter: SharePhotoOutput {
     }
     
     func savePostIntoDatabase(url: URL, postImage: UIImage, text: String) {
-        view?.navigationItem.rightBarButtonItem?.isEnabled = false
+        view?.isNavigationButtonEnable = false
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let reference = Database.database().reference().child("posts").child(uid)
@@ -44,7 +44,7 @@ class SharePhotoPresenter: SharePhotoOutput {
         reference.childByAutoId().updateChildValues(values) { (error, reference) in
             if let err = error {
                 print(err.localizedDescription)
-                self.view?.navigationItem.rightBarButtonItem?.isEnabled = true
+                self.view?.isNavigationButtonEnable = true
                 return
             }
             
@@ -52,5 +52,9 @@ class SharePhotoPresenter: SharePhotoOutput {
             self.view?.cancel(animated: true)
         }
         
+    }
+    
+    init(view: SharePhotoInput) {
+        self.view = view 
     }
 }
