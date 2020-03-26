@@ -10,6 +10,6 @@ import UIKit
 
 protocol SignUpOutput {
     func createUser(email: String, password: String, imageToUpload: UIImage, data: Data, username: String)
-    func uploadImage(image: UIImage, data: Data, uid: String, for username) -> URL?
+    func uploadImage(image: UIImage, data: Data, uid: String, username: String) -> URL?
     func saveUserIntoDatabase(username: String, uid: String, imageUrl: URL?)
 }
