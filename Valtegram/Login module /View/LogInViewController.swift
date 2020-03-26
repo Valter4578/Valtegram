@@ -11,7 +11,6 @@ import Firebase
 
 class LogInViewController: UIViewController, LoginViewInput {
 
-    
     // MARK:- Properties
     var presenter: LoginViewOutput!
     
@@ -173,7 +172,7 @@ class LogInViewController: UIViewController, LoginViewInput {
     
     // MARK:- Objc methods
     @objc func handleSignUpButton() {
-        let signUpViewController = SignUpViewController()
+        let signUpViewController = SignUpAssembly.configureModule()
         navigationController?.pushViewController(signUpViewController, animated: true)
     }
     
@@ -192,17 +191,6 @@ class LogInViewController: UIViewController, LoginViewInput {
     @objc func handleLoginButton() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-//        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-//            if let err = error {
-//                self.showErrorAlert(with: err.localizedDescription)
-//            }
-//
-//            print("Succssesfuly loged in with user: ", result?.user.uid ?? "")
-//            // Update ui
-//            guard let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? TabBarController else { return }
-//            tabBarVC.setupViewControllers()
-//            self.dismiss(animated: true, completion: nil)
-//        }
         
         presenter.didPressLogin(email: email, password: password)
     }

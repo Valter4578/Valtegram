@@ -198,6 +198,12 @@ class SignUpViewController: UIViewController {
     }
 }
 
+extension SignUpViewController: SignUpInput {
+    func cancel(animated: Bool) {
+        dismiss(animated: animated, completion: nil)
+    }
+}
+
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[.editedImage]as? UIImage {

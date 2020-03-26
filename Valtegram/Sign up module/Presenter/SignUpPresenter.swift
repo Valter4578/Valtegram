@@ -77,4 +77,8 @@ class SignUpPresenter: SignUpOutput {
         return url
     }
 
+    init(view: SignUpInput) {
+        self.view = view
+    }
+    
 }
