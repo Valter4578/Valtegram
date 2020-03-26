@@ -25,6 +25,9 @@
 		8833F5CB242CE474007CFC51 /* PhotoSelectorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5CA242CE474007CFC51 /* PhotoSelectorPresenter.swift */; };
 		8833F5CF242CE49A007CFC51 /* PhotoSelectorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5CE242CE49A007CFC51 /* PhotoSelectorOutput.swift */; };
 		8833F5D2242CEBEC007CFC51 /* PhotoSelectorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5D1242CEBEC007CFC51 /* PhotoSelectorAssembly.swift */; };
+		8833F5D7242CF908007CFC51 /* SharePhotoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5D6242CF908007CFC51 /* SharePhotoInput.swift */; };
+		8833F5D9242CF91B007CFC51 /* SharePhotoOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5D8242CF91B007CFC51 /* SharePhotoOutput.swift */; };
+		8833F5DB242CF932007CFC51 /* SharePhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5DA242CF932007CFC51 /* SharePhotoPresenter.swift */; };
 		884589582424A79F009FE863 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884589572424A79F009FE863 /* HomeFeedViewController.swift */; };
 		885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA642414DC280088452E /* SceneDelegate.swift */; };
 		885C446724190C9D00B6E03C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446424190B9500B6E03C /* TabBarController.swift */; };
@@ -90,6 +93,9 @@
 		8833F5CA242CE474007CFC51 /* PhotoSelectorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorPresenter.swift; sourceTree = "<group>"; };
 		8833F5CE242CE49A007CFC51 /* PhotoSelectorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorOutput.swift; sourceTree = "<group>"; };
 		8833F5D1242CEBEC007CFC51 /* PhotoSelectorAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorAssembly.swift; sourceTree = "<group>"; };
+		8833F5D6242CF908007CFC51 /* SharePhotoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoInput.swift; sourceTree = "<group>"; };
+		8833F5D8242CF91B007CFC51 /* SharePhotoOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoOutput.swift; sourceTree = "<group>"; };
+		8833F5DA242CF932007CFC51 /* SharePhotoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoPresenter.swift; sourceTree = "<group>"; };
 		884589572424A79F009FE863 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
 		885C446424190B9500B6E03C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		885C446824190E3800B6E03C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -275,6 +281,32 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		8833F5D3242CF8DF007CFC51 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88BCEC0224234BED00A22886 /* SharePhotoViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8833F5D4242CF8EA007CFC51 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8833F5D5242CF8EF007CFC51 /* Protocols */,
+				8833F5DA242CF932007CFC51 /* SharePhotoPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8833F5D5242CF8EF007CFC51 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8833F5D6242CF908007CFC51 /* SharePhotoInput.swift */,
+				8833F5D8242CF91B007CFC51 /* SharePhotoOutput.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		884589562424A77A009FE863 /* Home feed module */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,7 +444,8 @@
 		88BCEC0124234B9B00A22886 /* Share photo module */ = {
 			isa = PBXGroup;
 			children = (
-				88BCEC0224234BED00A22886 /* SharePhotoViewController.swift */,
+				8833F5D4242CF8EA007CFC51 /* Presenter */,
+				8833F5D3242CF8DF007CFC51 /* View */,
 			);
 			path = "Share photo module";
 			sourceTree = "<group>";
@@ -640,6 +673,7 @@
 				88DFDC42242B890400B5AB8F /* UserProfilePresenter.swift in Sources */,
 				881BD8DD242B87EF00BCE307 /* UserProfileControllerInput.swift in Sources */,
 				8800EA672414DC280088452E /* SignUpViewController.swift in Sources */,
+				8833F5D7242CF908007CFC51 /* SharePhotoInput.swift in Sources */,
 				8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */,
 				88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */,
 				88DFDC40242B886D00B5AB8F /* UserProfileOutput.swift in Sources */,
@@ -657,6 +691,7 @@
 				88BCEBF324233AB100A22886 /* PhotoSelectorHeader.swift in Sources */,
 				88C0A27B242CCA1300162657 /* UserProfileViewInput.swift in Sources */,
 				88DE001A242735CA008888C8 /* HomeFeedPresenterOutput.swift in Sources */,
+				8833F5DB242CF932007CFC51 /* SharePhotoPresenter.swift in Sources */,
 				885C446724190C9D00B6E03C /* TabBarController.swift in Sources */,
 				88DE001C2427367C008888C8 /* HomeFeedPresenter.swift in Sources */,
 				8833F5D2242CEBEC007CFC51 /* PhotoSelectorAssembly.swift in Sources */,
@@ -672,6 +707,7 @@
 				88DE001F242741E8008888C8 /* LoginPresenterInput.swift in Sources */,
 				885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */,
 				8833F5C8242CDDFE007CFC51 /* SignUpAssembly.swift in Sources */,
+				8833F5D9242CF91B007CFC51 /* SharePhotoOutput.swift in Sources */,
 				8869B2A3242746AC00B1B2CA /* LoginAssembly.swift in Sources */,
 				8833F5C2242CD2D8007CFC51 /* SignUpInput.swift in Sources */,
 			);
