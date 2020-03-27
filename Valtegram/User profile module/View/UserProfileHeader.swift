@@ -13,7 +13,7 @@ class UserProfileHeader: UICollectionViewCell {
     //MARK:- Properties
     var user: User? {
         didSet {
-            setProfileImage()
+
             usernameLabel.text = user?.username
         }
     }
@@ -116,28 +116,6 @@ class UserProfileHeader: UICollectionViewCell {
         button.layer.cornerRadius = 8
         return button
     }()
-    
-    // MARK:- Private functions
-    private func setProfileImage() {
-        guard let usr = user else { return }
-        guard let url = URL(string: usr.profileImageURL) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let err = error {
-                print(err.localizedDescription)
-                return
-            }
-            
-            print(data)
-            guard let data = data else { return }
-            let image = UIImage(data: data)
-            
-            
-            DispatchQueue.main.async {
-                self.profileImageView.image = image
-            }
-        }.resume()
-        
-    }
     
     // MARK:- Setups
     private func setupToolBar() {

@@ -17,6 +17,7 @@ class SharePhotoViewController: UIViewController {
         }
     }
     
+    var presenter: SharePhotoOutput!
     // MARK:- Views
     let containerView: UIView = {
         let view = UIView()
@@ -41,7 +42,6 @@ class SharePhotoViewController: UIViewController {
         return textView
     }()
     
-    
     // MARK:- Propeties
     override var prefersStatusBarHidden: Bool {
         return true
@@ -60,7 +60,6 @@ class SharePhotoViewController: UIViewController {
     // MARK:- Setups
     
     private func setupContainerView() {
-        
         view.addSubview(containerView)
         
         NSLayoutConstraint.activate([
@@ -88,59 +87,28 @@ class SharePhotoViewController: UIViewController {
             textView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0),
         ])
     }
-    
-    // MARK:- Private methods
-    private func showErrorAlert(with errorText: String) {
-        let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .cancel)
-        alertController.addAction(alertAction)
-        self.present(alertController, animated: true, completion: nil)
-        
-        print(errorText)
+}
+
+// MARK:- SharePhotoInput
+extension SharePhotoViewController: SharePhotoInput {
+    var isNavigationButtonEnable: Bool {
+        get {
+            self.navigationItem.rightBarButtonItem?.isEnabled ?? false
+        }
+        set {
+            self.navigationItem.rightBarButtonItem?.isEnabled = newValue
+        }
     }
     
-    private func savePostIntoDatabase(url: URL) {
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        
-        guard let postImage = image else { return }
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let reference = Database.database().reference().child("posts").child(uid)
-        
-        guard let text = textView.text else { return }
-        let values = ["imageUrl":url.absoluteString, "text": text, "imageWidth":postImage.size.width, "imageHeight":postImage.size.height, "date": Date().timeIntervalSince1970] as [String : Any]
-        reference.childByAutoId().updateChildValues(values) { (error, reference) in
-            if let err = error {
-                self.navigationItem.rightBarButtonItem?.isEnabled = true
-                self.showErrorAlert(with: err.localizedDescription)
-                return
-            }
-            
-            print("saved into database")
-            self.dismiss(animated: true, completion: nil)
-        }
+    func cancel(animated: Bool) {
+        dismiss(animated: animated, completion: nil)
     }
     
     // MARK:- Objc methods
     @objc func handleShareButton() {
-        
         guard let text = textView.text else { return }
-        if text.count == 0 {
-            navigationItem.rightBarButtonItem?.isEnabled = false 
-        }
         guard let image = image else { return }
-        guard let uploadData = image.jpegData(compressionQuality: 0.7) else { return }
-        let filename = NSUUID().uuidString
-        let reference = Storage.storage().reference().child("posts").child(filename)
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        reference.putData(uploadData, metadata: nil) { (meta, error) in
-            if let err = error {
-                self.showErrorAlert(with: err.localizedDescription)
-                return
-            }
-            reference.downloadURL { (url, error) in
-                guard let url = url else { return }
-                self.savePostIntoDatabase(url: url)
-            }
-        }
+        
+        presenter.didPressShare(text: text, image: image)
     }
 }

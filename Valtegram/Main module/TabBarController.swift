@@ -24,8 +24,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
     }
     
     func setupViewControllers() {
+        let collectionViewLayout = UICollectionViewFlowLayout()
         // home view controller
-        let homeNavigationController = createNavigationController(imageName: "home")
+        let homeFeedViewController = HomeFeedViewController(collectionViewLayout: collectionViewLayout)
+        let homeNavigationController = createNavigationController(imageName: "home", rootViewController: homeFeedViewController)
         // search view controller
         let searchNavigationController = createNavigationController(imageName: "search")
         // plus view controller
@@ -34,10 +36,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
         let likedNavigationController = createNavigationController(imageName: "heart")
         
         // profile view controller
-        let collectionViewLayout = UICollectionViewFlowLayout()
-        let userProfileViewController = UserProfileViewController(collectionViewLayout: collectionViewLayout)
+        let userProfileViewController = UserProfileAssembly.configureModule()
         let userProfileNavigationController = createNavigationController(imageName: "profile", rootViewController: userProfileViewController)
-        
         
         viewControllers = [homeNavigationController,searchNavigationController,plusNavigationController,likedNavigationController, userProfileNavigationController]
     }
@@ -73,13 +73,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
         let index = viewControllers?.firstIndex(of: viewController)
         
         if index == 2 {
-            let layout = UICollectionViewFlowLayout()
-            let photoSelectorController = PhotoSelectorViewController(collectionViewLayout: layout)
+            let photoSelectorController = PhotoSelectorAssembly.configureModule()
             let navigationController = UINavigationController(rootViewController: photoSelectorController)
             present(navigationController, animated: true)
             return false
         }
-        
         
         return true
     }

@@ -7,15 +7,17 @@
 //
 
 import UIKit
-import Firebase
-
 
 class SignUpViewController: UIViewController {
+    // MARK:- Properties
+    var presenter: SignUpPresenter!
     
+    // MARK:- Private properties
     private var username: String?
     private var email: String?
     private var password: String?
     
+    // MARK:- Views
     let photoPlusButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "add"), for: .normal)
@@ -46,7 +48,6 @@ class SignUpViewController: UIViewController {
         
         textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
 
-        
         return textField
     }()
     
@@ -58,7 +59,6 @@ class SignUpViewController: UIViewController {
         textField.isSecureTextEntry = true
         
         textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
-
         
         return textField
     }()
@@ -124,13 +124,12 @@ class SignUpViewController: UIViewController {
     private func setupAddPhotoButton() {
         view.addSubview(photoPlusButton)
 
-        photoPlusButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
-            photoPlusButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            photoPlusButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            photoPlusButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
-    
-        
-        
+        NSLayoutConstraint.activate([
+            photoPlusButton.heightAnchor.constraint(equalToConstant: 100),
+            photoPlusButton.widthAnchor.constraint(equalToConstant: 100),
+            photoPlusButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            photoPlusButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+        ])
     }
     
     private func setupLoginButton() {
@@ -153,80 +152,7 @@ class SignUpViewController: UIViewController {
         
         print(errorText)
     }
-    
-    // Create and save user in database
-    private func createUser(email: String, password: String, imageToUpload: UIImage, data: Data, username: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            if let err = error {
-                self.showErrorAlert(with: err.localizedDescription)
-            }
-            print("User created ", result?.user.uid)
-            
-            guard let uid = result?.user.uid else { return }
-
-            let imgURL = self.uploadImage(image: imageToUpload, data: data, uid: uid)
-            
-        }
-        print(#function)
-    }
-    
-    
-    
-    
-    private func uploadImage(image: UIImage, data: Data, uid: String) -> URL? {
-        var url: URL?
         
-        let filename = NSUUID().uuidString
-        
-        let profileRef = Storage.storage().reference().child("profileImages").child(filename)
-        
-        profileRef.putData(data, metadata: nil) { (metadata, error) in
-            
-            let profileRef = StorageReference().child("profileImage")
-            if let err = error {
-                self.showErrorAlert(with: err.localizedDescription)
-                print("Failed to uploud image: ", err.localizedDescription)
-                return
-            }
-            
-            var profileImageUrl: URL?
-            let profileImageUrlTask = profileRef.downloadURL { (imgUrl, error) in
-                if let err = error {
-                    self.showErrorAlert(with: err.localizedDescription)
-                    print("Failed to get image url: ", err.localizedDescription)
-                    return
-                }
-                
-                print("Successfully upload profile image: ", imgUrl)
-                    
-                
-                guard let usrName = self.username else { return }
-                self.saveUserIntoDatabase(username: usrName, uid: uid, imageUrl: imgUrl)
-            }
-        }
-        
-        print(#function)
-        return url
-    }
-    
-    private func saveUserIntoDatabase(username: String, uid: String, imageUrl: URL?) {
-        
-        Database.database().reference().child("users").updateChildValues([uid:["username":username, "profileImageUrl":imageUrl?.absoluteString]]) { (error, reference) in
-            if let err = error {
-                self.showErrorAlert(with: err.localizedDescription)
-                print("Failed to add user into database: ",err.localizedDescription)
-                return
-            }
-            print("User " + username + " saved with image: \(imageUrl?.absoluteString)")
-            
-            // Update ui
-            guard let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? TabBarController else { return }
-            tabBarVC.setupViewControllers()
-            self.dismiss(animated: true, completion: nil)
-        }
-        print(#function)
-    }
-    
     // MARK:- Selectors
     @objc func signUpTouched() {
 
@@ -239,15 +165,13 @@ class SignUpViewController: UIViewController {
         
         
         guard let mail = email else { return }
-        guard let passwrd = password else { return }
+        guard let password = password else { return }
         guard let usrName = username else { return }
         
-        createUser(email: mail, password: passwrd, imageToUpload: image, data: data, username: usrName)
+        presenter.createUser(email: mail, password: password, imageToUpload: image, data: data, username: usrName)
         
     }
 
-
-    
     @objc func handleTextInputChange() {
         let isFormValid = emailTextField.text?.count ?? 0 > 0 && usernameTextField.text?.count ?? 0 > 0 && passwordTextField.text?.count ?? 0 > 0
         
@@ -260,7 +184,6 @@ class SignUpViewController: UIViewController {
         }
     }
 
-    
     @objc func photoPlusButtonTapped() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -272,6 +195,12 @@ class SignUpViewController: UIViewController {
     
     @objc func handleLoginButton() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension SignUpViewController: SignUpInput {
+    func cancel(animated: Bool) {
+        dismiss(animated: animated, completion: nil)
     }
 }
 
