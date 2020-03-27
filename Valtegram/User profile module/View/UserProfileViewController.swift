@@ -10,6 +10,9 @@ import UIKit
 import Firebase
 
 class UserProfileViewController: UICollectionViewController {
+    // MARK:- Properties
+    var presenter: UserProfileOutput!
+    
     // MARK:- Private properties
     private var user: User?
     private let cellId = "mainCell"
@@ -30,15 +33,17 @@ class UserProfileViewController: UICollectionViewController {
         
         collectionView.backgroundColor = .white
         
-        fetchUser()
+        presenter.fetchUser()
         
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         
         collectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         setupPreferenceButton()
-        
-        fetchPosts()
+
+        presenter.fetchPost {
+            self.collectionView.reloadData()
+        }
     }
     
     //MARK: - Private methods
@@ -49,7 +54,7 @@ class UserProfileViewController: UICollectionViewController {
            self.present(alertController, animated: true, completion: nil)
            
            print(errorText)
-       }
+    }
        
     
     func fetchUser() {
@@ -69,7 +74,7 @@ class UserProfileViewController: UICollectionViewController {
         }
     }
     
-    private func fetchPosts() {
+    internal func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         let reference = Database.database().reference().child("posts").child(uid)
@@ -93,33 +98,15 @@ class UserProfileViewController: UICollectionViewController {
     
     // MARK:- Setups
     private func setupPreferenceButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(logOut))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(handleLogOut))
     }
     
     
-    // MARK:- Objc methods
-    @objc func logOut() {
-        let alertController = UIAlertController(title: "Log out", message: "Do you really want to do it ?", preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
-            do {
-                try? Auth.auth().signOut()
-                
-                let loginVC = LogInViewController()
-                let navigationVC = UINavigationController(rootViewController: loginVC)
-                self.present(navigationVC, animated: true, completion: nil)
-            } catch {
-                print(error)
-            }
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alertController, animated: true)
-    }
     // MARK:- Collection view delegate
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
         
-        header.user = self.user
+        header.user = presenter.user
             
         return header
     }
@@ -127,13 +114,13 @@ class UserProfileViewController: UICollectionViewController {
 
     // MARK:- Collection view data source
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        return presenter.posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as? PostCollectionViewCell
-        cell?.post = posts[indexPath.item]
-        return cell!
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as! PostCollectionViewCell
+        cell.post = presenter.posts[indexPath.item]
+        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -149,6 +136,34 @@ class UserProfileViewController: UICollectionViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
+}
+
+extension UserProfileViewController: UserProfileInput {
+    func show(_ viewController: UIViewController) {
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    // MARK:- Objc methods
+    @objc func handleLogOut() {
+        let alertController = UIAlertController(title: "Log out", message: "Do you really want to do it ?", preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
+            do {
+                self.presenter.didLogOut()
+            } catch {
+                print(error)
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true)
+    }
+    
+    func setUser(_ user: User) {
+        title = user.username
+        collectionView.reloadData()
+    }
+    
+    
 }
 
 // MARK:- CollectionView Flow layout delegate
