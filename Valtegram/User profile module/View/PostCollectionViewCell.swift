@@ -9,6 +9,15 @@
 import UIKit
 
 class PostCollectionViewCell: UICollectionViewCell {
+    // MARK:- Properties
+    var post: Post? {
+        didSet {
+            print(post?.imageUrl)
+            guard let post = post, let url = URL(string: post.imageUrl) else { return }
+            photoImageView.kf.setImage(with: url)
+        }
+    }
+    
     // MARK:- Views
     let photoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -17,13 +26,6 @@ class PostCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    // MARK:- Properties
-    var post: Post? {
-        didSet {
-            print(post?.imageUrl)
-            setPostImage()
-        }
-    }
     
     // MARK:- Private methods
     private func setupImageView() {
@@ -35,27 +37,6 @@ class PostCollectionViewCell: UICollectionViewCell {
             photoImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             photoImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
         ])
-    }
-    
-    private func setPostImage() {
-        guard let post = post else { return }
-        guard let url = URL(string: post.imageUrl) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let err = error {
-                print(err.localizedDescription)
-                return
-            }
-            
-            print(data)
-            guard let data = data else { return }
-            let image = UIImage(data: data)
-            
-            
-            DispatchQueue.main.async {
-                self.photoImageView.image = image
-            }
-        }.resume()
-        
     }
     
     // MARK:- Inits

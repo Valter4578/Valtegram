@@ -10,9 +10,13 @@ import UIKit
 import Firebase
 
 class UserProfileViewController: UICollectionViewController {
+    // MARK:- Properties
+    var presenter: UserProfileOutput!
+    
     // MARK:- Private properties
     private var user: User?
     private let cellId = "mainCell"
+    private var posts = [Post]()
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
@@ -29,49 +33,46 @@ class UserProfileViewController: UICollectionViewController {
         
         collectionView.backgroundColor = .white
         
-        fetchUser()
+        presenter.fetchUser()
         
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         setupPreferenceButton()
+
+        presenter.fetchPost {
+            self.collectionView.reloadData()
+        }
     }
     
     //MARK: - Private methods
-    func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot.value ?? "")
-            
-            
-            guard let dictionary = snapshot.value as? [String: Any] else { return }
-            self.user = User(dictionary: dictionary)
-            
-            self.title = self.user?.username
-            
-            self.collectionView.reloadData()
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+    private func showErrorAlert(with errorText: String) {
+           let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
+           let alertAction = UIAlertAction(title: "OK", style: .cancel)
+           alertController.addAction(alertAction)
+           self.present(alertController, animated: true, completion: nil)
+           
+           print(errorText)
     }
     
     // MARK:- Setups
     private func setupPreferenceButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(logOut))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(handleLogOut))
+    }
+}
+
+extension UserProfileViewController: UserProfileInput {
+    func show(_ viewController: UIViewController) {
+        present(viewController, animated: true, completion: nil)
     }
     
-    
     // MARK:- Objc methods
-    @objc func logOut() {
+    @objc func handleLogOut() {
         let alertController = UIAlertController(title: "Log out", message: "Do you really want to do it ?", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
             do {
-                try? Auth.auth().signOut()
-                
-                let loginVC = LogInViewController()
-                let navigationVC = UINavigationController(rootViewController: loginVC)
-                self.present(navigationVC, animated: true, completion: nil)
+                self.presenter.didLogOut()
             } catch {
                 print(error)
             }
@@ -80,25 +81,33 @@ class UserProfileViewController: UICollectionViewController {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertController, animated: true)
     }
-    // MARK:- Collection view delegate
+    
+    func setUser(_ user: User) {
+        title = user.username
+        collectionView.reloadData()
+    }
+}
+
+// MARK:- Collection view delegate
+extension UserProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
         
-        header.user = self.user
+        header.user = presenter.user
             
         return header
     }
-    
+}
 
-    // MARK:- Collection view data source
+// MARK:- Collection view data source
+extension UserProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return presenter.posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath)
-        cell.backgroundColor = .cyan
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as! PostCollectionViewCell
+        cell.post = presenter.posts[indexPath.item]
         return cell
     }
 
