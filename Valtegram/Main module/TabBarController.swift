@@ -36,7 +36,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
         let likedNavigationController = createNavigationController(imageName: "heart")
         
         // profile view controller
-        let userProfileViewController = UserProfileAssembly.configureModule()
+        let userProfileViewController = UserProfileViewController(collectionViewLayout: collectionViewLayout)
         let userProfileNavigationController = createNavigationController(imageName: "profile", rootViewController: userProfileViewController)
         
         viewControllers = [homeNavigationController,searchNavigationController,plusNavigationController,likedNavigationController, userProfileNavigationController]
