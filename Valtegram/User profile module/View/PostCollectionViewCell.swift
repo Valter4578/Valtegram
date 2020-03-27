@@ -21,6 +21,8 @@ class PostCollectionViewCell: UICollectionViewCell {
     var post: Post? {
         didSet {
             print(post?.imageUrl)
+            guard let post = post, let url = URL(string: post.imageUrl) else { return }
+            photoImageView.kf.setImage(with: url)
         }
     }
     

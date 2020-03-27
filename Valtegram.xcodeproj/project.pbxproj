@@ -27,6 +27,9 @@
 		8833F5D7242CF908007CFC51 /* SharePhotoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5D6242CF908007CFC51 /* SharePhotoInput.swift */; };
 		8833F5D9242CF91B007CFC51 /* SharePhotoOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5D8242CF91B007CFC51 /* SharePhotoOutput.swift */; };
 		8833F5DB242CF932007CFC51 /* SharePhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5DA242CF932007CFC51 /* SharePhotoPresenter.swift */; };
+		883AC5E6242E3056005B97DF /* UserProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC5E5242E3056005B97DF /* UserProfileInput.swift */; };
+		883AC5E8242E3064005B97DF /* UserProfileOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC5E7242E3064005B97DF /* UserProfileOutput.swift */; };
+		883AC5EA242E3096005B97DF /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC5E9242E3096005B97DF /* UserProfilePresenter.swift */; };
 		884589582424A79F009FE863 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884589572424A79F009FE863 /* HomeFeedViewController.swift */; };
 		885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA642414DC280088452E /* SceneDelegate.swift */; };
 		885C446724190C9D00B6E03C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C446424190B9500B6E03C /* TabBarController.swift */; };
@@ -89,6 +92,9 @@
 		8833F5D6242CF908007CFC51 /* SharePhotoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoInput.swift; sourceTree = "<group>"; };
 		8833F5D8242CF91B007CFC51 /* SharePhotoOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoOutput.swift; sourceTree = "<group>"; };
 		8833F5DA242CF932007CFC51 /* SharePhotoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoPresenter.swift; sourceTree = "<group>"; };
+		883AC5E5242E3056005B97DF /* UserProfileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInput.swift; sourceTree = "<group>"; };
+		883AC5E7242E3064005B97DF /* UserProfileOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileOutput.swift; sourceTree = "<group>"; };
+		883AC5E9242E3096005B97DF /* UserProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
 		884589572424A79F009FE863 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
 		885C446424190B9500B6E03C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		885C446824190E3800B6E03C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -307,6 +313,9 @@
 		8869B2A4242791D800B1B2CA /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				883AC5E5242E3056005B97DF /* UserProfileInput.swift */,
+				883AC5E7242E3064005B97DF /* UserProfileOutput.swift */,
+				883AC5E9242E3096005B97DF /* UserProfilePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -633,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88EBBF90242D0C75000C1B4B /* SharePhotoAssembly.swift in Sources */,
+				883AC5E8242E3064005B97DF /* UserProfileOutput.swift in Sources */,
 				88BCEC0324234BED00A22886 /* SharePhotoViewController.swift in Sources */,
 				8833F5CB242CE474007CFC51 /* PhotoSelectorPresenter.swift in Sources */,
 				8800EA672414DC280088452E /* SignUpViewController.swift in Sources */,
@@ -656,6 +666,7 @@
 				884589582424A79F009FE863 /* HomeFeedViewController.swift in Sources */,
 				88DE002124274202008888C8 /* LoginPresenterOutput.swift in Sources */,
 				88DFDC44242BA12000B5AB8F /* UserProfileAssembly.swift in Sources */,
+				883AC5E6242E3056005B97DF /* UserProfileInput.swift in Sources */,
 				889482732423CF0700A9A22D /* Post.swift in Sources */,
 				889482762423D3A400A9A22D /* PostCollectionViewCell.swift in Sources */,
 				881299B42424AC3B00495088 /* HomeFeedCollectionViewCell.swift in Sources */,
@@ -664,6 +675,7 @@
 				88CC0B43241D10DF003E604C /* User.swift in Sources */,
 				88DE001F242741E8008888C8 /* LoginPresenterInput.swift in Sources */,
 				885C446624190C9600B6E03C /* SceneDelegate.swift in Sources */,
+				883AC5EA242E3096005B97DF /* UserProfilePresenter.swift in Sources */,
 				8833F5C8242CDDFE007CFC51 /* SignUpAssembly.swift in Sources */,
 				8833F5D9242CF91B007CFC51 /* SharePhotoOutput.swift in Sources */,
 				8869B2A3242746AC00B1B2CA /* LoginAssembly.swift in Sources */,
