@@ -55,86 +55,10 @@ class UserProfileViewController: UICollectionViewController {
            
            print(errorText)
     }
-       
-    
-    func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot.value ?? "")
-            
-            
-            guard let dictionary = snapshot.value as? [String: Any] else { return }
-            self.user = User(dictionary: dictionary)
-            
-            self.title = self.user?.username
-            
-            self.collectionView.reloadData()
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    }
-    
-    internal func fetchPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        let reference = Database.database().reference().child("posts").child(uid)
-        reference.observe(.value, with: { (snapshot) in
-
-            guard let dictionaries = snapshot.value as? [String:Any] else { return }
-            dictionaries.forEach { (key, value) in
-                print("Key: \(key), value \(value)")
-                
-                guard let dictionary = value as? [String:Any] else { return }
-                let imageUrl = dictionary["imageUrl"] as? String
-                let post = Post(dictionary: dictionary)
-                self.posts.append(post)
-            }
-            
-            self.collectionView.reloadData()
-        }) { (error) in
-            self.showErrorAlert(with: error.localizedDescription)
-        }
-    }
     
     // MARK:- Setups
     private func setupPreferenceButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "preference"), style: .plain, target: self, action: #selector(handleLogOut))
-    }
-    
-    
-    // MARK:- Collection view delegate
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
-        
-        header.user = presenter.user
-            
-        return header
-    }
-    
-
-    // MARK:- Collection view data source
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.posts.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as! PostCollectionViewCell
-        cell.post = presenter.posts[indexPath.item]
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Deduct 2 because of two lines beetwen midle cell and left and right cell
-        let width = (view.frame.width-2)/3
-        return CGSize(width: width, height: width)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
     }
 }
 
@@ -162,8 +86,44 @@ extension UserProfileViewController: UserProfileInput {
         title = user.username
         collectionView.reloadData()
     }
+}
+
+// MARK:- Collection view delegate
+extension UserProfileViewController {
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
+        
+        header.user = presenter.user
+            
+        return header
+    }
+}
+
+// MARK:- Collection view data source
+extension UserProfileViewController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter.posts.count
+    }
     
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for:  indexPath) as! PostCollectionViewCell
+        cell.post = presenter.posts[indexPath.item]
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Deduct 2 because of two lines beetwen midle cell and left and right cell
+        let width = (view.frame.width-2)/3
+        return CGSize(width: width, height: width)
+    }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
 }
 
 // MARK:- CollectionView Flow layout delegate
