@@ -20,7 +20,7 @@ class HomeFeedViewController: UICollectionViewController {
         super.viewDidLoad()
         collectionView?.backgroundColor = .yellow
         
-        collectionView?.register(HomeFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         setupNavigationItems()
         
@@ -45,9 +45,7 @@ class HomeFeedViewController: UICollectionViewController {
         
         print(errorText)
     }
-    
-    
-    
+        
     private func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
