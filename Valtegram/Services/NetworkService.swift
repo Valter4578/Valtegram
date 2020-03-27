@@ -22,6 +22,6 @@ class NetworkService {
             DispatchQueue.main.async {
                 complitionHandler(image)
             }
-        }
+        }.resume()
     }
 }

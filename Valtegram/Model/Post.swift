@@ -6,12 +6,12 @@
 //  Copyright © 2020 Максим Алексеев. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Post {
     let imageUrl: String
     
-    init(dictionary: [String:Any] ) {
+    init(dictionary: [String:Any]) {
         self.imageUrl = dictionary["imageUrl"] as? String ?? ""
     }
 }
