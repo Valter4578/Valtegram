@@ -24,9 +24,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
     }
     
     func setupViewControllers() {
-        let collectionViewLayout = UICollectionViewFlowLayout()
         // home view controller
-        let homeFeedViewController = HomeFeedViewController(collectionViewLayout: collectionViewLayout)
+        let homeFeedViewController = HomeFeedAssembly.configureModule()
         let homeNavigationController = createNavigationController(imageName: "home", rootViewController: homeFeedViewController)
         // search view controller
         let searchNavigationController = createNavigationController(imageName: "search")

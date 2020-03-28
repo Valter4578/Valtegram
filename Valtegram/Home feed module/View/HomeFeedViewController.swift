@@ -12,6 +12,7 @@ import Firebase
 class HomeFeedViewController: UICollectionViewController {
     // MARK:- Properties
     var posts = [Post]()
+    var presenter: HomeFeedOutput! 
     // MARK:- Constants
     let cellId = "homeFeedCell"
     
@@ -20,12 +21,13 @@ class HomeFeedViewController: UICollectionViewController {
         super.viewDidLoad()
         collectionView?.backgroundColor = .yellow
         
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(HomePostCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         setupNavigationItems()
         
-        fetchPosts()
-    
+        presenter.fetchPosts {
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK:- Setups
@@ -35,51 +37,19 @@ class HomeFeedViewController: UICollectionViewController {
         imageView.contentMode = .scaleToFill
         navigationItem.titleView = imageView
     }
-    // MARK:- Private methods
-    
-    private func showErrorAlert(with errorText: String) {
-        let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .cancel)
-        alertController.addAction(alertAction)
-        self.present(alertController, animated: true, completion: nil)
-        
-        print(errorText)
-    }
-        
-    private func fetchPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        let reference = Database.database().reference().child("posts").child(uid)
-        reference.observe(.value, with: { (snapshot) in
-
-            guard let dictionaries = snapshot.value as? [String:Any] else { return }
-            dictionaries.forEach { (key, value) in
-                print("Key: \(key), value \(value)")
-                
-                guard let dictionary = value as? [String:Any] else { return }
-                let imageUrl = dictionary["imageUrl"] as? String
-                let post = Post(dictionary: dictionary)
-                self.posts.append(post)
-            }
-            
-            self.collectionView.reloadData()
-        }) { (error) in
-            self.showErrorAlert(with: error.localizedDescription)
-        }
-    }
-    
-    
     
     // MARK:- CollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        return presenter.posts.count
     }
     
     // MARK:- CollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! HomePostCollectionViewCell
 
+        cell.post = presenter.posts[indexPath.item]
+        
         return cell
     }
 }
