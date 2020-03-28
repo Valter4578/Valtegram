@@ -48,6 +48,9 @@
 		88BCEBF324233AB100A22886 /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCEBF224233AB100A22886 /* PhotoSelectorHeader.swift */; };
 		88BCEC0324234BED00A22886 /* SharePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCEC0224234BED00A22886 /* SharePhotoViewController.swift */; };
 		88CC0B43241D10DF003E604C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC0B42241D10DF003E604C /* User.swift */; };
+		88DD67C3242F40EB00276AC1 /* HomeFeedOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DD67C2242F40EB00276AC1 /* HomeFeedOutput.swift */; };
+		88DD67C5242F412700276AC1 /* HomeFeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DD67C4242F412700276AC1 /* HomeFeedPresenter.swift */; };
+		88DD67C7242F42F400276AC1 /* HomeFeedAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DD67C6242F42F400276AC1 /* HomeFeedAssembly.swift */; };
 		88DE001F242741E8008888C8 /* LoginPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE001E242741E8008888C8 /* LoginPresenterInput.swift */; };
 		88DE002124274202008888C8 /* LoginPresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE002024274202008888C8 /* LoginPresenterOutput.swift */; };
 		88DE00232427420E008888C8 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DE00222427420E008888C8 /* LoginPresenter.swift */; };
@@ -123,6 +126,9 @@
 		88BCEBF224233AB100A22886 /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
 		88BCEC0224234BED00A22886 /* SharePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoViewController.swift; sourceTree = "<group>"; };
 		88CC0B42241D10DF003E604C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		88DD67C2242F40EB00276AC1 /* HomeFeedOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeFeedOutput.swift; path = "Valtegram/User profile module/Presenter/HomeFeedOutput.swift"; sourceTree = SOURCE_ROOT; };
+		88DD67C4242F412700276AC1 /* HomeFeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeFeedPresenter.swift; path = "Valtegram/User profile module/Presenter/HomeFeedPresenter.swift"; sourceTree = SOURCE_ROOT; };
+		88DD67C6242F42F400276AC1 /* HomeFeedAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedAssembly.swift; sourceTree = "<group>"; };
 		88DE001E242741E8008888C8 /* LoginPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterInput.swift; sourceTree = "<group>"; };
 		88DE002024274202008888C8 /* LoginPresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterOutput.swift; sourceTree = "<group>"; };
 		88DE00222427420E008888C8 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
@@ -306,6 +312,7 @@
 			children = (
 				88DE001624273551008888C8 /* Presenter */,
 				881299B22424AC2A00495088 /* View */,
+				88DD67C6242F42F400276AC1 /* HomeFeedAssembly.swift */,
 			);
 			path = "Home feed module";
 			sourceTree = "<group>";
@@ -447,6 +454,8 @@
 		88DE001624273551008888C8 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				88DD67C2242F40EB00276AC1 /* HomeFeedOutput.swift */,
+				88DD67C4242F412700276AC1 /* HomeFeedPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -654,6 +663,7 @@
 				8887E1B524279C44001F1CC6 /* NetworkService.swift in Sources */,
 				8833F5BE242CD1B2007CFC51 /* SignUpPresenter.swift in Sources */,
 				88BB62A02422606C0063A914 /* PhotoSelctorCell.swift in Sources */,
+				88DD67C3242F40EB00276AC1 /* HomeFeedOutput.swift in Sources */,
 				8800EA632414DC280088452E /* AppDelegate.swift in Sources */,
 				8833F5CF242CE49A007CFC51 /* PhotoSelectorOutput.swift in Sources */,
 				885C446D2419378E00B6E03C /* UIImage+Extension.swift in Sources */,
@@ -668,6 +678,8 @@
 				88DFDC44242BA12000B5AB8F /* UserProfileAssembly.swift in Sources */,
 				883AC5E6242E3056005B97DF /* UserProfileInput.swift in Sources */,
 				889482732423CF0700A9A22D /* Post.swift in Sources */,
+				88DD67C7242F42F400276AC1 /* HomeFeedAssembly.swift in Sources */,
+				88DD67C5242F412700276AC1 /* HomeFeedPresenter.swift in Sources */,
 				889482762423D3A400A9A22D /* PostCollectionViewCell.swift in Sources */,
 				881299B42424AC3B00495088 /* HomeFeedCollectionViewCell.swift in Sources */,
 				885C446924190E3800B6E03C /* UserProfileViewController.swift in Sources */,
