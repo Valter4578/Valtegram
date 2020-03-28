@@ -19,9 +19,9 @@ class HomeFeedViewController: UICollectionViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.backgroundColor = .yellow
+        collectionView?.backgroundColor = .white 
         
-        collectionView?.register(HomePostCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(HomeFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         setupNavigationItems()
         
@@ -32,9 +32,9 @@ class HomeFeedViewController: UICollectionViewController {
     
     // MARK:- Setups
     private func setupNavigationItems() {
-        let image = UIImage(named: "valtegram")
+        let image = UIImage(named: "s-valtegram")
         let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         navigationItem.titleView = imageView
     }
     
@@ -46,7 +46,7 @@ class HomeFeedViewController: UICollectionViewController {
     // MARK:- CollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! HomePostCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! HomeFeedCollectionViewCell
 
         cell.post = presenter.posts[indexPath.item]
         
@@ -56,6 +56,11 @@ class HomeFeedViewController: UICollectionViewController {
 
 extension HomeFeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 250)
+        
+        var height: CGFloat = 64 // space for top of cell with label and image ;height of image(50) + 2 spaces (7)
+        height += 50 // space for action buttons
+        height += 100
+        height += view.frame.width
+        return CGSize(width: view.frame.width, height: height)
     }
 }
