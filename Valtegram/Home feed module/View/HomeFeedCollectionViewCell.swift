@@ -12,8 +12,15 @@ class HomeFeedCollectionViewCell: UICollectionViewCell {
     // MARK:- Properties
     var post: Post? {
         didSet {
-            guard let post = post, let url = URL(string: post.imageUrl) else { return }
-            postImageView.kf.setImage(with: url)
+            guard let post = post, let postUrl = URL(string: post.imageUrl) else { return }
+            postImageView.kf.setImage(with: postUrl)
+            usernameLabel.text = post.user.username
+            
+            guard let imageUrl = URL(string: post.user.profileImageURL)  else { return }
+            
+            userProfileImageView.kf.setImage(with: imageUrl)
+            
+            descriptionLabel.text = post.description
         }
     }
     
@@ -24,7 +31,6 @@ class HomeFeedCollectionViewCell: UICollectionViewCell {
         imageView.backgroundColor = .yellow
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = imageView.bounds.width / 2
         return imageView
     }()
     
@@ -86,18 +92,24 @@ class HomeFeedCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         
-        let attributedText = NSMutableAttributedString(string: "Username ", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 14)])
-        
-        attributedText.append(NSAttributedString(string: "Lorem ispum", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14)]))
-        
-        attributedText.append(NSAttributedString(string: "\n1 month ago", attributes:
-            [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14),
-             NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
-        
-        label.attributedText = attributedText
         
         return label
     }()
+    
+    // MARK:- Private functions
+    private func createAttributedText() {
+        guard let post = post else { return }
+        
+        let attributedText = NSMutableAttributedString(string: (post.user.username ?? "") + " ", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 14)])
+         
+        attributedText.append(NSAttributedString(string: post.description, attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14)]))
+         
+         attributedText.append(NSAttributedString(string: "\n1 month ago", attributes:
+             [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14),
+              NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+        
+        descriptionLabel.attributedText = attributedText
+    }
     
     // MARK:- Initializers
     override init(frame: CGRect) {
@@ -109,6 +121,7 @@ class HomeFeedCollectionViewCell: UICollectionViewCell {
         setupUsernameLabel()
         setupStackView()
         setupDescriptionLabel()
+        createAttributedText()
     }
     
     required init?(coder: NSCoder) {
@@ -125,11 +138,14 @@ class HomeFeedCollectionViewCell: UICollectionViewCell {
             userProfileImageView.widthAnchor.constraint(equalToConstant: 50),
             userProfileImageView.heightAnchor.constraint(equalToConstant: 50),
         ])
+
+        postImageView.layer.cornerRadius = postImageView.frame.size.width / 2
+        
     }
 
     private func setupPostImageView() {
         addSubview(postImageView)
-                
+                    
         NSLayoutConstraint.activate([
             postImageView.topAnchor.constraint(equalTo: userProfileImageView.bottomAnchor, constant: 8),
             postImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),

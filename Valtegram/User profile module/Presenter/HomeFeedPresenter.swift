@@ -16,23 +16,35 @@ class HomeFeedPresenter: HomeFeedOutput {
     func fetchPosts(complitionHandler: @escaping () -> () ) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        let reference = Database.database().reference().child("posts").child(uid)
-        reference.observe(.value, with: { (snapshot) in
-
-            guard let dictionaries = snapshot.value as? [String:Any] else { return }
-            dictionaries.forEach { (key, value) in
-                print("Key: \(key), value \(value)")
-                
-                guard let dictionary = value as? [String:Any] else { return }
-                let imageUrl = dictionary["imageUrl"] as? String
-                let post = Post(dictionary: dictionary)
-                self.posts.append(post)
-            }
+        
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in // get user
+            guard let userDictionary = snapshot.value as? [String : Any] else { return }
+            let user = User(dictionary: userDictionary)
             
-            complitionHandler()
+            // fetch posts
+            let reference = Database.database().reference().child("posts").child(uid)
+            reference.observe(.value, with: { (snapshot) in
+
+                guard let dictionaries = snapshot.value as? [String:Any] else { return }
+                dictionaries.forEach { (key, value) in
+                    print("Key: \(key), value \(value)")
+
+                    guard let dictionary = value as? [String:Any] else { return }
+
+                    let post = Post(dictionary: dictionary, user: user)
+                    self.posts.append(post)
+                }
+
+                complitionHandler()
+            }) { (error) in
+                print(error.localizedDescription)
+                return
+            }
+
         }) { (error) in
             print(error.localizedDescription)
             return
         }
+
     }
 }
