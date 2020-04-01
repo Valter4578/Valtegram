@@ -12,80 +12,55 @@ import Firebase
 class HomeFeedViewController: UICollectionViewController {
     // MARK:- Properties
     var posts = [Post]()
+    var presenter: HomeFeedOutput! 
     // MARK:- Constants
     let cellId = "homeFeedCell"
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.backgroundColor = .yellow
+        collectionView?.backgroundColor = .white 
         
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(HomeFeedCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         setupNavigationItems()
         
-        fetchPosts()
-    
+        presenter.fetchPosts {
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK:- Setups
     private func setupNavigationItems() {
-        let image = UIImage(named: "valtegram")
+        let image = UIImage(named: "s-valtegram")
         let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         navigationItem.titleView = imageView
     }
-    // MARK:- Private methods
-    
-    private func showErrorAlert(with errorText: String) {
-        let alertController = UIAlertController(title: "Error", message: errorText, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .cancel)
-        alertController.addAction(alertAction)
-        self.present(alertController, animated: true, completion: nil)
-        
-        print(errorText)
-    }
-        
-    private func fetchPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        let reference = Database.database().reference().child("posts").child(uid)
-        reference.observe(.value, with: { (snapshot) in
-
-            guard let dictionaries = snapshot.value as? [String:Any] else { return }
-            dictionaries.forEach { (key, value) in
-                print("Key: \(key), value \(value)")
-                
-                guard let dictionary = value as? [String:Any] else { return }
-                let imageUrl = dictionary["imageUrl"] as? String
-                let post = Post(dictionary: dictionary)
-                self.posts.append(post)
-            }
-            
-            self.collectionView.reloadData()
-        }) { (error) in
-            self.showErrorAlert(with: error.localizedDescription)
-        }
-    }
-    
-    
     
     // MARK:- CollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        return presenter.posts.count
     }
     
     // MARK:- CollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! HomeFeedCollectionViewCell
 
+        cell.post = presenter.posts[indexPath.item]
+        
         return cell
     }
 }
 
 extension HomeFeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 250)
+        
+        var height: CGFloat = 64 // space for top of cell with label and image ;height of image(50) + 2 spaces (7)
+        height += 50 // space for action buttons
+        height += 100
+        height += view.frame.width
+        return CGSize(width: view.frame.width, height: height)
     }
 }

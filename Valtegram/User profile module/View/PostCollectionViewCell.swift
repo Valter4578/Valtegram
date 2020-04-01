@@ -9,14 +9,6 @@
 import UIKit
 
 class PostCollectionViewCell: UICollectionViewCell {
-    // MARK:- Views
-    let photoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
     // MARK:- Properties
     var post: Post? {
         didSet {
@@ -25,6 +17,15 @@ class PostCollectionViewCell: UICollectionViewCell {
             photoImageView.kf.setImage(with: url)
         }
     }
+    
+    // MARK:- Views
+    let photoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
     
     // MARK:- Private methods
     private func setupImageView() {
