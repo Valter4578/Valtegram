@@ -18,7 +18,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
         
         self.delegate = self
         
-        
         setupViewControllers()
         modifyItems()
     }
@@ -28,7 +27,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
         let homeFeedViewController = HomeFeedAssembly.configureModule()
         let homeNavigationController = createNavigationController(imageName: "home", rootViewController: homeFeedViewController)
         // search view controller
-        let searchNavigationController = createNavigationController(imageName: "search")
+        let searchLayout = UICollectionViewFlowLayout()
+        let searchCollectionViewController = SearchCollectionViewController(collectionViewLayout: searchLayout)
+        let searchNavigationController = createNavigationController(imageName: "search", rootViewController: searchCollectionViewController)
         // plus view controller
         let plusNavigationController = createNavigationController(imageName: "create")
         // liked view controller
