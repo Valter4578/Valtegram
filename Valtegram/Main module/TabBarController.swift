@@ -9,9 +9,6 @@
 import UIKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate  {
-    // MARK:- Properties
-    
-    
     // Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +24,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate  {
         let homeFeedViewController = HomeFeedAssembly.configureModule()
         let homeNavigationController = createNavigationController(imageName: "home", rootViewController: homeFeedViewController)
         // search view controller
-        let searchLayout = UICollectionViewFlowLayout()
-        let searchCollectionViewController = SearchCollectionViewController(collectionViewLayout: searchLayout)
+        let searchCollectionViewController = SearchAssembly.configureModule()
         let searchNavigationController = createNavigationController(imageName: "search", rootViewController: searchCollectionViewController)
         // plus view controller
         let plusNavigationController = createNavigationController(imageName: "create")

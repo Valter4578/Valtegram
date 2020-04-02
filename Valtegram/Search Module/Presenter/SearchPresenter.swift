@@ -24,7 +24,11 @@ class SearchPresenter: SearchOutput {
                 
                 self.users.append(user)
                 self.filteredUsers = self.users
-    
+                
+                self.users.sorted { (firstUser, secondUser) -> Bool in
+                    return firstUser.username.compare(secondUser.username) == .orderedAscending
+                }
+                
                 complitionHandler() 
             }
         }) { (error) in
