@@ -16,13 +16,12 @@ class HomeFeedPresenter: HomeFeedOutput {
     func fetchPosts(complitionHandler: @escaping () -> () ) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in // get user
-            guard let userDictionary = snapshot.value as? [String : Any] else { return }
-            let user = User(dictionary: userDictionary)
+            guard let dictionary = snapshot.value as? [String : Any] else { return }
+            let user = User(dictionary: dictionary, uid: uid)
             
             // fetch posts
-            let reference = Database.database().reference().child("posts").child(uid)
+            let reference = Database.database().reference().child("posts").child(user.uid)
             reference.observe(.value, with: { (snapshot) in
 
                 guard let dictionaries = snapshot.value as? [String:Any] else { return }
