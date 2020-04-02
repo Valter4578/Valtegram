@@ -17,6 +17,9 @@
 		8800EA722414DC2F0088452E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8800EA702414DC2F0088452E /* LaunchScreen.storyboard */; };
 		8800EA7D2414DC300088452E /* ValtegramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8800EA7C2414DC300088452E /* ValtegramTests.swift */; };
 		881299B42424AC3B00495088 /* HomeFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881299B32424AC3B00495088 /* HomeFeedCollectionViewCell.swift */; };
+		881E5DD824362CA300B14623 /* SearchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881E5DD724362CA300B14623 /* SearchInput.swift */; };
+		881E5DDA24362CB300B14623 /* SearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881E5DD924362CB300B14623 /* SearchOutput.swift */; };
+		881E5DDC2436333600B14623 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881E5DDB2436333600B14623 /* SearchPresenter.swift */; };
 		8833F5BE242CD1B2007CFC51 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5BD242CD1B2007CFC51 /* SignUpPresenter.swift */; };
 		8833F5C0242CD2C6007CFC51 /* SignUpOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5BF242CD2C6007CFC51 /* SignUpOutput.swift */; };
 		8833F5C2242CD2D8007CFC51 /* SignUpInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5C1242CD2D8007CFC51 /* SignUpInput.swift */; };
@@ -86,6 +89,9 @@
 		8800EA7C2414DC300088452E /* ValtegramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValtegramTests.swift; sourceTree = "<group>"; };
 		8800EA7E2414DC300088452E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		881299B32424AC3B00495088 /* HomeFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		881E5DD724362CA300B14623 /* SearchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInput.swift; sourceTree = "<group>"; };
+		881E5DD924362CB300B14623 /* SearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOutput.swift; sourceTree = "<group>"; };
+		881E5DDB2436333600B14623 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		8833F5BD242CD1B2007CFC51 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		8833F5BF242CD2C6007CFC51 /* SignUpOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpOutput.swift; sourceTree = "<group>"; };
 		8833F5C1242CD2D8007CFC51 /* SignUpInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInput.swift; sourceTree = "<group>"; };
@@ -238,6 +244,16 @@
 				881299B32424AC3B00495088 /* HomeFeedCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		881E5DD624362C8600B14623 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				881E5DD724362CA300B14623 /* SearchInput.swift */,
+				881E5DD924362CB300B14623 /* SearchOutput.swift */,
+				881E5DDB2436333600B14623 /* SearchPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		8833F5C3242CD2E7007CFC51 /* View */ = {
@@ -467,6 +483,7 @@
 		88FE30C32434E1A300B1F0DE /* Search Module */ = {
 			isa = PBXGroup;
 			children = (
+				881E5DD624362C8600B14623 /* Presenter */,
 				88FE30C62434EB0500B1F0DE /* View */,
 			);
 			path = "Search Module";
@@ -663,6 +680,7 @@
 			files = (
 				88EBBF90242D0C75000C1B4B /* SharePhotoAssembly.swift in Sources */,
 				883AC5E8242E3064005B97DF /* UserProfileOutput.swift in Sources */,
+				881E5DDC2436333600B14623 /* SearchPresenter.swift in Sources */,
 				88BCEC0324234BED00A22886 /* SharePhotoViewController.swift in Sources */,
 				8833F5CB242CE474007CFC51 /* PhotoSelectorPresenter.swift in Sources */,
 				8800EA672414DC280088452E /* SignUpViewController.swift in Sources */,
@@ -686,6 +704,7 @@
 				884589582424A79F009FE863 /* HomeFeedViewController.swift in Sources */,
 				88DE002124274202008888C8 /* LoginPresenterOutput.swift in Sources */,
 				88DFDC44242BA12000B5AB8F /* UserProfileAssembly.swift in Sources */,
+				881E5DD824362CA300B14623 /* SearchInput.swift in Sources */,
 				883AC5E6242E3056005B97DF /* UserProfileInput.swift in Sources */,
 				889482732423CF0700A9A22D /* Post.swift in Sources */,
 				88DD67C7242F42F400276AC1 /* HomeFeedAssembly.swift in Sources */,
@@ -702,6 +721,7 @@
 				883AC5EA242E3096005B97DF /* UserProfilePresenter.swift in Sources */,
 				8833F5C8242CDDFE007CFC51 /* SignUpAssembly.swift in Sources */,
 				8833F5D9242CF91B007CFC51 /* SharePhotoOutput.swift in Sources */,
+				881E5DDA24362CB300B14623 /* SearchOutput.swift in Sources */,
 				8869B2A3242746AC00B1B2CA /* LoginAssembly.swift in Sources */,
 				8833F5C2242CD2D8007CFC51 /* SignUpInput.swift in Sources */,
 			);

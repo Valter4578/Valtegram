@@ -9,6 +9,15 @@
 import UIKit
 
 class SearchCollectionViewCell: UICollectionViewCell {
+    // MARK:- Properties
+    var user: User? {
+        didSet {
+            usernameLabel.text = user?.username
+            guard let usr = user,let url = URL(string: usr.profileImageURL) else { return }
+            profileImageView.kf.setImage(with: url)
+        }
+    }
+    
     // MARK:- Views
     let profileImageView: UIImageView = {
         let imageView = UIImageView()

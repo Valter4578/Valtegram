@@ -1,0 +1,36 @@
+//
+//  SearchPresenter.swift
+//  Valtegram
+//
+//  Created by Максим Алексеев on 02.04.2020.
+//  Copyright © 2020 Максим Алексеев. All rights reserved.
+//
+
+import Firebase
+
+class SearchPresenter: SearchOutput {
+    var filteredUsers: [User] = [User]()
+    var users: [User] = [User]()
+    
+    func fetchUsers(complitionHandler: @escaping () -> ()) {
+        let reference = Database.database().reference().child("users")
+        reference.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dictionaries = snapshot.value as? [String:Any] else { return }
+            
+            dictionaries.forEach { (key,value) in
+                guard let dictionary = value as? [String:Any] else { return }
+                
+                let user = User(dictionary: dictionary, uid: key)
+                
+                self.users.append(user)
+                self.filteredUsers = self.users
+    
+                complitionHandler() 
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+            return
+        }
+    }
+    
+}

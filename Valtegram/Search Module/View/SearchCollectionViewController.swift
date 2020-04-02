@@ -11,6 +11,7 @@ import UIKit
 class SearchCollectionViewController: UICollectionViewController {
     // MARK:- Properties
     let cellId = "searchCell"
+    var presenter: SearchOutput!
     
     // MARK:- Views
     let searchBar: UISearchBar = {
@@ -28,6 +29,11 @@ class SearchCollectionViewController: UICollectionViewController {
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
             
         setupSearchBar()
+        searchBar.delegate = self
+        
+        presenter?.fetchUsers {
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK:- Setups
@@ -46,12 +52,14 @@ class SearchCollectionViewController: UICollectionViewController {
     
     // MARK:- CollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return presenter.filteredUsers.count
     }
     
     // MARK:- CollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchCollectionViewCell
+        
+        cell.user = presenter.filteredUsers[indexPath.item]
         
         return cell
     }
@@ -61,5 +69,16 @@ class SearchCollectionViewController: UICollectionViewController {
 extension SearchCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 100)
+    }
+}
+
+// MARK:- UISearchBarDelegate
+extension SearchCollectionViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.users = presenter.users.filter { (user) -> Bool in
+            return user.username.contains(searchText)
+        }
+        
+        collectionView.reloadData()
     }
 }
