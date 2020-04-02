@@ -27,13 +27,20 @@ final class SearchCollectionViewController: UICollectionViewController {
         
         collectionView.backgroundColor = .white
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-            
+        collectionView.keyboardDismissMode = .onDrag
+        
         setupSearchBar()
         searchBar.delegate = self
         
         presenter?.fetchUsers {
             self.collectionView.reloadData()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchBar.isHidden = false 
     }
     
     // MARK:- Setups
@@ -62,6 +69,18 @@ final class SearchCollectionViewController: UICollectionViewController {
         cell.user = presenter.filteredUsers[indexPath.item]
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        searchBar.isHidden = true
+        searchBar.resignFirstResponder()
+        
+        let user = presenter.filteredUsers[indexPath.item]
+        
+        let userProfileViewController = UserProfileAssembly.configureModule()
+        userProfileViewController.userId = user.uid
+        navigationController?.pushViewController(userProfileViewController, animated: true)
     }
 }
 

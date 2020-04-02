@@ -14,6 +14,6 @@ protocol UserProfileOutput {
     
     func didLogOut()
     func fetchUser()
-    func fetchPost(complitionHandler: @escaping () -> ())
+    func fetchPost()
 }
     

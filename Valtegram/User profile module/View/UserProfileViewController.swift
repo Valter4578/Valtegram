@@ -12,6 +12,7 @@ import Firebase
 class UserProfileViewController: UICollectionViewController {
     // MARK:- Properties
     var presenter: UserProfileOutput!
+    var userId: String? 
     
     // MARK:- Private properties
     private var user: User?
@@ -41,9 +42,7 @@ class UserProfileViewController: UICollectionViewController {
         
         setupPreferenceButton()
 
-        presenter.fetchPost {
-            self.collectionView.reloadData()
-        }
+
     }
     
     //MARK: - Private methods
@@ -62,6 +61,7 @@ class UserProfileViewController: UICollectionViewController {
     }
 }
 
+// MARK:- UserProfileInput 
 extension UserProfileViewController: UserProfileInput {
     func show(_ viewController: UIViewController) {
         present(viewController, animated: true, completion: nil)

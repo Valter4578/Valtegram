@@ -9,6 +9,8 @@
 import UIKit
 
 protocol UserProfileInput: class {
+    var userId: String? { get set } 
+    
     func show(_ viewController: UIViewController)
     func handleLogOut()
     func setUser(_ user: User)
