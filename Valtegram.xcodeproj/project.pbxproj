@@ -249,10 +249,18 @@
 		881E5DD624362C8600B14623 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				881E5DD924362CB300B14623 /* SearchOutput.swift */,
+				881E5DDF243640DA00B14623 /* Protocol */,
 				881E5DDB2436333600B14623 /* SearchPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		881E5DDF243640DA00B14623 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				881E5DD924362CB300B14623 /* SearchOutput.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		8833F5C3242CD2E7007CFC51 /* View */ = {

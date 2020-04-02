@@ -8,7 +8,7 @@
 
 import Firebase
 
-class SearchPresenter: SearchOutput {
+final class SearchPresenter: SearchOutput {
     var filteredUsers: [User] = [User]()
     var users: [User] = [User]()
     

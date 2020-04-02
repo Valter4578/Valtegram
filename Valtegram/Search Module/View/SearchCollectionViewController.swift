@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SearchCollectionViewController: UICollectionViewController {
+final class SearchCollectionViewController: UICollectionViewController {
     // MARK:- Properties
-    let cellId = "searchCell"
+    private let cellId = "searchCell"
     var presenter: SearchOutput!
     
     // MARK:- Views
@@ -78,7 +78,7 @@ extension SearchCollectionViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             presenter.filteredUsers = presenter.users
         } else {
-            presenter.users = presenter.users.filter { (user) -> Bool in
+            presenter.filteredUsers = presenter.users.filter { (user) -> Bool in
                 return user.username.lowercased().contains(searchText.lowercased())
             }
         }

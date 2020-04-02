@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchCollectionViewCell: UICollectionViewCell {
+final class SearchCollectionViewCell: UICollectionViewCell {
     // MARK:- Properties
     var user: User? {
         didSet {
@@ -90,5 +90,4 @@ class SearchCollectionViewCell: UICollectionViewCell {
             lineView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
-    
 }
