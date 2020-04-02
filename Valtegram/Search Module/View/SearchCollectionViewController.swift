@@ -75,10 +75,15 @@ extension SearchCollectionViewController: UICollectionViewDelegateFlowLayout {
 // MARK:- UISearchBarDelegate
 extension SearchCollectionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.users = presenter.users.filter { (user) -> Bool in
-            return user.username.contains(searchText)
+        if searchText.isEmpty {
+            presenter.filteredUsers = presenter.users
+        } else {
+            presenter.users = presenter.users.filter { (user) -> Bool in
+                return user.username.lowercased().contains(searchText.lowercased())
+            }
         }
-        
+
         collectionView.reloadData()
     }
 }
+ 
