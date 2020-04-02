@@ -17,7 +17,13 @@ final class SearchPresenter: SearchOutput {
         reference.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let dictionaries = snapshot.value as? [String:Any] else { return }
             
-            dictionaries.forEach { (key,value) in
+            dictionaries.forEach { (key,value) in // key is uid 
+                
+                // Don't presenter user's account in search
+                if key == Auth.auth().currentUser?.uid {
+                    return
+                }
+                
                 guard let dictionary = value as? [String:Any] else { return }
                 
                 let user = User(dictionary: dictionary, uid: key)

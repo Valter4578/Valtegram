@@ -26,7 +26,7 @@ class UserProfilePresenter: UserProfileOutput {
     }
     
     func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = view?.userId ?? Auth.auth().currentUser?.uid else { return }
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot.value ?? "")
             
@@ -35,6 +35,7 @@ class UserProfilePresenter: UserProfileOutput {
             self.user = User(dictionary: dictionary, uid: uid)
             
             guard let usr = self.user else { return }
+            self.fetchPost()
             self.view?.setUser(usr)
         }) { (error) in
             print(error.localizedDescription)
@@ -42,8 +43,8 @@ class UserProfilePresenter: UserProfileOutput {
     }
 
 
-    func fetchPost(complitionHandler: @escaping () -> ()) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+    func fetchPost() {
+        guard let uid = user?.uid else { return }
         let reference = Database.database().reference().child("posts").child(uid)
         reference.queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
             guard let dictionary = snapshot.value as? [String:Any] else { return }
@@ -52,7 +53,6 @@ class UserProfilePresenter: UserProfileOutput {
             let post = Post(dictionary: dictionary, user: user)
             self.posts.insert(post, at: 0)
             
-            complitionHandler()
         }) { (error) in
             print(error.localizedDescription)
             return 
