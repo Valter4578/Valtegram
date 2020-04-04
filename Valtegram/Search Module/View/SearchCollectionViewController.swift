@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SearchCollectionViewController: UICollectionViewController {
+final class SearchCollectionViewController: UICollectionViewController {
     // MARK:- Properties
-    let cellId = "searchCell"
+    private let cellId = "searchCell"
     var presenter: SearchOutput!
     
     // MARK:- Views
@@ -27,13 +27,20 @@ class SearchCollectionViewController: UICollectionViewController {
         
         collectionView.backgroundColor = .white
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-            
+        collectionView.keyboardDismissMode = .onDrag
+        
         setupSearchBar()
         searchBar.delegate = self
         
         presenter?.fetchUsers {
             self.collectionView.reloadData()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchBar.isHidden = false 
     }
     
     // MARK:- Setups
@@ -63,6 +70,18 @@ class SearchCollectionViewController: UICollectionViewController {
         
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        searchBar.isHidden = true
+        searchBar.resignFirstResponder()
+        
+        let user = presenter.filteredUsers[indexPath.item]
+        
+        let userProfileViewController = UserProfileAssembly.configureModule()
+        userProfileViewController.userId = user.uid
+        navigationController?.pushViewController(userProfileViewController, animated: true)
+    }
 }
 
 // MARK:- UICollectionViewDelegateFlowLayout
@@ -78,7 +97,7 @@ extension SearchCollectionViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             presenter.filteredUsers = presenter.users
         } else {
-            presenter.users = presenter.users.filter { (user) -> Bool in
+            presenter.filteredUsers = presenter.users.filter { (user) -> Bool in
                 return user.username.lowercased().contains(searchText.lowercased())
             }
         }
