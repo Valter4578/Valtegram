@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol UserProfileInput: class {
+protocol UserProfileViewInput: class {
     var userId: String? { get set } 
     
     func show(_ viewController: UIViewController)

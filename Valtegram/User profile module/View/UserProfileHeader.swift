@@ -9,14 +9,20 @@
 import UIKit
 import Kingfisher
 
-class UserProfileHeader: UICollectionViewCell {
+class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
+
     //MARK:- Properties
+    var isCurrentsUsersProfile: Bool = true
     var user: User? {
         didSet {
             guard let usr = user, let url = URL(string: usr.profileImageURL) else { return }
             profileImageView.kf.setImage(with: url, options: [.transition(.fade(0.2))])
             usernameLabel.text = user?.username
             usernameLabel.text = user?.username
+            
+            if !isCurrentsUsersProfile {
+
+            }
         }
     }
     
@@ -218,6 +224,21 @@ class UserProfileHeader: UICollectionViewCell {
             editProfileButton.rightAnchor.constraint(equalTo: followingLabel.rightAnchor, constant: 0),
             editProfileButton.heightAnchor.constraint(equalToConstant: 35),
         ])
+    }
+    
+    // MARK:- UserPRofileHeaderInput Implementation
+    func handleFollowButton() {
+        
+    }
+    
+    func setFollow(isFollowing: Bool) {
+        if isFollowing {
+            self.editProfileButton.setTitle("Unfollow",for: .normal)
+        } else {
+            editProfileButton.setTitle("Follow", for: .normal)
+            editProfileButton.backgroundColor = UIColor.setAsRgb(red: 14, green: 186, blue: 129)
+            editProfileButton.setTitleColor(.white, for: .normal)
+        }
     }
     
 }

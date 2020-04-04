@@ -11,7 +11,8 @@ import Firebase
 
 class UserProfilePresenter: UserProfileOutput {
     
-    weak var view: UserProfileInput?
+    weak var view: UserProfileViewInput?
+    weak var header: UserProfileHeaderInput?
     
     var user: User?
     var posts = [Post]()
@@ -59,7 +60,50 @@ class UserProfilePresenter: UserProfileOutput {
         }
     }
     
-    init(view: UserProfileInput) {
+    func isCurrentUser(uid: String) -> Bool {
+        return Auth.auth().currentUser?.uid == uid
+    }
+    
+    func didFollowTapped(isFollowing: Bool) {
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        guard let usersUid = user?.uid else { return }
+        
+        if isFollowing { // When button title is "unfollow"
+            let reference = Database.database().reference().child("following").child(currentUserUid)
+            reference.removeValue { (error, reference) in
+                if let err = error {
+                    print(err.localizedDescription)
+                    return
+                }
+                
+            }
+        } else { // When button title is "follow"
+            let values = [usersUid : 1]
+            let reference = Database.database().reference().child("following").child(currentUserUid)
+            reference.updateChildValues(values) { (error, reference) in
+                if let err = error {
+                    print(err.localizedDescription)
+                    return
+                }
+            }
+        }
+    }
+    
+    func isFollowing() {
+        guard let currentUsersUid = Auth.auth().currentUser?.uid else { fatalError() }
+        guard let usersUid = user?.uid else { fatalError() }
+    Database.database().reference().child(currentUsersUid).child(usersUid).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            guard let isFollowing = snapshot.value as? Int else { return }
+            self.header?.setFollow(isFollowing: isFollowing == 1)
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    init(view: UserProfileViewInput) {
         self.view = view
     }
 }

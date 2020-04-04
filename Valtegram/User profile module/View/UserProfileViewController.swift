@@ -62,7 +62,7 @@ class UserProfileViewController: UICollectionViewController {
 }
 
 // MARK:- UserProfileInput 
-extension UserProfileViewController: UserProfileInput {
+extension UserProfileViewController: UserProfileViewInput {
     func show(_ viewController: UIViewController) {
         present(viewController, animated: true, completion: nil)
     }
@@ -93,8 +93,10 @@ extension UserProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
         
-        header.user = presenter.user
-            
+        if let user = presenter.user {
+            header.user = user
+            header.isCurrentsUsersProfile = presenter.isCurrentUser(uid: user.uid)
+        }
         return header
     }
 }
