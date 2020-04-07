@@ -42,7 +42,9 @@ class UserProfileViewController: UICollectionViewController {
         
         setupPreferenceButton()
 
-
+        presenter.fetchPost {
+              self.collectionView.reloadData()
+        }
     }
     
     //MARK: - Private methods
@@ -93,9 +95,14 @@ extension UserProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
         
+//        if let user = presenter.user {
+//            header.user = user
+//            header.isCurrentsUsersProfile = presenter.isCurrentUser(uid: user.uid)
+//        }
+        
         if let user = presenter.user {
             header.user = user
-            header.isCurrentsUsersProfile = presenter.isCurrentUser(uid: user.uid)
+            header.presenter = presenter
         }
         return header
     }

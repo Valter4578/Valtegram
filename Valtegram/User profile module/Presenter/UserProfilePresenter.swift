@@ -10,13 +10,14 @@ import Foundation
 import Firebase
 
 class UserProfilePresenter: UserProfileOutput {
-    
+
+    // MARK:- Properties
     weak var view: UserProfileViewInput?
-    weak var header: UserProfileHeaderInput?
     
     var user: User?
     var posts = [Post]()
     
+    // MARK:- Functions
     func didLogOut() {
         try? Auth.auth().signOut()
         
@@ -26,6 +27,7 @@ class UserProfilePresenter: UserProfileOutput {
         view?.show(navigationVC)
     }
     
+    /// Fetch user from firebase
     func fetchUser() {
         guard let uid = view?.userId ?? Auth.auth().currentUser?.uid else { return }
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -60,49 +62,53 @@ class UserProfilePresenter: UserProfileOutput {
         }
     }
     
-    func isCurrentUser(uid: String) -> Bool {
-        return Auth.auth().currentUser?.uid == uid
-    }
-    
+    /// Started after follow/edit button in header tapped
+    /// - Parameter isFollowing: will be true when button's text is "Unfollow"
     func didFollowTapped(isFollowing: Bool) {
+        guard let userUid = user?.uid else { return }
         guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
-        guard let usersUid = user?.uid else { return }
-        
-        if isFollowing { // When button title is "unfollow"
-            let reference = Database.database().reference().child("following").child(currentUserUid)
-            reference.removeValue { (error, reference) in
-                if let err = error {
-                    print(err.localizedDescription)
+        let reference = Database.database().reference().child("following").child(currentUserUid)
+        if isFollowing { // button's text is "Unfollow"
+            reference.child(userUid).removeValue { (error, reference) in
+                if let error = error {
+                    print(error.localizedDescription)
                     return
                 }
                 
+                print("Unfollowed")
             }
-        } else { // When button title is "follow"
-            let values = [usersUid : 1]
-            let reference = Database.database().reference().child("following").child(currentUserUid)
+        } else { // button's text is "Follow"
+            let values = [userUid: true]
             reference.updateChildValues(values) { (error, reference) in
-                if let err = error {
-                    print(err.localizedDescription)
+                if let error = error {
+                    print(error.localizedDescription)
                     return
                 }
+                
+                print("followed")
             }
         }
     }
+
     
-    func isFollowing() {
-        guard let currentUsersUid = Auth.auth().currentUser?.uid else { fatalError() }
-        guard let usersUid = user?.uid else { fatalError() }
-    Database.database().reference().child(currentUsersUid).child(usersUid).observeSingleEvent(of: .value, with: { (snapshot) in
+    /// Starts when user properti user setted
+    /// - Parameter complitionHandler: in complition button configurated depend of value
+    func checkFollowing(complitionHandler: @escaping (Bool) -> Void) {
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        guard let userUid = user?.uid else { return }
             
-            guard let isFollowing = snapshot.value as? Int else { return }
-            self.header?.setFollow(isFollowing: isFollowing == 1)
-            
+        let reference = Database.database().reference().child("following").child(currentUserUid).child(userUid)
+        
+        reference.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let isFollowing = snapshot.value as? Bool else { return }
+            complitionHandler(isFollowing)
         }) { (error) in
             print(error.localizedDescription)
+            return
         }
     }
     
-    
+    // MARK:- Initializers
     init(view: UserProfileViewInput) {
         self.view = view
     }

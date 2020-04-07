@@ -16,9 +16,7 @@ protocol UserProfileOutput {
     func fetchUser()
     func fetchPost()
     // UserProfileHeader
-    func isCurrentUser(uid: String) -> Bool
-    func isFollowing()
-    func didFollowTapped()
-    
+    func didFollowTapped(isFollowing: Bool)
+    func checkFollowing(complitionHandler: @escaping (Bool) -> Void)
 }
     

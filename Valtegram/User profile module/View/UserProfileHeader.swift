@@ -12,7 +12,7 @@ import Kingfisher
 class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
 
     //MARK:- Properties
-    let presenter: UserProfilePresenter!
+    var presenter: UserProfileOutput!
     var isCurrentsUsersProfile: Bool = true
     var user: User? {
         didSet {
@@ -21,8 +21,9 @@ class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
             usernameLabel.text = user?.username
             usernameLabel.text = user?.username
             
-            if !isCurrentsUsersProfile {
-
+            presenter.checkFollowing { (isFollowing) in
+                self.editProfileButton.setTitle("Unfollow", for: .normal)
+                self.editProfileButton.backgroundColor = UIColor.white
             }
         }
     }
@@ -112,6 +113,8 @@ class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
         button.layer.borderColor = UIColor.setAsRgb(red: 27, green: 67, blue: 51).cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 8
+        
+        button.addTarget(self, action: #selector(handleFollowButton), for: .touchUpInside)
         return button
     }()
     
@@ -228,9 +231,9 @@ class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
     }
     
     // MARK:- UserPRofileHeaderInput Implementation
-    func handleFollowButton() {
+    @objc func handleFollowButton() {
         let isFollowing = editProfileButton.titleLabel?.text == "Follow"
-        presenter.didFollowTapped(isFollowing: isFollowing)
+        
     }
     
     func setFollow(isFollowing: Bool) {
