@@ -14,9 +14,5 @@ protocol UserProfileOutput {
     
     func didLogOut()
     func fetchUser()
-    func fetchPost()
-    // UserProfileHeader
-    func didFollowTapped(isFollowing: Bool)
-    func checkFollowing(complitionHandler: @escaping (Bool) -> Void)
+    func fetchPost(completionHandler: @escaping () -> Void)
 }
-    

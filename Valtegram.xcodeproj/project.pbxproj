@@ -20,7 +20,6 @@
 		881E5DDA24362CB300B14623 /* SearchOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881E5DD924362CB300B14623 /* SearchOutput.swift */; };
 		881E5DDC2436333600B14623 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881E5DDB2436333600B14623 /* SearchPresenter.swift */; };
 		881E5DDE24363E4C00B14623 /* SearchAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881E5DDD24363E4C00B14623 /* SearchAssembly.swift */; };
-		8831220F2437942A009AD285 /* UserProrileHeaderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831220E2437942A009AD285 /* UserProrileHeaderInput.swift */; };
 		8833F5BE242CD1B2007CFC51 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5BD242CD1B2007CFC51 /* SignUpPresenter.swift */; };
 		8833F5C0242CD2C6007CFC51 /* SignUpOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5BF242CD2C6007CFC51 /* SignUpOutput.swift */; };
 		8833F5C2242CD2D8007CFC51 /* SignUpInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5C1242CD2D8007CFC51 /* SignUpInput.swift */; };
@@ -93,7 +92,6 @@
 		881E5DD924362CB300B14623 /* SearchOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOutput.swift; sourceTree = "<group>"; };
 		881E5DDB2436333600B14623 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		881E5DDD24363E4C00B14623 /* SearchAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAssembly.swift; sourceTree = "<group>"; };
-		8831220E2437942A009AD285 /* UserProrileHeaderInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProrileHeaderInput.swift; sourceTree = "<group>"; };
 		8833F5BD242CD1B2007CFC51 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
 		8833F5BF242CD2C6007CFC51 /* SignUpOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpOutput.swift; sourceTree = "<group>"; };
 		8833F5C1242CD2D8007CFC51 /* SignUpInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInput.swift; sourceTree = "<group>"; };
@@ -270,7 +268,6 @@
 			children = (
 				883AC5E5242E3056005B97DF /* UserProfileViewInput.swift */,
 				883AC5E7242E3064005B97DF /* UserProfileOutput.swift */,
-				8831220E2437942A009AD285 /* UserProrileHeaderInput.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -706,7 +703,6 @@
 				8833F5D7242CF908007CFC51 /* SharePhotoInput.swift in Sources */,
 				8800EA6D2414DC280088452E /* Valtegram.xcdatamodeld in Sources */,
 				88601AB5241FB51600004DFC /* LogInViewController.swift in Sources */,
-				8831220F2437942A009AD285 /* UserProrileHeaderInput.swift in Sources */,
 				88DE00232427420E008888C8 /* LoginPresenter.swift in Sources */,
 				8833F5C0242CD2C6007CFC51 /* SignUpOutput.swift in Sources */,
 				8833F5BE242CD1B2007CFC51 /* SignUpPresenter.swift in Sources */,

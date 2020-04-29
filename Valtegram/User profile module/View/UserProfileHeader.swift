@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
+class UserProfileHeader: UICollectionViewCell {
 
     //MARK:- Properties
     var presenter: UserProfileOutput!
@@ -21,10 +21,6 @@ class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
             usernameLabel.text = user?.username
             usernameLabel.text = user?.username
             
-            presenter.checkFollowing { (isFollowing) in
-                self.editProfileButton.setTitle("Unfollow", for: .normal)
-                self.editProfileButton.backgroundColor = UIColor.white
-            }
         }
     }
     
@@ -114,7 +110,6 @@ class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 8
         
-        button.addTarget(self, action: #selector(handleFollowButton), for: .touchUpInside)
         return button
     }()
     
@@ -123,7 +118,7 @@ class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
         super.init(frame: frame)
         
         let viewsArray = [profileImageView, usernameLabel, gridButton, listButton, gridButton, bookmarkButton, postsLabel, followersLabel, followingLabel, editProfileButton]
-        viewsArray.forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
+        viewsArray.forEach {$0.translatesAutoresizingMaskIntoConstraints = false}
     
         setupImageView()
         setupToolBar()
@@ -230,22 +225,5 @@ class UserProfileHeader: UICollectionViewCell, UserProfileHeaderInput {
         ])
     }
     
-    // MARK:- UserPRofileHeaderInput Implementation
-    @objc func handleFollowButton() {
-        let isFollowing = editProfileButton.titleLabel?.text == "Follow"
-        
-    }
-    
-    func setFollow(isFollowing: Bool) {
-        if isFollowing {
-            editProfileButton.setTitle("Unfollow",for: .normal)
-            editProfileButton.backgroundColor = .white
-            editProfileButton.setTitleColor(.black, for: .normal)
-        } else {
-            editProfileButton.setTitle("Follow", for: .normal)
-            editProfileButton.backgroundColor = UIColor.setAsRgb(red: 14, green: 186, blue: 129)
-            editProfileButton.setTitleColor(.white, for: .normal)
-        }
-    }
     
 }

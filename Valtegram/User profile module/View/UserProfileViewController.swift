@@ -45,6 +45,7 @@ class UserProfileViewController: UICollectionViewController {
         presenter.fetchPost {
               self.collectionView.reloadData()
         }
+        
     }
     
     //MARK: - Private methods
