@@ -30,7 +30,7 @@
 		8833F5D7242CF908007CFC51 /* SharePhotoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5D6242CF908007CFC51 /* SharePhotoInput.swift */; };
 		8833F5D9242CF91B007CFC51 /* SharePhotoOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5D8242CF91B007CFC51 /* SharePhotoOutput.swift */; };
 		8833F5DB242CF932007CFC51 /* SharePhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833F5DA242CF932007CFC51 /* SharePhotoPresenter.swift */; };
-		883AC5E6242E3056005B97DF /* UserProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC5E5242E3056005B97DF /* UserProfileInput.swift */; };
+		883AC5E6242E3056005B97DF /* UserProfileViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC5E5242E3056005B97DF /* UserProfileViewInput.swift */; };
 		883AC5E8242E3064005B97DF /* UserProfileOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC5E7242E3064005B97DF /* UserProfileOutput.swift */; };
 		883AC5EA242E3096005B97DF /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AC5E9242E3096005B97DF /* UserProfilePresenter.swift */; };
 		884589582424A79F009FE863 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884589572424A79F009FE863 /* HomeFeedViewController.swift */; };
@@ -102,7 +102,7 @@
 		8833F5D6242CF908007CFC51 /* SharePhotoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoInput.swift; sourceTree = "<group>"; };
 		8833F5D8242CF91B007CFC51 /* SharePhotoOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoOutput.swift; sourceTree = "<group>"; };
 		8833F5DA242CF932007CFC51 /* SharePhotoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoPresenter.swift; sourceTree = "<group>"; };
-		883AC5E5242E3056005B97DF /* UserProfileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInput.swift; sourceTree = "<group>"; };
+		883AC5E5242E3056005B97DF /* UserProfileViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewInput.swift; sourceTree = "<group>"; };
 		883AC5E7242E3064005B97DF /* UserProfileOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileOutput.swift; sourceTree = "<group>"; };
 		883AC5E9242E3096005B97DF /* UserProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
 		884589572424A79F009FE863 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
@@ -263,6 +263,15 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		8831220D243793B5009AD285 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				883AC5E5242E3056005B97DF /* UserProfileViewInput.swift */,
+				883AC5E7242E3064005B97DF /* UserProfileOutput.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		8833F5C3242CD2E7007CFC51 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,8 +354,7 @@
 		8869B2A4242791D800B1B2CA /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				883AC5E5242E3056005B97DF /* UserProfileInput.swift */,
-				883AC5E7242E3064005B97DF /* UserProfileOutput.swift */,
+				8831220D243793B5009AD285 /* Protocols */,
 				883AC5E9242E3096005B97DF /* UserProfilePresenter.swift */,
 			);
 			path = Presenter;
@@ -713,7 +721,7 @@
 				88DE002124274202008888C8 /* LoginPresenterOutput.swift in Sources */,
 				88DFDC44242BA12000B5AB8F /* UserProfileAssembly.swift in Sources */,
 				881E5DDE24363E4C00B14623 /* SearchAssembly.swift in Sources */,
-				883AC5E6242E3056005B97DF /* UserProfileInput.swift in Sources */,
+				883AC5E6242E3056005B97DF /* UserProfileViewInput.swift in Sources */,
 				889482732423CF0700A9A22D /* Post.swift in Sources */,
 				88DD67C7242F42F400276AC1 /* HomeFeedAssembly.swift in Sources */,
 				88DD67C5242F412700276AC1 /* HomeFeedPresenter.swift in Sources */,

@@ -10,12 +10,14 @@ import Foundation
 import Firebase
 
 class UserProfilePresenter: UserProfileOutput {
-    
-    weak var view: UserProfileInput?
+
+    // MARK:- Properties
+    weak var view: UserProfileViewInput?
     
     var user: User?
     var posts = [Post]()
     
+    // MARK:- Functions
     func didLogOut() {
         try? Auth.auth().signOut()
         
@@ -25,6 +27,7 @@ class UserProfilePresenter: UserProfileOutput {
         view?.show(navigationVC)
     }
     
+    /// Fetch user from firebase
     func fetchUser() {
         guard let uid = view?.userId ?? Auth.auth().currentUser?.uid else { return }
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -35,7 +38,6 @@ class UserProfilePresenter: UserProfileOutput {
             self.user = User(dictionary: dictionary, uid: uid)
             
             guard let usr = self.user else { return }
-            self.fetchPost()
             self.view?.setUser(usr)
         }) { (error) in
             print(error.localizedDescription)
@@ -43,7 +45,7 @@ class UserProfilePresenter: UserProfileOutput {
     }
 
 
-    func fetchPost() {
+    func fetchPost(completionHandler: @escaping () -> Void) {
         guard let uid = user?.uid else { return }
         let reference = Database.database().reference().child("posts").child(uid)
         reference.queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
@@ -51,15 +53,61 @@ class UserProfilePresenter: UserProfileOutput {
             
             guard let user = self.user else { return }
             let post = Post(dictionary: dictionary, user: user)
-            self.posts.insert(post, at: 0)
+            self.posts.append(post)
+            self.posts.reverse()
             
+            completionHandler()
         }) { (error) in
             print(error.localizedDescription)
             return 
         }
     }
     
-    init(view: UserProfileInput) {
+    func checkFollowing(profileId: String, completiotionHandler: @escaping (Bool) -> Void) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        if !(profileId == currentUserId) {
+            Database.database().reference().child("following").child(currentUserId).child(profileId).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let isFollowing = snapshot.value as? Int else { return }
+                completiotionHandler(isFollowing == 1)
+                
+            }) { (error) in
+                print(error.localizedDescription)
+                return
+            }
+            
+        }
+    }
+    
+    func didTapFollow(profileId: String, completionHandler: @escaping (Bool) -> Void, isFollowing: Bool) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        if isFollowing {
+            Database.database().reference().child("following").child(currentUserId).child(profileId).removeValue { (error, _) in
+                if let error = error {
+                    print(error)
+                }
+                
+                completionHandler(false)
+            }
+        } else {
+            let reference = Database.database().reference().child("following").child(currentUserId)
+            
+            let values = [profileId: true]
+            reference.updateChildValues(values) { (error, reference) in
+                if let err = error {
+                    print(err.localizedDescription)
+                    return
+                }
+                
+                completionHandler(true)
+            }
+        }
+    }
+    
+    // MARK:- Initializers
+    init(view: UserProfileViewInput) {
         self.view = view
     }
 }

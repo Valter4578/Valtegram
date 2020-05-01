@@ -8,16 +8,51 @@
 
 import UIKit
 import Kingfisher
+import Firebase
 
 class UserProfileHeader: UICollectionViewCell {
+
     //MARK:- Properties
+    var presenter: UserProfileOutput!
+    
     var user: User? {
         didSet {
             guard let usr = user, let url = URL(string: usr.profileImageURL) else { return }
             profileImageView.kf.setImage(with: url, options: [.transition(.fade(0.2))])
             usernameLabel.text = user?.username
-            usernameLabel.text = user?.username
+            
+            guard let id = user?.uid else { return }
+            presenter.checkFollowing(profileId: id) { (isFollowing) in
+                if isFollowing {
+                    self.setupFollowStyle()
+                } else {
+                    self.setupUnfollowStyle()
+                }
+            }
         }
+    }
+    
+    private func setupFollowButton() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        guard let profileUserId = user?.uid else { return }
+        
+        if !(currentUserId == profileUserId) { // text is "follow"
+            Database.database().reference().child("following").child(currentUserId).child(profileUserId).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let isFollowing = snapshot.value as? Bool, isFollowing {
+                    
+                } else {
+                    self.setupFollowStyle()
+                }
+                
+            }) { (error) in
+                print(error.localizedDescription)
+                return
+            }
+            
+            editProfileButton.setTitle("Follow", for: .normal)
+        }
+        
     }
     
     // MARK:- Views
@@ -95,7 +130,7 @@ class UserProfileHeader: UICollectionViewCell {
         return label
     }()
     
-    private let editProfileButton: UIButton = {
+    lazy var editProfileButton: UIButton = {
         let button = UIButton()
          
         button.setTitle("Edit profile", for: .normal)
@@ -105,6 +140,9 @@ class UserProfileHeader: UICollectionViewCell {
         button.layer.borderColor = UIColor.setAsRgb(red: 27, green: 67, blue: 51).cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 8
+        
+        button.addTarget(self, action: #selector(handleEditButton), for: .touchUpInside)
+        
         return button
     }()
     
@@ -113,7 +151,7 @@ class UserProfileHeader: UICollectionViewCell {
         super.init(frame: frame)
         
         let viewsArray = [profileImageView, usernameLabel, gridButton, listButton, gridButton, bookmarkButton, postsLabel, followersLabel, followingLabel, editProfileButton]
-        viewsArray.forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
+        viewsArray.forEach {$0.translatesAutoresizingMaskIntoConstraints = false}
     
         setupImageView()
         setupToolBar()
@@ -218,6 +256,52 @@ class UserProfileHeader: UICollectionViewCell {
             editProfileButton.rightAnchor.constraint(equalTo: followingLabel.rightAnchor, constant: 0),
             editProfileButton.heightAnchor.constraint(equalToConstant: 35),
         ])
+    }
+    
+    private func setupFollowStyle() {
+        editProfileButton.setTitle("Follow", for: .normal)
+        editProfileButton.backgroundColor = UIColor.darkGreen
+        editProfileButton.setTitleColor(.white, for: .normal)
+    }
+    
+    private func setupUnfollowStyle() {
+        editProfileButton.setTitle("Unfollow", for: .normal)
+    }
+    
+    // MARK:- Selectors
+    @objc func handleEditButton() {
+//        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+//
+//        if editProfileButton.titleLabel?.text == "Unfollow" {
+//            Database.database().reference().child("following").child(currentUserId).child(profileUserId).removeValue { (error, _) in
+//                if let error = error {
+//                    print(error)
+//                }
+//
+//                self.setupFollowStyle()
+//            }
+//        } else {
+//            let reference = Database.database().reference().child("following").child(currentUserId)
+//
+//            let values = [profileUserId: true]
+//            reference.updateChildValues(values) { (error, reference) in
+//                if let err = error {
+//                    print(err.localizedDescription)
+//                    return
+//                }
+//
+//                self.setupUnfollowStyle()
+//            }
+//        }
+//
+        guard let profileUserId = user?.uid else { return }
+        presenter.didTapFollow(profileId: profileUserId, completionHandler: { (isFollowing) in
+            if isFollowing {
+                self.setupUnfollowStyle()
+            } else {
+                self.setupFollowStyle()
+            }
+        }, isFollowing: editProfileButton.titleLabel?.text == "Unfollow")
     }
     
 }
