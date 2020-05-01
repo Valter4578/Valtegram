@@ -34,7 +34,7 @@ class UserProfileViewController: UICollectionViewController {
         
         collectionView.backgroundColor = .white
         
-        presenter.fetchUser()
+        presenter.fetchUser() 
         
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         
@@ -87,6 +87,7 @@ extension UserProfileViewController: UserProfileViewInput {
     
     func setUser(_ user: User) {
         title = user.username
+        self.user = user
         collectionView.reloadData()
     }
 }
@@ -96,15 +97,9 @@ extension UserProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
         
-//        if let user = presenter.user {
-//            header.user = user
-//            header.isCurrentsUsersProfile = presenter.isCurrentUser(uid: user.uid)
-//        }
+        header.user = user
+        header.presenter = presenter
         
-        if let user = presenter.user {
-            header.user = user
-            header.presenter = presenter
-        }
         return header
     }
 }

@@ -63,6 +63,23 @@ class UserProfilePresenter: UserProfileOutput {
         }
     }
     
+    func checkFollowing(profileId: String, completiotionHandler: @escaping (Bool) -> Void) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        if !(profileId == currentUserId) {
+            Database.database().reference().child("following").child(currentUserId).child(profileId).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let isFollowing = snapshot.value as? Int else { return }
+                completiotionHandler(isFollowing == 1)
+                
+            }) { (error) in
+                print(error.localizedDescription)
+                return
+            }
+            
+        }
+    }
+    
     // MARK:- Initializers
     init(view: UserProfileViewInput) {
         self.view = view

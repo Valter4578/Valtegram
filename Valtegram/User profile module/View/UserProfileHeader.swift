@@ -14,14 +14,21 @@ class UserProfileHeader: UICollectionViewCell {
 
     //MARK:- Properties
     var presenter: UserProfileOutput!
-    var isCurrentsUsersProfile: Bool = true
+    
     var user: User? {
         didSet {
             guard let usr = user, let url = URL(string: usr.profileImageURL) else { return }
             profileImageView.kf.setImage(with: url, options: [.transition(.fade(0.2))])
             usernameLabel.text = user?.username
             
-            setupFollowButton()
+            guard let id = user?.uid else { return }
+            presenter.checkFollowing(profileId: id) { (isFollowing) in
+                if isFollowing {
+                    self.setupFollowStyle()
+                } else {
+                    self.setupUnfollowStyle()
+                }
+            }
         }
     }
     
@@ -252,11 +259,13 @@ class UserProfileHeader: UICollectionViewCell {
     }
     
     private func setupFollowStyle() {
-
+        editProfileButton.setTitle("Follow", for: .normal)
+        editProfileButton.backgroundColor = UIColor.darkGreen
+        editProfileButton.setTitleColor(.white, for: .normal)
     }
     
     private func setupUnfollowStyle() {
-        
+        editProfileButton.setTitle("Unfollow", for: .normal)
     }
     
     // MARK:- Selectors
@@ -269,6 +278,8 @@ class UserProfileHeader: UICollectionViewCell {
                 if let error = error {
                     print(error)
                 }
+                
+                self.setupFollowStyle() 
             }
         } else {
             let reference = Database.database().reference().child("following").child(currentUserId)
@@ -279,6 +290,8 @@ class UserProfileHeader: UICollectionViewCell {
                     print(err.localizedDescription)
                     return
                 }
+                
+                self.setupUnfollowStyle()
             }
         }
         
