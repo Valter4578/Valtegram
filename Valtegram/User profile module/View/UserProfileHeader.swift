@@ -270,31 +270,38 @@ class UserProfileHeader: UICollectionViewCell {
     
     // MARK:- Selectors
     @objc func handleEditButton() {
-        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+//        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+//
+//        if editProfileButton.titleLabel?.text == "Unfollow" {
+//            Database.database().reference().child("following").child(currentUserId).child(profileUserId).removeValue { (error, _) in
+//                if let error = error {
+//                    print(error)
+//                }
+//
+//                self.setupFollowStyle()
+//            }
+//        } else {
+//            let reference = Database.database().reference().child("following").child(currentUserId)
+//
+//            let values = [profileUserId: true]
+//            reference.updateChildValues(values) { (error, reference) in
+//                if let err = error {
+//                    print(err.localizedDescription)
+//                    return
+//                }
+//
+//                self.setupUnfollowStyle()
+//            }
+//        }
+//
         guard let profileUserId = user?.uid else { return }
-        
-        if editProfileButton.titleLabel?.text == "Unfollow" {
-            Database.database().reference().child("following").child(currentUserId).child(profileUserId).removeValue { (error, _) in
-                if let error = error {
-                    print(error)
-                }
-                
-                self.setupFollowStyle() 
-            }
-        } else {
-            let reference = Database.database().reference().child("following").child(currentUserId)
-            
-            let values = [profileUserId: true]
-            reference.updateChildValues(values) { (error, reference) in
-                if let err = error {
-                    print(err.localizedDescription)
-                    return
-                }
-                
+        presenter.didTapFollow(profileId: profileUserId, completionHandler: { (isFollowing) in
+            if isFollowing {
                 self.setupUnfollowStyle()
+            } else {
+                self.setupFollowStyle()
             }
-        }
-        
+        }, isFollowing: editProfileButton.titleLabel?.text == "Unfollow")
     }
     
 }

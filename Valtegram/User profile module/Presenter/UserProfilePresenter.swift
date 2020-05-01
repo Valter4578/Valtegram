@@ -80,6 +80,32 @@ class UserProfilePresenter: UserProfileOutput {
         }
     }
     
+    func didTapFollow(profileId: String, completionHandler: @escaping (Bool) -> Void, isFollowing: Bool) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        if isFollowing {
+            Database.database().reference().child("following").child(currentUserId).child(profileId).removeValue { (error, _) in
+                if let error = error {
+                    print(error)
+                }
+                
+                completionHandler(false)
+            }
+        } else {
+            let reference = Database.database().reference().child("following").child(currentUserId)
+            
+            let values = [profileId: true]
+            reference.updateChildValues(values) { (error, reference) in
+                if let err = error {
+                    print(err.localizedDescription)
+                    return
+                }
+                
+                completionHandler(true)
+            }
+        }
+    }
+    
     // MARK:- Initializers
     init(view: UserProfileViewInput) {
         self.view = view

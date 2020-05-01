@@ -19,4 +19,6 @@ protocol UserProfileOutput {
     
     // Header
     func checkFollowing(profileId: String, completiotionHandler: @escaping (Bool) -> Void)
+    func didTapFollow(profileId: String, completionHandler: @escaping (Bool) -> Void, isFollowing: Bool)
+    
 }
