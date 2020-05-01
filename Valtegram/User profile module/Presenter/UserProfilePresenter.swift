@@ -38,9 +38,7 @@ class UserProfilePresenter: UserProfileOutput {
             self.user = User(dictionary: dictionary, uid: uid)
             
             guard let usr = self.user else { return }
-            self.fetchPost() {
-                self.view?.setUser(usr)
-            }
+            self.view?.setUser(usr)
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -64,9 +62,6 @@ class UserProfilePresenter: UserProfileOutput {
             return 
         }
     }
-
-    
-    
     
     // MARK:- Initializers
     init(view: UserProfileViewInput) {

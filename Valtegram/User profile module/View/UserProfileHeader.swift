@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import Firebase
 
 class UserProfileHeader: UICollectionViewCell {
 
@@ -19,9 +20,32 @@ class UserProfileHeader: UICollectionViewCell {
             guard let usr = user, let url = URL(string: usr.profileImageURL) else { return }
             profileImageView.kf.setImage(with: url, options: [.transition(.fade(0.2))])
             usernameLabel.text = user?.username
-            usernameLabel.text = user?.username
             
+            setupFollowButton()
         }
+    }
+    
+    private func setupFollowButton() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        guard let profileUserId = user?.uid else { return }
+        
+        if !(currentUserId == profileUserId) { // text is "follow"
+            Database.database().reference().child("following").child(currentUserId).child(profileUserId).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let isFollowing = snapshot.value as? Bool, isFollowing {
+                    
+                } else {
+                    self.setupFollowStyle()
+                }
+                
+            }) { (error) in
+                print(error.localizedDescription)
+                return
+            }
+            
+            editProfileButton.setTitle("Follow", for: .normal)
+        }
+        
     }
     
     // MARK:- Views
@@ -99,7 +123,7 @@ class UserProfileHeader: UICollectionViewCell {
         return label
     }()
     
-    private let editProfileButton: UIButton = {
+    lazy var editProfileButton: UIButton = {
         let button = UIButton()
          
         button.setTitle("Edit profile", for: .normal)
@@ -109,6 +133,8 @@ class UserProfileHeader: UICollectionViewCell {
         button.layer.borderColor = UIColor.setAsRgb(red: 27, green: 67, blue: 51).cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 8
+        
+        button.addTarget(self, action: #selector(handleEditButton), for: .touchUpInside)
         
         return button
     }()
@@ -225,5 +251,37 @@ class UserProfileHeader: UICollectionViewCell {
         ])
     }
     
+    private func setupFollowStyle() {
+
+    }
+    
+    private func setupUnfollowStyle() {
+        
+    }
+    
+    // MARK:- Selectors
+    @objc func handleEditButton() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        guard let profileUserId = user?.uid else { return }
+        
+        if editProfileButton.titleLabel?.text == "Unfollow" {
+            Database.database().reference().child("following").child(currentUserId).child(profileUserId).removeValue { (error, _) in
+                if let error = error {
+                    print(error)
+                }
+            }
+        } else {
+            let reference = Database.database().reference().child("following").child(currentUserId)
+            
+            let values = [profileUserId: true]
+            reference.updateChildValues(values) { (error, reference) in
+                if let err = error {
+                    print(err.localizedDescription)
+                    return
+                }
+            }
+        }
+        
+    }
     
 }
