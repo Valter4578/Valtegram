@@ -32,29 +32,6 @@ class UserProfileHeader: UICollectionViewCell {
         }
     }
     
-    private func setupFollowButton() {
-        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
-        guard let profileUserId = user?.uid else { return }
-        
-        if !(currentUserId == profileUserId) { // text is "follow"
-            Database.database().reference().child("following").child(currentUserId).child(profileUserId).observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                if let isFollowing = snapshot.value as? Bool, isFollowing {
-                    
-                } else {
-                    self.setupFollowStyle()
-                }
-                
-            }) { (error) in
-                print(error.localizedDescription)
-                return
-            }
-            
-            editProfileButton.setTitle("Follow", for: .normal)
-        }
-        
-    }
-    
     // MARK:- Views
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -270,30 +247,7 @@ class UserProfileHeader: UICollectionViewCell {
     
     // MARK:- Selectors
     @objc func handleEditButton() {
-//        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
-//
-//        if editProfileButton.titleLabel?.text == "Unfollow" {
-//            Database.database().reference().child("following").child(currentUserId).child(profileUserId).removeValue { (error, _) in
-//                if let error = error {
-//                    print(error)
-//                }
-//
-//                self.setupFollowStyle()
-//            }
-//        } else {
-//            let reference = Database.database().reference().child("following").child(currentUserId)
-//
-//            let values = [profileUserId: true]
-//            reference.updateChildValues(values) { (error, reference) in
-//                if let err = error {
-//                    print(err.localizedDescription)
-//                    return
-//                }
-//
-//                self.setupUnfollowStyle()
-//            }
-//        }
-//
+
         guard let profileUserId = user?.uid else { return }
         presenter.didTapFollow(profileId: profileUserId, completionHandler: { (isFollowing) in
             if isFollowing {
